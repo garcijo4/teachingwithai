@@ -779,8 +779,8 @@
             <p class="eyebrow">What support covers</p>
             <h2>Small infrastructure, sustained attention.</h2>
             <ul><li>Website and media hosting</li><li>HeyGen and video production costs</li><li>Chatbot API and maintenance costs</li><li>Annual capability-drift review</li></ul>
-            ${placeholderButton("Buy John a Coffee", "button-gold")}
-            <p class="small muted" style="margin-top:1rem">Support URL: PLACEHOLDER</p>
+            <a class="button button-gold" href="https://buymeacoffee.com/john_garcia" target="_blank" rel="noopener noreferrer">Buy John a Coffee</a>
+            <p class="small muted" style="margin-top:1rem">Opens Buy Me a Coffee in a new tab.</p>
           </div>
         </div>
       </section>`;
