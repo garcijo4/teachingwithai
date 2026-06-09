@@ -1,0 +1,10 @@
+[
+  {"question":"How long does this really take?","answer":"The required core is designed for 7.5 hours total. Modules range from 60 to 90 minutes, and each has a protected express path of 25 to 35 minutes."},
+  {"question":"Do modules have to be completed in order?","answer":"No, but the portfolio builds sequentially. Starting with the problem you need to solve is welcome; return to earlier modules when you need their artifact or design language."},
+  {"question":"Will this work for my discipline?","answer":"The design applies to labs, studios, clinical courses, quantitative work, and writing-intensive courses. Synthetic course packets provide a low-stakes option when you do not want to use a current course."},
+  {"question":"Do I need a paid AI account?","answer":"No. Required learning should not depend on a paid tier. Any optional AI-supported activity should include a non-AI path."},
+  {"question":"Does my progress sync across devices?","answer":"No. Wireframe progress is stored only in this browser using localStorage. There are no accounts or server-side learner records."},
+  {"question":"Can I receive CTL or professional-development credit?","answer":"PLACEHOLDER: confirm the local arrangement with Cal Lutheran Faculty Development. The portfolio page includes a printable completion summary."},
+  {"question":"Who sees my data?","answer":"Your course progress stays in this browser. The newsletter form collects only what you submit. Never enter student PII into a chatbot."},
+  {"question":"What if a link or video is broken?","answer":"Use the persistent Ask John link to report the page and item. In this wireframe, external media and resource links are intentionally marked as placeholders."}
+]

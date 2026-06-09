@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://garcijo4.github.io/teachingwithai/sitemap.xml

@@ -1,0 +1,8 @@
+{
+  "feeds": [
+    {"name":"EDUCAUSE Review","rssUrl":"PLACEHOLDER"},
+    {"name":"Inside Higher Ed AI","rssUrl":"PLACEHOLDER"},
+    {"name":"MIT Technology Review AI","rssUrl":"PLACEHOLDER"}
+  ],
+  "maxItemsPerFeed": 5
+}
