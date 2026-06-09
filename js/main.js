@@ -18,6 +18,28 @@
     ["About", "about/", "/about/"]
   ];
 
+  const courseOpeningVideos = [
+    {
+      id: "introduction-video",
+      title: "Introduction Video",
+      duration: "1.83 min",
+      transcript: "A brief welcome and orientation to the Teaching with AI course."
+    },
+    {
+      id: "course-overview-intro",
+      title: "Course Overview Intro",
+      duration: "7.75 min",
+      transcript: "An overview of the course stance, six-module arc, and portfolio outcomes."
+    }
+  ];
+
+  const courseConclusionVideo = {
+    id: "conclusion-video",
+    title: "Conclusion Video",
+    duration: "2.13 min",
+    transcript: "A closing reflection and invitation to carry the portfolio into the next teaching term."
+  };
+
   function fetchData(name) {
     if (!dataCache.has(name)) {
       dataCache.set(
@@ -168,7 +190,7 @@
     return `
       <article class="card module-card">
         <div class="module-number">${module.id}</div>
-        <div class="badge-row">${badge(module.duration)} ${badge(`Express ${module.express}`, "badge-gold")}</div>
+        <div class="badge-row">${badge(`${module.duration} video`)} ${badge(`Express ${module.express}`, "badge-gold")}</div>
         <h3>${module.title}</h3>
         <p class="muted">${module.description}</p>
         <p class="small"><strong>Portfolio artifact:</strong> ${module.artifact}</p>
@@ -252,7 +274,7 @@
     main.innerHTML = `
       <section class="hero">
         <div class="container">
-          <p class="eyebrow">A 7.5-hour asynchronous faculty course</p>
+          <p class="eyebrow">A 3-hour asynchronous faculty course</p>
           <h1>Teaching with Artificial Intelligence</h1>
           <p class="lede">Grounded Curiosity. Defensible Choices. Portfolio Outcomes.</p>
           <div class="button-row">
@@ -277,7 +299,7 @@
         <div class="container">
           <div class="stat-strip">
             <div class="stat"><strong>Asynchronous</strong><span>Work at your own pace</span></div>
-            <div class="stat"><strong>7.5 hours</strong><span>Required core time</span></div>
+            <div class="stat"><strong>3 hours</strong><span>Total lecture runtime</span></div>
             <div class="stat"><strong>6 modules</strong><span>Each creates an artifact</span></div>
             <div class="stat"><strong>All disciplines</strong><span>With synthetic course packets</span></div>
             <div class="stat"><strong>1 portfolio</strong><span>Ready for next term</span></div>
@@ -288,7 +310,7 @@
         <div class="container">
           <div class="section-heading"><div><p class="eyebrow">The course spine</p><h2>Follow the six-module arc</h2><p>Each module produces the input for the next. Jump in where needed, then return to complete the design story.</p></div><a class="button button-outline" href="course/">See all modules</a></div>
           <div class="progress-arc">
-            ${modules.map((module) => `<a class="arc-stop" data-number="${module.id}" href="course/module.html?m=${module.id}"><strong>${module.shortTitle}</strong><small>${module.duration} | ${CourseProgress.percent(moduleItemIds(module))}% complete</small></a>`).join("")}
+            ${modules.map((module) => `<a class="arc-stop" data-number="${module.id}" href="course/module.html?m=${module.id}"><strong>${module.shortTitle}</strong><small>${module.duration} video | ${CourseProgress.percent(moduleItemIds(module))}% complete</small></a>`).join("")}
           </div>
         </div>
       </section>
@@ -329,9 +351,15 @@
         <div class="container">
           <div class="callout">
             <h3>How to take this course</h3>
-            <p>Use one real course as your design substrate. Complete the modules in sequence for the strongest portfolio story, or begin with the problem you need to solve. Express paths protect the portfolio artifact when time is short.</p>
+            <p>The complete lecture sequence runs 176.42 minutes, or about 3 hours. Use one real course as your design substrate. Complete the modules in sequence for the strongest portfolio story, or begin with the problem you need to solve.</p>
             <p class="small muted">Progress is stored only in this browser. <button class="copy-link" type="button" data-reset-progress>Reset my progress</button></p>
           </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="section-heading"><div><p class="eyebrow">Begin here</p><h2>Course introduction and overview</h2><p>These two short videos orient you to the course before you enter Module 1.</p></div></div>
+          <div class="grid grid-2">${courseOpeningVideos.map(renderVideoCard).join("")}</div>
         </div>
       </section>
       <section class="section">
@@ -340,7 +368,15 @@
           <div class="grid grid-3">${modules.map(moduleCard).join("")}</div>
         </div>
       </section>
+      <section class="section section-tint">
+        <div class="container">
+          <div class="section-heading"><div><p class="eyebrow">Complete the arc</p><h2>Course conclusion</h2><p>Close the course after assembling your portfolio and six-month plan.</p></div></div>
+          <div class="narrow">${renderVideoCard(courseConclusionVideo)}</div>
+        </div>
+      </section>
       ${ctaBanner()}`;
+
+    bindProgressCheckboxes();
   }
 
   function renderVideoCard(video) {
@@ -392,7 +428,7 @@
       <section class="page-hero">
         <div class="container">
           <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="course/">Course</a><span>&rsaquo;</span><span>Module ${module.id}</span></nav>
-          <div class="badge-row">${badge(`Module ${module.id}`)} ${badge(module.duration)} ${badge(`Express ${module.express}`, "badge-gold")} ${badge(`Reviewed ${module.lastReviewed}`)}</div>
+          <div class="badge-row">${badge(`Module ${module.id}`)} ${badge(`${module.duration} video`)} ${badge(`Express ${module.express}`, "badge-gold")} ${badge(`Reviewed ${module.lastReviewed}`)}</div>
           <h1>${module.title}</h1>
           <p class="lede">${module.description}</p>
           <div style="max-width:620px">${progressBar(percent)}<p class="small muted"><span data-module-percent>${percent}</span>% complete in this browser</p></div>
@@ -408,7 +444,7 @@
             </section>
             <section>
               <p class="eyebrow">Time budget</p>
-              <div class="callout callout-gold"><h3>${module.duration} required core | ${module.express} express path</h3><p>Video, activity, reading, and self-check time are bounded so you can plan a realistic work session.</p></div>
+              <div class="callout callout-gold"><h3>${module.duration} total lecture runtime | ${module.express} express path</h3><p>The listed runtime reflects the current module lectures. Worksheets and optional portfolio activities add time based on how deeply you choose to engage.</p></div>
             </section>
             <section id="videos">
               <p class="eyebrow">Watch and reflect</p>

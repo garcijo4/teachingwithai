@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Foundations: Skeptic-Safe On-Ramp and Disciplinary Anchor",
     "shortTitle": "Foundations",
-    "duration": "65 min",
+    "duration": "51.25 min",
     "express": "25 min",
     "description": "Begin with disciplinary values, a functional understanding of generative AI, and a grounded stance that refuses both hype and panic.",
     "artifact": "Discipline Statement and signed Skeptic's Charter",
@@ -14,11 +14,11 @@
       "Create a values anchor for every later design decision."
     ],
     "videos": [
-      {"id": "m1v1", "title": "Your disciplinary line in the sand", "duration": "7:00", "embedUrl": "PLACEHOLDER", "transcript": "This lecture introduces grounded curiosity, the six portfolio artifacts, and the Skeptic's Charter."},
-      {"id": "m1v2", "title": "How LLMs Work for Educators", "duration": "10:00", "embedUrl": "PLACEHOLDER", "transcript": "A functional explanation of prediction, fluency, hallucination, bias, and overconfidence."},
-      {"id": "m1v3", "title": "Risk is a design question", "duration": "8:00", "embedUrl": "PLACEHOLDER", "transcript": "Connect technical, applied, and critical AI literacy to disciplinary choices."},
-      {"id": "m1v4", "title": "How LLMs Work: A Technical Review", "duration": "Optional", "embedUrl": "PLACEHOLDER", "transcript": "Optional technical extension for faculty who want a deeper explanation."},
-      {"id": "m1v5", "title": "AI literacy is a disciplinary act", "duration": "8:00", "embedUrl": "PLACEHOLDER", "transcript": "Turn general AI literacy into a specific disciplinary commitment."}
+      {"id": "m1v1", "title": "Your disciplinary line in the sand", "duration": "6.07 min", "embedUrl": "PLACEHOLDER", "transcript": "This lecture introduces grounded curiosity, the six portfolio artifacts, and the Skeptic's Charter."},
+      {"id": "m1v2", "title": "How LLMs Work for Educators", "duration": "8.73 min", "embedUrl": "PLACEHOLDER", "transcript": "A functional explanation of prediction, fluency, hallucination, bias, and overconfidence."},
+      {"id": "m1v4", "title": "How LLMs Work: A Technical Review", "duration": "20 min", "embedUrl": "PLACEHOLDER", "transcript": "A deeper technical review of how large language models work."},
+      {"id": "m1v3", "title": "Risk is a design question", "duration": "7.75 min", "embedUrl": "PLACEHOLDER", "transcript": "Connect technical, applied, and critical AI literacy to disciplinary choices."},
+      {"id": "m1v5", "title": "AI literacy is a disciplinary act", "duration": "8.7 min", "embedUrl": "PLACEHOLDER", "transcript": "Turn general AI literacy into a specific disciplinary commitment."}
     ],
     "worksheets": [
       {"id": "m1w1", "title": "Module 1 Participant Workbook", "minutes": "22 min", "url": "PLACEHOLDER"},
@@ -32,7 +32,7 @@
     "id": 2,
     "title": "The Cognitive Architecture of Learning",
     "shortTitle": "Cognitive Architecture",
-    "duration": "70 min",
+    "duration": "24.57 min",
     "express": "25 min",
     "description": "Distinguish productive struggle from needless friction and choose an appropriate AI posture for a real learning task.",
     "artifact": "Friction Audit",
@@ -43,9 +43,9 @@
       "Choose an Oracle, Tutor, or Adversary posture deliberately."
     ],
     "videos": [
-      {"id": "m2v1", "title": "The Safety Gap and the Novice-Expert Divide", "duration": "10:00", "embedUrl": "PLACEHOLDER", "transcript": "Why experts and novices experience AI assistance differently."},
-      {"id": "m2v2", "title": "Productive Struggle vs. Needless Friction", "duration": "10:00", "embedUrl": "PLACEHOLDER", "transcript": "A design lens for deciding what difficulty belongs in the learning task."},
-      {"id": "m2v3", "title": "Oracle, Tutor, Adversary: Choosing the AI Posture", "duration": "10:00", "embedUrl": "PLACEHOLDER", "transcript": "Three postures for structuring AI use without outsourcing judgment."}
+      {"id": "m2v1", "title": "The Safety Gap and the Novice-Expert Divide", "duration": "8.23 min", "embedUrl": "PLACEHOLDER", "transcript": "Why experts and novices experience AI assistance differently."},
+      {"id": "m2v2", "title": "Productive Struggle vs. Needless Friction", "duration": "10.72 min", "embedUrl": "PLACEHOLDER", "transcript": "A design lens for deciding what difficulty belongs in the learning task."},
+      {"id": "m2v3", "title": "Oracle, Tutor, Adversary", "duration": "5.62 min", "embedUrl": "PLACEHOLDER", "transcript": "Three postures for structuring AI use without outsourcing judgment."}
     ],
     "worksheets": [
       {"id": "m2w1", "title": "Module 2 Participant Workbook", "minutes": "Core activity", "url": "PLACEHOLDER"},
@@ -59,7 +59,7 @@
     "id": 3,
     "title": "Assessment Redesign and the AI Assessment Scale",
     "shortTitle": "Assessment Redesign",
-    "duration": "80 min",
+    "duration": "23.48 min",
     "express": "30 min",
     "description": "Stress-test an assessment, decide what it truly measures, and document a defensible AI Assessment Scale choice.",
     "artifact": "Assessment Stress Test and AIAS Decision Memo",
@@ -70,10 +70,9 @@
       "Complete a failure analysis before redesigning an assignment."
     ],
     "videos": [
-      {"id": "m3v1", "title": "Learning Production vs. Learning Measurement", "duration": "10:00", "embedUrl": "PLACEHOLDER", "transcript": "Ask whether an assessment measures the intended learning or only the production of a deliverable."},
-      {"id": "m3v2", "title": "The AI Assessment Scale (AIAS)", "duration": "10:00", "embedUrl": "PLACEHOLDER", "transcript": "Use AIAS levels to communicate permitted and expected AI involvement."},
-      {"id": "m3v3", "title": "The Stress Test is a failure analysis", "duration": "10:00", "embedUrl": "PLACEHOLDER", "transcript": "Identify where AI can bypass essential cognitive work before choosing a response."},
-      {"id": "m3v4", "title": "Transparent and Authentic Assessment in the AI Era", "duration": "10:00", "embedUrl": "PLACEHOLDER", "transcript": "Align task, criteria, evidence, and student-facing expectations."}
+      {"id": "m3v1", "title": "Learning Production vs. Learning Measurement", "duration": "6.35 min", "embedUrl": "PLACEHOLDER", "transcript": "Ask whether an assessment measures the intended learning or only the production of a deliverable."},
+      {"id": "m3v2", "title": "The AI Assessment Scale (AIAS)", "duration": "9.18 min", "embedUrl": "PLACEHOLDER", "transcript": "Use AIAS levels to communicate permitted and expected AI involvement."},
+      {"id": "m3v3", "title": "The Stress Test is a failure analysis", "duration": "7.95 min", "embedUrl": "PLACEHOLDER", "transcript": "Identify where AI can bypass essential cognitive work before choosing a response."}
     ],
     "worksheets": [
       {"id": "m3w1", "title": "Module 3 Participant Workbook", "minutes": "80 min core", "url": "PLACEHOLDER"},
@@ -87,7 +86,7 @@
     "id": 4,
     "title": "Assignment Redesign: From AI-Proofing to AI-Resilience",
     "shortTitle": "Assignment Redesign",
-    "duration": "90 min",
+    "duration": "24.38 min",
     "express": "35 min",
     "description": "Redesign a real assignment so the essential thinking is visible, supported, and difficult to bypass without creating unsustainable work.",
     "artifact": "Redesigned Assignment",
@@ -98,9 +97,9 @@
       "Write transparent student-facing AI-use guidance."
     ],
     "videos": [
-      {"id": "m4v1", "title": "AI-proof is the Wrong Goal", "duration": "10:00", "embedUrl": "PLACEHOLDER", "transcript": "Why durable design begins with the learning rather than an arms race against tools."},
-      {"id": "m4v2", "title": "Making Thinking Visible Without Making Work Explode", "duration": "10:00", "embedUrl": "PLACEHOLDER", "transcript": "Choose lightweight process evidence that supports judgment and feedback."},
-      {"id": "m4v3", "title": "Using AI as Tutor, Adversary, or Collaborator", "duration": "10:00", "embedUrl": "PLACEHOLDER", "transcript": "Build AI into a task only where its role strengthens the intended learning."}
+      {"id": "m4v1", "title": "AI-proof is the Wrong Goal", "duration": "7.57 min", "embedUrl": "PLACEHOLDER", "transcript": "Why durable design begins with the learning rather than an arms race against tools."},
+      {"id": "m4v2", "title": "Making Thinking Visible Without Making Work Explode", "duration": "8.68 min", "embedUrl": "PLACEHOLDER", "transcript": "Choose lightweight process evidence that supports judgment and feedback."},
+      {"id": "m4v3", "title": "Using AI as Tutor, Adversary, or Collaborator", "duration": "8.13 min", "embedUrl": "PLACEHOLDER", "transcript": "Build AI into a task only where its role strengthens the intended learning."}
     ],
     "worksheets": [
       {"id": "m4w1", "title": "Module 4 Participant Workbook", "minutes": "90 min core", "url": "PLACEHOLDER"},
@@ -114,7 +113,7 @@
     "id": 5,
     "title": "Transparent Policies, Integrity, and the Equity/Ethics Audit",
     "shortTitle": "Policy and Equity",
-    "duration": "85 min",
+    "duration": "24.93 min",
     "express": "30 min",
     "description": "Turn assignment decisions into transparent course policy, replace detection-led thinking, and audit implementation for equity and ethics.",
     "artifact": "Syllabus AI Policy and Equity/Ethics Audit",
@@ -125,9 +124,9 @@
       "Audit policy across access, privacy, truth, copyright, labor, and power."
     ],
     "videos": [
-      {"id": "m5v1", "title": "Why Detection Fails as a Teaching Strategy", "duration": "10:00", "embedUrl": "PLACEHOLDER", "transcript": "Replace unreliable detection with a designed evidence stack."},
-      {"id": "m5v2", "title": "Core Intellectual Substance and Student-Facing Policy", "duration": "10:00", "embedUrl": "PLACEHOLDER", "transcript": "Write policy that names what students must do and why."},
-      {"id": "m5v3", "title": "The Equity and Ethics Audit", "duration": "12:00", "embedUrl": "PLACEHOLDER", "transcript": "Treat equity and ethics as design constraints rather than closing disclaimers."}
+      {"id": "m5v1", "title": "Why Detection Fails as a Teaching Strategy", "duration": "7.47 min", "embedUrl": "PLACEHOLDER", "transcript": "Replace unreliable detection with a designed evidence stack."},
+      {"id": "m5v2", "title": "Core Intellectual Substance and Student-Facing Policy", "duration": "7.63 min", "embedUrl": "PLACEHOLDER", "transcript": "Write policy that names what students must do and why."},
+      {"id": "m5v3", "title": "The Equity and Ethics Audit", "duration": "9.83 min", "embedUrl": "PLACEHOLDER", "transcript": "Treat equity and ethics as design constraints rather than closing disclaimers."}
     ],
     "worksheets": [
       {"id": "m5w1", "title": "Module 5 Participant Workbook", "minutes": "85 min core", "url": "PLACEHOLDER"},
@@ -141,7 +140,7 @@
     "id": 6,
     "title": "Portfolio, Departmental Alignment, and Continuous Revision",
     "shortTitle": "Portfolio and Revision",
-    "duration": "60 min",
+    "duration": "16.1 min",
     "express": "25 min",
     "description": "Assemble a teaching-ready packet, identify department-level alignment needs, and establish a sustainable capability-drift review cadence.",
     "artifact": "Final Course Redesign Portfolio and Six-Month Plan",
@@ -152,9 +151,9 @@
       "Create a sustainable six-month maintenance plan."
     ],
     "videos": [
-      {"id": "m6v1", "title": "Assembling a Portfolio Faculty Can Actually Use", "duration": "7:00", "embedUrl": "PLACEHOLDER", "transcript": "Build a teaching-ready packet rather than a reflective essay about AI."},
-      {"id": "m6v2", "title": "Departmental Alignment Without Forced Uniformity", "duration": "7:00", "embedUrl": "PLACEHOLDER", "transcript": "Align shared vocabulary and equity floors while preserving course-level judgment."},
-      {"id": "m6v3", "title": "Designing for Capability Drift", "duration": "6:00", "embedUrl": "PLACEHOLDER", "transcript": "Identify what becomes stale first and budget a sustainable review cadence."}
+      {"id": "m6v1", "title": "Assembling a Portfolio Faculty", "duration": "5 min", "embedUrl": "PLACEHOLDER", "transcript": "Build a teaching-ready packet rather than a reflective essay about AI."},
+      {"id": "m6v2", "title": "Departmental Alignment Without Forced Uniformity", "duration": "5.58 min", "embedUrl": "PLACEHOLDER", "transcript": "Align shared vocabulary and equity floors while preserving course-level judgment."},
+      {"id": "m6v3", "title": "Designing for Capability Drift", "duration": "5.52 min", "embedUrl": "PLACEHOLDER", "transcript": "Identify what becomes stale first and budget a sustainable review cadence."}
     ],
     "worksheets": [
       {"id": "m6w1", "title": "Module 6 Portfolio Template", "minutes": "25 min core", "url": "PLACEHOLDER"},
