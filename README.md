@@ -35,6 +35,7 @@ JS to update content.**
 |---|---|
 | `site.json` | Site name, tagline, contact email, support URL, site URL, last-reviewed date, intro/conclusion videos, analytics code |
 | `modules.json` | Module titles, objectives, videos, reading, worksheets, slides, artifacts |
+| `sessions.json` | Standalone sessions (outside the course): title, blurb, video, slides, worksheet, try-it steps, related modules/terms. Add an object to the array and the listing page, session page, and homepage strip update automatically |
 | `key-terms.json` | Glossary definitions, video scripts, tooltip aliases |
 | `articles.json` | Curated article cards |
 | `feeds.json` | RSS feeds for the auto-updating articles section |

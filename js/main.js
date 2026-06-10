@@ -26,6 +26,7 @@
   const navItems = [
     ["Home", "./", "/"],
     ["Course", "course/", "/course/"],
+    ["Sessions", "sessions/", "/sessions/"],
     ["Key Terms", "key-terms/", "/key-terms/"],
     ["Articles", "articles/", "/articles/"],
     ["Chatbots", "chatbots/", "/chatbots/"],
@@ -189,6 +190,7 @@
               <h3>Explore</h3>
               <nav class="footer-links" aria-label="Footer navigation">
                 <a href="course/">Course</a>
+                <a href="sessions/">Sessions</a>
                 <a href="start/">Quick Start</a>
                 <a href="portfolio/">Portfolio</a>
                 <a href="faq/">FAQ</a>
@@ -450,8 +452,9 @@
   /* ---------- page renderers ---------- */
 
   async function renderHome() {
-    const [modules, articles, chatbots, terms] = await Promise.all([
-      fetchData("modules"), fetchData("articles"), fetchData("chatbots"), fetchData("key-terms")
+    const [modules, articles, chatbots, terms, sessions] = await Promise.all([
+      fetchData("modules"), fetchData("articles"), fetchData("chatbots"), fetchData("key-terms"),
+      fetchData("sessions").catch(() => [])
     ]);
     const termIndex = buildTermIndex(terms);
     const hoursNum = Math.round(totalRuntimeMinutes(modules) / 60);
@@ -521,6 +524,13 @@
           <div class="grid grid-3">${articles.slice(0, 3).map(articleCard).join("")}</div>
         </div>
       </section>
+      ${sessions.length ? `
+      <section class="section">
+        <div class="container">
+          <div class="section-heading"><div><p class="eyebrow">Beyond the course</p><h2>Standalone sessions: one design move at a time</h2><p>Short, self-contained sessions for faculty who want one idea they can try next week. No module sequence required.</p></div><a class="button button-outline" href="sessions/">All sessions</a></div>
+          <div class="grid grid-3">${sessions.slice(0, 3).map(sessionCard).join("")}</div>
+        </div>
+      </section>` : ""}
       <section class="section-sm">
         <div class="container">
           <div class="callout callout-gold">
@@ -801,6 +811,164 @@
         showToast("Could not send feedback here. Use the Ask John link instead.");
       }
     });
+  }
+
+  /* ---------- standalone sessions ---------- */
+
+  function sessionCard(session) {
+    const hasVideo = Boolean(realUrl(session.video && session.video.embedUrl));
+    return `
+      <article class="card">
+        <div class="badge-row">${badge(esc(session.duration))} ${(session.topics || []).map((topic) => badge(esc(topic), "badge-gold")).join(" ")}${hasVideo ? "" : ` <span class="placeholder-note">Video coming soon</span>`}</div>
+        <h3>${esc(session.title)}</h3>
+        <p class="muted">${esc(session.blurb)}</p>
+        <a class="button button-outline button-small" href="sessions/session.html?s=${esc(session.id)}">Open session</a>
+      </article>`;
+  }
+
+  async function renderSessions() {
+    const sessions = await fetchData("sessions");
+    main.innerHTML = `
+      ${pageHero("Standalone sessions", "One design move at a time.", "Short, self-contained sessions that sit outside the six-module course. Each ends with something small enough to pilot next week in a course you already teach.", `<div class="button-row"><a class="button button-outline" href="course/">Looking for the full course?</a></div>`)}
+      <section class="section">
+        <div class="container">
+          <div class="section-heading"><div><p class="eyebrow">No sequence required</p><h2>Pick the teaching decision in front of you</h2><p>New sessions are added as topics come up in faculty conversations. Each pairs a short video with a one-page pilot plan.</p></div></div>
+          <div class="grid grid-3">${sessions.map(sessionCard).join("")}</div>
+        </div>
+      </section>
+      ${ctaBanner()}`;
+
+    injectJsonLd({
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: `Sessions | ${site.siteName}`,
+      url: pageUrl("sessions/"),
+      description: "Standalone faculty development sessions on teaching with artificial intelligence."
+    });
+  }
+
+  async function renderSession() {
+    const [sessions, modules, terms] = await Promise.all([fetchData("sessions"), fetchData("modules"), fetchData("key-terms")]);
+    const termIndex = buildTermIndex(terms);
+    const slug = new URLSearchParams(location.search).get("s");
+    const session = sessions.find((item) => item.id === slug);
+    if (!session) {
+      location.replace(new URL("sessions/", document.baseURI));
+      return;
+    }
+
+    document.title = `${session.title} | ${site.siteName}`;
+    const email = site.contactEmail || FALLBACK_SITE.contactEmail;
+    const sessionSubject = encodeURIComponent(`Question about the ${session.shortTitle || session.title} session`);
+    document.querySelectorAll(".ask-john, .site-footer a[href^='mailto:']").forEach((link) => {
+      link.href = `mailto:${email}?subject=${sessionSubject}`;
+    });
+    const related = (session.relatedModules || []).map((id) => modules.find((module) => module.id === id)).filter(Boolean);
+    const slides = session.slides || {};
+    const worksheet = session.worksheet;
+
+    main.innerHTML = `
+      <section class="page-hero">
+        <div class="container">
+          <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="sessions/">Sessions</a><span>&rsaquo;</span><span>${esc(session.shortTitle || session.title)}</span></nav>
+          <div class="badge-row">${badge("Standalone session")} ${badge(esc(session.duration))}${session.lastReviewed ? ` ${badge(`Reviewed ${esc(session.lastReviewed)}`)}` : ""}</div>
+          <h1>${esc(session.title)}</h1>
+          <p class="lede">${withTermRefs(session.description, termIndex)}</p>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container content-layout">
+          <div class="stack">
+            <section id="video">
+              <p class="eyebrow">Watch</p>
+              <h2>Session video</h2>
+              ${videoBlock({ ...(session.video || {}), title: session.title }, "Video coming soon", true)}
+              ${session.video && session.video.summary ? `<details><summary>Video summary</summary><div class="details-body"><p>${esc(session.video.summary)}</p></div></details>` : ""}
+            </section>
+            ${session.takeaway ? `
+            <section>
+              <p class="eyebrow">The one thing to keep</p>
+              <div class="callout callout-gold"><h3>Key takeaway</h3><p>${withTermRefs(session.takeaway, termIndex)}</p></div>
+            </section>` : ""}
+            ${(session.tryIt || []).length ? `
+            <section id="try-it">
+              <p class="eyebrow">Make it real</p>
+              <h2>Try it next week</h2>
+              <div class="card"><ol>${session.tryIt.map((step) => `<li>${withTermRefs(step, termIndex)}</li>`).join("")}</ol></div>
+            </section>` : ""}
+            ${worksheet || realUrl(slides.pdfUrl) || realUrl(slides.previewUrl) || slides.title ? `
+            <section id="resources">
+              <p class="eyebrow">Take it with you</p>
+              <h2>Session resources</h2>
+              <div class="resource-list">
+                ${worksheet ? `
+                <article class="resource-card">
+                  <div class="resource-icon">DOC</div>
+                  <div><h3>${esc(worksheet.title)}</h3><p class="small muted">${esc(worksheet.minutes || "")}${realUrl(worksheet.url) ? "" : " | Links coming soon"}</p></div>
+                  <div class="resource-actions">
+                    ${actionButton("Make your own copy", worksheet.url, "button-small")}
+                    ${actionButton("Word/PDF export", worksheet.exportUrl, "button-outline button-small")}
+                  </div>
+                </article>` : ""}
+                <article class="resource-card">
+                  <div class="resource-icon">PDF</div>
+                  <div><h3>${esc(slides.title || `${session.shortTitle || session.title} slides`)}</h3><p class="small muted">${realUrl(slides.pdfUrl) || realUrl(slides.previewUrl) ? "View in Google Drive or download the PDF." : "Slide links coming soon."}</p></div>
+                  <div class="resource-actions">
+                    ${actionButton("Preview slides", slides.previewUrl, "button-small")}
+                    ${actionButton("Open PDF", slides.pdfUrl, "button-outline button-small")}
+                  </div>
+                </article>
+              </div>
+            </section>` : ""}
+            ${related.length ? `
+            <section>
+              <p class="eyebrow">Go deeper</p>
+              <div class="callout"><h2>Connect this session to the course</h2><p>This session pairs naturally with ${related.map((module) => `Module ${module.id}: ${esc(module.shortTitle)}`).join(" and ")}. The module adds the frameworks, reading, and portfolio artifact behind this design move.</p><div class="button-row">${related.map((module) => `<a class="button button-small" href="course/module.html?m=${module.id}">Open Module ${module.id}</a>`).join("")}</div></div>
+            </section>` : ""}
+            <section>
+              <p class="eyebrow">Quick feedback</p>
+              <div class="form-card">
+                <h2>Was this session helpful?</h2>
+                <form class="form-grid" name="module-feedback" data-feedback-form>
+                  <input type="hidden" name="form-name" value="module-feedback">
+                  <input type="hidden" name="module" value="session-${esc(session.id)}">
+                  <input type="hidden" name="helpful" value="">
+                  <p hidden><input name="bot-field"></p>
+                  <div class="feedback-buttons" role="group" aria-label="Was this session helpful?">
+                    <button class="button button-outline button-small" type="button" data-helpful="yes" aria-pressed="false">Yes, helpful</button>
+                    <button class="button button-outline button-small" type="button" data-helpful="no" aria-pressed="false">Not yet</button>
+                  </div>
+                  <div class="form-field"><label for="feedback-comment">Optional comment</label><textarea id="feedback-comment" name="comment" placeholder="What should change?"></textarea></div>
+                  <button class="button button-small" type="submit">Send feedback</button>
+                </form>
+              </div>
+            </section>
+            <nav class="button-row" aria-label="Session navigation">
+              <a class="button button-outline" href="sessions/">&larr; All sessions</a>
+              <a class="button" href="course/">Explore the full course &rarr;</a>
+            </nav>
+          </div>
+          <aside class="sidebar">
+            ${(session.relatedTerms || []).length ? `
+            <div class="card">
+              <p class="eyebrow">Related key terms</p>
+              <div class="badge-row">${(session.relatedTerms || []).map((termSlug) => {
+                const term = terms.find((item) => item.slug === termSlug);
+                return `<a class="badge" href="key-terms/#${esc(termSlug)}">${esc(term ? term.term : termSlug.replaceAll("-", " "))}</a>`;
+              }).join("")}</div>
+            </div>` : ""}
+            <div class="card">
+              <h3>Want to build one together?</h3>
+              <p class="small muted">A human escape hatch matters. Ask a focused question and name the course or assignment you have in mind.</p>
+              <a class="button button-small" href="mailto:${esc(email)}?subject=${sessionSubject}">Ask John</a>
+            </div>
+            <div class="card"><p class="small muted">Sessions sit outside the six-module course, so they do not count toward course progress.</p></div>
+          </aside>
+        </div>
+      </section>
+      ${ctaBanner()}`;
+
+    bindFeedbackForm();
   }
 
   function termCard(term) {
@@ -1160,6 +1328,8 @@
     home: renderHome,
     course: renderCourse,
     module: renderModule,
+    sessions: renderSessions,
+    session: renderSession,
     "key-terms": renderKeyTerms,
     articles: renderArticles,
     chatbots: renderChatbots,

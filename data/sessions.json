@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ai-role-play",
+    "title": "From Static Cases to AI Role-Play",
+    "shortTitle": "AI Role-Play",
+    "duration": "12 min",
+    "topics": ["Assignment design", "Simulation", "Assessment"],
+    "blurb": "Turn an existing case discussion into live practice. Build a bounded chatbot scenario partner that students must reason with while the decision is still unfolding.",
+    "description": "Case discussions usually look backward: the decision is already made and the pressure is gone. This session shows how a bounded chatbot role-play puts students inside the situation while the decision is still unfolding, so they practice judgment under realistic pressure instead of recalling someone else's answer.",
+    "takeaway": "Leave with one role, one decision, and one debrief question you could pilot in a course you already teach. The chatbot is the practice environment, not the teacher or the assessment. The student's revised judgment is the evidence.",
+    "video": {
+      "embedUrl": "PLACEHOLDER",
+      "summary": "A five-step build for an AI scenario partner: define the objective, build the scaffold, write the prompt, test and iterate, then run and debrief. The prompt anatomy covers role, situation, boundaries, behavior, and debrief. The key design principle: assess the reflection, not the chatbot conversation."
+    },
+    "slides": {
+      "title": "AI Role-Play session slides",
+      "pdfUrl": "PLACEHOLDER",
+      "previewUrl": "PLACEHOLDER"
+    },
+    "worksheet": {
+      "title": "One-decision pilot planner",
+      "minutes": "15 min planning",
+      "url": "PLACEHOLDER",
+      "exportUrl": "PLACEHOLDER"
+    },
+    "tryIt": [
+      "Start with one existing case, scenario, or hard concept you already teach. You already know where students struggle.",
+      "Name one decision students should practice. Not five. One.",
+      "Build one AI role that creates realistic pressure: a skeptical client, a confused patient, an angry customer, a worried parent, a regulator.",
+      "Keep the timing modest: five minutes setup, ten minutes role-play, five minutes reflection, ten minutes debrief.",
+      "Assess three questions: What did you decide? What evidence did you use? What did the role-play make you reconsider?"
+    ],
+    "relatedModules": [4],
+    "relatedTerms": ["oracle-tutor-adversary", "productive-struggle"],
+    "published": "2026-06-10",
+    "lastReviewed": "2026-06-10"
+  }
+]
