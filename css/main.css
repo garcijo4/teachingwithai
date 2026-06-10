@@ -19,8 +19,8 @@
   --radius: 14px;
   --radius-lg: 22px;
   --max: 1180px;
-  --serif: Georgia, "Times New Roman", serif;
-  --sans: Inter, Aptos, "Segoe UI", Arial, sans-serif;
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "Inter", Aptos, "Segoe UI", Arial, sans-serif;
 }
 
 * {
@@ -875,16 +875,22 @@ summary {
   margin-bottom: 1.5rem;
 }
 
-.az-bar span {
+.az-bar .az-letter {
   display: grid;
   width: 1.8rem;
   height: 1.8rem;
   place-items: center;
+  border: 0;
   border-radius: 50%;
   background: var(--purple-100);
   color: var(--purple-800);
   font-size: 0.75rem;
   font-weight: 850;
+}
+
+.az-bar .az-letter:hover {
+  background: var(--purple-800);
+  color: var(--white);
 }
 
 .article-meta {
@@ -1316,7 +1322,10 @@ summary {
   .ask-john,
   .button,
   .filter-bar,
-  .video-placeholder {
+  .video-placeholder,
+  .video-embed,
+  .az-bar,
+  .toast {
     display: none !important;
   }
 
@@ -1335,4 +1344,126 @@ summary {
     break-inside: avoid;
     box-shadow: none;
   }
+}
+
+/* ---------- live video embeds (click-to-load) ---------- */
+
+.video-embed {
+  position: relative;
+  display: grid;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  place-items: center;
+  align-content: center;
+  gap: 0.2rem;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(255, 194, 34, 0.12), transparent),
+    var(--purple-950);
+  color: var(--white);
+  text-align: center;
+  padding: 1rem;
+}
+
+.video-embed.is-loaded {
+  display: block;
+  padding: 0;
+}
+
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.term-card .video-embed {
+  margin: 1rem 0;
+}
+
+/* ---------- glossary term references with tooltips ---------- */
+
+.term-ref {
+  position: relative;
+  border-bottom: 1px dotted var(--purple-700);
+  color: inherit;
+  text-decoration: none;
+  font-weight: 650;
+}
+
+.term-ref:hover,
+.term-ref:focus-visible {
+  color: var(--purple-800);
+  border-bottom-style: solid;
+}
+
+.term-ref::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 0.5rem);
+  left: 50%;
+  z-index: 60;
+  width: max-content;
+  max-width: min(280px, 70vw);
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background: var(--purple-950);
+  color: var(--white);
+  font-size: 0.82rem;
+  font-weight: 450;
+  line-height: 1.45;
+  text-align: left;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translate(-50%, 4px);
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.term-ref:hover::after,
+.term-ref:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- worksheet / slide action buttons ---------- */
+
+.resource-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.resource-actions .button {
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .resource-actions {
+    grid-column: 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* ---------- feedback toggle state ---------- */
+
+.feedback-buttons .button[aria-pressed="true"] {
+  background: var(--purple-800);
+  border-color: var(--purple-800);
+  color: var(--white);
+}
+
+/* ---------- noscript fallback ---------- */
+
+.noscript {
+  max-width: 720px;
+  margin: 3rem auto;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+  text-align: center;
 }

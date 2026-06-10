@@ -6,5 +6,32 @@
   "supportUrl": "https://buymeacoffee.com/john_garcia",
   "newsletterName": "Weekly AI & Teaching Update",
   "courseDuration": "3 hours",
-  "lastReviewed": "2026-06-09"
+  "lastReviewed": "2026-06-09",
+  "siteUrl": "https://teachingwithartificialintelligence.netlify.app",
+  "goatcounterCode": "",
+  "courseVideos": {
+    "opening": [
+      {
+        "id": "introduction-video",
+        "title": "Introduction Video",
+        "duration": "1.83 min",
+        "embedUrl": "PLACEHOLDER",
+        "transcript": "A brief welcome and orientation to the Teaching with AI course."
+      },
+      {
+        "id": "course-overview-intro",
+        "title": "Course Overview Intro",
+        "duration": "7.75 min",
+        "embedUrl": "PLACEHOLDER",
+        "transcript": "An overview of the course stance, six-module arc, and portfolio outcomes."
+      }
+    ],
+    "conclusion": {
+      "id": "conclusion-video",
+      "title": "Conclusion Video",
+      "duration": "2.13 min",
+      "embedUrl": "PLACEHOLDER",
+      "transcript": "A closing reflection and invitation to carry the portfolio into the next teaching term."
+    }
+  }
 }

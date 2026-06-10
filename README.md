@@ -1,66 +1,109 @@
-# Teaching with AI Website Wireframe
+# Teaching with AI — Website
 
-This folder contains a full clickable, branded wireframe for the Teaching with
-Artificial Intelligence faculty-development website. It uses plain HTML, CSS,
-vanilla JavaScript, and editable JSON files. There is no build step.
+The faculty-development website for **Teaching with Artificial Intelligence**
+(California Lutheran University). Plain HTML, CSS, vanilla JavaScript, and
+editable JSON files. No build step.
 
-## Published Site
+## Where it lives
 
-**Direct link:** [https://garcijo4.github.io/teachingwithai/](https://garcijo4.github.io/teachingwithai/)
+- **Production:** https://teachingwithartificialintelligence.netlify.app/
+  (Netlify builds automatically from the GitHub repo's `main` branch)
+- **GitHub Pages preview:** https://garcijo4.github.io/teachingwithai/
+  (deployed by `.github/workflows/pages.yml`; useful as a staging check)
 
-The site deploys automatically to GitHub Pages whenever changes are pushed to
-the `main` branch.
+Push to `main` → GitHub Pages and Netlify both redeploy. Netlify is the
+canonical site: all `<link rel="canonical">`, sitemap, and robots URLs point
+there, and **forms only work on Netlify** (GitHub Pages cannot accept POSTs).
 
-## Preview Locally
+## Preview locally
 
-From the `website` folder, start any static web server. Python is one simple
-option:
+From the `website` folder, run any static server, then open
+`http://127.0.0.1:8080/`:
 
 ```powershell
 python -m http.server 8080
 ```
 
-Then open `http://127.0.0.1:8080/`.
+Don't open files via `file://` — pages fetch JSON and need a web server.
 
-Do not open the HTML files directly with `file://`. The pages fetch JSON content
-and require a local or hosted web server.
+## Editing content (the JSON layer)
 
-## Content Editing
+All owner-editable content lives in `data/`. **You never need to touch HTML or
+JS to update content.**
 
-The editable content layer lives in `data/`:
+| File | Controls |
+|---|---|
+| `site.json` | Site name, tagline, contact email, support URL, site URL, last-reviewed date, intro/conclusion videos, analytics code |
+| `modules.json` | Module titles, objectives, videos, worksheets, slides, artifacts |
+| `key-terms.json` | Glossary definitions, video scripts, tooltip aliases |
+| `articles.json` | Curated article cards |
+| `feeds.json` | RSS feeds for the auto-updating articles section |
+| `chatbots.json` | Chatbot directory (set `"status": "live"` + real `url` to activate a Launch button) |
+| `quickstart.json` | Time-based quick-start paths |
+| `faq.json` | FAQ entries |
+| `updates.json` | Newsletter archive |
 
-- `modules.json`: module names, objectives, videos, worksheets, and artifacts
-- `key-terms.json`: glossary definitions and video scripts
-- `articles.json`: curated article cards
-- `chatbots.json`: faculty-support chatbot directory
-- `quickstart.json`: time-based quick-start paths
-- `faq.json`: faculty FAQ entries
-- `updates.json`: newsletter archive
-- `site.json`: shared site details and contact information
-- `feeds.json`: future RSS feed configuration
+### The PLACEHOLDER convention
 
-Search the website folder for `PLACEHOLDER` before launch. Replace those values
-with approved ScreenPal, HeyGen, Google Drive, chatbot, support, article, RSS,
-domain, and instructor-bio details.
+Any URL field still set to `PLACEHOLDER` renders as a disabled "coming soon"
+control. **Paste a real URL into the JSON and the button or video goes live
+automatically** — no other change needed. This applies to:
 
-## Wireframe Behavior
+- `embedUrl` on every video (ScreenPal/HeyGen embed URL → click-to-load player appears)
+- `url` (Google Doc `/copy` link) and `exportUrl` (Word/PDF export) on worksheets
+- `pdfUrl` / `previewUrl` on each module's `slides`
+- `url` on articles and chatbots
+- `supportUrl` and `portfolioWorkbookUrl` in `site.json`
 
-- Course and module content is rendered from JSON.
-- Module items and portfolio artifacts save progress to browser `localStorage`.
-- Key terms and articles have working client-side filters.
-- Video placeholders demonstrate the intended click-to-load behavior.
-- Subscribe and feedback forms use Netlify-compatible markup, but submission is
-  intentionally disabled while this remains a wireframe.
-- External placeholder links are intercepted so the wireframe never navigates
-  to an invented URL.
+### Useful extras
 
-## Before Production
+- **Runtime tokens:** `{{TOTAL_RUNTIME}}`, `{{TOTAL_MINUTES}}`, `{{TOTAL_HOURS}}`
+  in `faq.json` / `quickstart.json` are replaced with totals computed from
+  `modules.json`, so durations never drift when videos change.
+- **Express path:** add `"express": true` to a video in `modules.json` to give
+  it a gold "Express path" badge (the module page then explains the badge).
+- **Term tooltips:** module descriptions and objectives automatically link
+  glossary terms (dotted underline + hover definition). Matching uses each
+  term's `term` plus its `aliases` array in `key-terms.json`.
+- **Analytics:** create a free GoatCounter account, then set
+  `"goatcounterCode": "yourcode"` in `site.json` (the part before
+  `.goatcounter.com`). Leave empty for no analytics. Cookieless — no banner needed.
 
-1. Replace every `PLACEHOLDER`.
-2. Set all Google Drive resources to "Anyone with the link - Viewer."
-3. Use `/copy` links for editable Google Docs and add Word/PDF export links.
-4. Add final ScreenPal and HeyGen embed URLs and verify captions.
-5. Connect and test Netlify Forms.
-6. Confirm support, contact, privacy, analytics, and CTL-credit language.
-7. Add approved instructor artwork, favicon, and social-sharing image.
-8. Run accessibility, responsive, link, and performance checks.
+## Forms (Netlify)
+
+Two forms: `weekly-updates` (footer + subscribe page) and `module-feedback`
+(every module page, sent via AJAX). Hidden static copies live at the bottom of
+`index.html` so Netlify's build bots register them — **don't delete that block.**
+
+One-time setup: in the Netlify dashboard → **Forms → Enable form detection**,
+then redeploy. Submissions appear under Forms (100/month on the free tier);
+export the list or wire a notification there.
+
+## Auto-updating articles (RSS)
+
+`.github/workflows/rss-cache.yml` runs daily, executes
+`scripts/fetch_feeds.py`, and commits `data/feed-cache.json` (which also
+triggers a Netlify redeploy). The Articles page shows the "Recent from around
+the web" section only when the cache has items.
+
+To activate: replace the `PLACEHOLDER` values in `data/feeds.json` with real
+RSS URLs. Until then the workflow runs harmlessly and the section stays hidden.
+
+## Assets
+
+`assets/img/` holds `favicon.svg`, `apple-touch-icon.png`, and `og-image.png`
+(social-share card). These are generated brand-colored placeholders — replace
+with approved artwork anytime, keeping the same filenames.
+
+## Pre-launch checklist
+
+1. Replace remaining `PLACEHOLDER` values in `data/` (search the folder).
+2. Set Google Drive files to "Anyone with the link — Viewer"; use `/copy`
+   links for Docs and `/export?format=docx` links for Word export.
+3. Add ScreenPal/HeyGen embed URLs and verify captions.
+4. Enable Netlify form detection and send a test submission.
+5. Put real RSS URLs in `data/feeds.json`; run the workflow manually once
+   (Actions → Refresh RSS feed cache → Run workflow).
+6. Confirm CTL-credit language in `faq.json` and the instructor bio on About.
+7. Replace placeholder artwork in `assets/img/`.
+8. Run a Lighthouse pass (target 90+) and a link check.

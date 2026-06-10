@@ -1,0 +1,35 @@
+name: Refresh RSS feed cache
+
+on:
+  schedule:
+    - cron: "0 12 * * *" # daily, ~5am Pacific
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install feedparser
+      - name: Build feed cache
+        run: python scripts/fetch_feeds.py
+      - name: Commit cache if changed
+        run: |
+          git config user.name "rss-cache-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if ! git diff --quiet data/feed-cache.json; then
+            git add data/feed-cache.json
+            git commit -m "chore: refresh RSS feed cache"
+            git push
+          else
+            echo "No feed changes."
+          fi
