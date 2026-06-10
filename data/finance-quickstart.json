@@ -1,0 +1,82 @@
+[
+  {
+    "rank": 1,
+    "title": "Simulated C-Suite / Client Role-Play",
+    "difficulty": "intermediate",
+    "html": "<p>Use a standard ChatGPT or Claude session (no custom bot needed). Give students this one-paragraph scenario and prompt:</p>\n<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Quick Role-Play Prompt</h4>\n<button class=\"copy-btn\" data-copy-target=\"qs-prompt-1\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"qs-prompt-1\">You are a skeptical CFO at a manufacturing company. I am a junior analyst about to pitch a $30M warehouse expansion. My NPV analysis shows $4.2M positive NPV at a 10% discount rate. Push back on my assumptions-especially the 6% revenue growth rate and the choice of discount rate. Be tough but fair.</code></pre>\n</div>\n<p>Have students do a 5-minute interaction on their phones during class and submit 3 bullet points: (1) the toughest objection, (2) how they responded, (3) what they would do differently.</p>",
+    "time": "Total class time: 10 minutes",
+    "submit": "<strong>What students submit:</strong> 3 bullet points — (1) the toughest objection raised, (2) how they responded, (3) what they would do differently next time."
+  },
+  {
+    "rank": 2,
+    "title": "AI-Assisted Formative Feedback on Student Writing",
+    "difficulty": "beginner",
+    "html": "<p>Pick one assignment you are grading this week. Paste one student's submission and your rubric into ChatGPT or Claude. Use this prompt:</p>\n<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Quick Feedback Prompt</h4>\n<button class=\"copy-btn\" data-copy-target=\"qs-prompt-2\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"qs-prompt-2\">Evaluate this submission using the attached rubric. For each category, provide a score, one strength with a quote, one weakness with a quote, and one actionable suggestion.</code></pre>\n</div>\n<p>Compare the AI's draft to what you would have written. Edit it, add your personal touch, and return it. Track your time—most faculty report saving 15-25 minutes per submission on first use.</p>",
+    "time": "Time investment: 15-25 minutes saved per submission",
+    "submit": "<strong>What students submit:</strong> Not applicable — this is an instructor workflow. Faculty submit the AI-drafted feedback (edited and approved) to the student."
+  },
+  {
+    "rank": 3,
+    "title": "AI Socratic Tutor for Foundational Concepts",
+    "difficulty": "beginner",
+    "html": "<p>Create a half-page handout with 2 prompt templates: one Socratic tutor for your course's most-struggled concept (e.g., TVM, bond pricing, WACC) and one practice problem generator. Distribute it next class. Ask students to try one problem with the AI tutor before the next session and bring a screenshot of one exchange.</p>\n<p>Spend 5 minutes debriefing: “How many found an error in the AI's response? What worked well? What didn't?”</p>",
+    "time": "Zero technology setup required",
+    "submit": "<strong>What students submit:</strong> A screenshot of one AI tutor exchange, annotated with one thing the AI got right and one thing they had to correct or verify."
+  },
+  {
+    "rank": 4,
+    "title": "AI-Aware Assessment Design",
+    "difficulty": "intermediate",
+    "html": "<p>Take one existing exam problem from your current course. Add two interpretation questions that AI cannot easily answer:</p>\n<ol>\n<li>“What does this NPV result mean for the firm's strategic decision—should they proceed, and why?”</li>\n<li>“Identify the single assumption that, if changed, would most likely reverse your recommendation. Explain why.”</li>\n</ol>\n<p>No technology, no setup, no AI account needed. This alone shifts the assessment toward evaluative judgment.</p>",
+    "time": "No setup required",
+    "submit": "<strong>What students submit:</strong> Written answers to the two interpretation questions added to the problem — no AI required to answer them."
+  },
+  {
+    "rank": 5,
+    "title": "AI-Powered Financial Data Analysis & Visualization",
+    "difficulty": "intermediate",
+    "html": "<p>Download a free CSV of monthly Fama-French factor returns from <a href=\"https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html\" rel=\"noopener\" target=\"_blank\">Kenneth French's data library</a>. Upload it to ChatGPT Code Interpreter with this prompt:</p>\n<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Quick Data Analysis Prompt</h4>\n<button class=\"copy-btn\" data-copy-target=\"qs-prompt-5\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"qs-prompt-5\">Calculate the average monthly return and standard deviation for the market factor, SMB, and HML. Display as a bar chart with error bars.</code></pre>\n</div>\n<p>Show the result in class (takes 30 seconds). Ask students: “What would you need to check to trust these numbers?” Debrief in 3 minutes. No coding knowledge required.</p>",
+    "time": "Total class time: ~5 minutes",
+    "submit": "<strong>What students submit:</strong> The AI-generated chart, one-paragraph interpretation of what the data shows, and one data quality concern they would need to address before citing the results in a report."
+  },
+  {
+    "rank": 6,
+    "title": "Content Generation: Exam Variants, Cases & Materials",
+    "difficulty": "beginner",
+    "html": "<p>Open ChatGPT right now. Paste this prompt:</p>\n<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Quick Bond Problem Generator</h4>\n<button class=\"copy-btn\" data-copy-target=\"qs-prompt-6\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"qs-prompt-6\">Generate 3 variants of a bond pricing problem for Principles of Finance. Each should use a different coupon rate (4%, 6%, 8%), different maturity (5, 10, 20 years), and different YTM (3%, 5%, 7%). Include answer keys.</code></pre>\n</div>\n<p>Compare the output to your existing problem set. Edit the best variant for your next quiz.</p>",
+    "time": "Total time: 10-15 minutes",
+    "submit": "<strong>What students submit:</strong> Not required for the in-class demo — but for assignment use, students submit the edited variant with a note explaining what they changed and why."
+  },
+  {
+    "rank": 7,
+    "title": "Real-Time Market Context & Case Enhancement",
+    "difficulty": "beginner",
+    "html": "<p>Before your next case discussion, post this 5-minute pre-class task:</p>\n<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Pre-Class Case Update Task</h4>\n<button class=\"copy-btn\" data-copy-target=\"qs-prompt-7\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"qs-prompt-7\">Open ChatGPT or Perplexity. Ask: What has happened to [Case Company] since [case year]? Find one development that would change the case analysis. Verify it with one primary source (10-K, earnings transcript, or press release). Bring your finding to class.</code></pre>\n</div>\n<p>Open class by having 2-3 students share their updates. Debrief: “How many verified what the AI told you? What did you find when you checked?”</p>",
+    "time": "Zero setup required",
+    "submit": "<strong>What students submit:</strong> One finding (1–2 sentences), the primary source used to verify it (link or citation), and whether the AI's claim held up to verification."
+  },
+  {
+    "rank": 8,
+    "title": "Coding Assistance & “Vibe Coding”",
+    "difficulty": "intermediate",
+    "html": "<p>In class, open ChatGPT or Claude and type:</p>\n<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Quick PV Coding Demo</h4>\n<button class=\"copy-btn\" data-copy-target=\"qs-prompt-8\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"qs-prompt-8\">Write Python code to calculate the present value of $10,000 received in 5 years at a 7% annual discount rate. Show the formula in a comment.</code></pre>\n</div>\n<p>Display the result (15 seconds). Then ask students: “What would you need to change if there were also annual $500 coupon payments?” Have a student describe the change in plain English. Paste their description into the AI. Display the updated code. Debrief: “The AI wrote it—how would you verify it's correct?”</p>",
+    "time": "Total time: 8 minutes",
+    "submit": "<strong>What students submit:</strong> The AI-generated code with 2–3 inline comments added by the student explaining what each key line does and why the sign convention is correct."
+  },
+  {
+    "rank": 9,
+    "title": "AI Literacy & Critical Evaluation",
+    "difficulty": "beginner",
+    "html": "<p><strong>The 2-Minute AI Audit</strong> (works with zero preparation):</p>\n<p>In class, tell every student to open any AI tool on their phone. Ask them a finance question they know the answer to cold—something from last week's lecture. They have exactly 2 minutes to find at least one error or imprecision in the AI's response.</p>\n<p>Quick show of hands: How many found an error? What kinds of errors? This exercise takes 5 minutes total, requires zero setup, immediately demonstrates that AI is accessible and fallible, and establishes AI as a tool to be audited rather than trusted blindly. Do it on day one of any course.</p>",
+    "time": "Total time: 5 minutes, zero preparation",
+    "submit": "<strong>What students submit:</strong> One specific error or imprecision found, the correct answer or better framing, and one sentence on what the error implies about trusting AI for finance decisions."
+  },
+  {
+    "rank": 10,
+    "title": "Simulation, Monte Carlo & Scenario Analysis",
+    "difficulty": "advanced",
+    "html": "<p><strong>Zero-infrastructure demonstration:</strong> Open ChatGPT Code Interpreter in class. Type:</p>\n<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Coin Flip Convergence Demo</h4>\n<button class=\"copy-btn\" data-copy-target=\"qs-prompt-10\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"qs-prompt-10\">Simulate 1,000 coin flips. Plot the running average after each flip. Add a horizontal line at 0.5.</code></pre>\n</div>\n<p>Result appears in 15 seconds. Show the convergence. Then say: “Now imagine this, but instead of coin flips, these are annual stock returns. And instead of a running average, we are tracking a retirement account balance. That is a Monte Carlo simulation.”</p>\n<p>This 60-second demo plants the conceptual seed for simulation thinking with zero technical barrier. For the next class, provide a pre-built Colab notebook link where students can modify 3 parameters (allocation, withdrawal rate, time horizon) and re-run.</p>",
+    "time": "Total time: ~2 minutes",
+    "submit": "<strong>What students submit:</strong> For the follow-up Colab exercise — a screenshot of their simulation output and a 3-sentence interpretation: what the distribution shows, what changes most when they adjust one parameter, and one real-world implication."
+  }
+]

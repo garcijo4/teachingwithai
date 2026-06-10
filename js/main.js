@@ -412,6 +412,22 @@
         setTimeout(() => location.reload(), 350);
       });
     });
+
+    document.querySelectorAll(".copy-btn[data-copy-target]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const target = document.getElementById(button.dataset.copyTarget);
+        if (!target) return;
+        try {
+          await navigator.clipboard.writeText(target.textContent);
+          showToast("Prompt copied to clipboard.");
+          const original = button.textContent;
+          button.textContent = "Copied";
+          setTimeout(() => { button.textContent = original; }, 1600);
+        } catch (error) {
+          showToast("Copy is unavailable here. Select the text manually.");
+        }
+      });
+    });
   }
 
   function handleHashTarget() {
@@ -656,7 +672,9 @@
   }
 
   async function renderModule() {
-    const [modules, terms] = await Promise.all([fetchData("modules"), fetchData("key-terms")]);
+    const [modules, terms, allSessions] = await Promise.all([
+      fetchData("modules"), fetchData("key-terms"), fetchData("sessions").catch(() => [])
+    ]);
     const termIndex = buildTermIndex(terms);
     const moduleId = Number(new URLSearchParams(location.search).get("m"));
     const module = modules.find((item) => item.id === moduleId);
@@ -677,6 +695,7 @@
     const next = modules.find((item) => item.id === module.id + 1);
     const slides = module.slides || {};
     const hasExpressItems = module.videos.some((video) => video.express);
+    const relatedSessions = allSessions.filter((item) => (item.relatedModules || []).includes(module.id));
 
     main.innerHTML = `
       <section class="page-hero">
@@ -764,6 +783,13 @@
                 return `<a class="badge" href="key-terms/#${esc(slug)}">${esc(term ? term.term : slug.replaceAll("-", " "))}</a>`;
               }).join("")}</div>
             </div>
+            ${relatedSessions.length ? `
+            <div class="card">
+              <p class="eyebrow">Related sessions</p>
+              <div class="stack-sm">
+                ${relatedSessions.map((item) => `<div><a class="text-link" href="${esc(item.type === "guide" && item.url ? item.url : `sessions/session.html?s=${item.id}`)}">${esc(item.shortTitle || item.title)} &rarr;</a><p class="small muted" style="margin:.25rem 0 0">${esc(item.blurb || "")}</p></div>`).join("")}
+              </div>
+            </div>` : ""}
             <div class="card">
               <h3>Stuck on Module ${module.id}?</h3>
               <p class="small muted">A human escape hatch matters. Ask a focused question and include the page or item name.</p>
@@ -816,6 +842,15 @@
   /* ---------- standalone sessions ---------- */
 
   function sessionCard(session) {
+    if (session.type === "guide") {
+      return `
+      <article class="card">
+        <div class="badge-row">${badge(esc(session.kind || "Companion guide"), "badge-gold")}${session.date ? ` ${badge(esc(session.date))}` : ""} ${(session.topics || []).map((topic) => badge(esc(topic))).join(" ")}</div>
+        <h3>${esc(session.shortTitle || session.title)}</h3>
+        <p class="muted">${esc(session.blurb)}</p>
+        <a class="button button-outline button-small" href="${esc(session.url)}">Open the guide</a>
+      </article>`;
+    }
     const hasVideo = Boolean(realUrl(session.video && session.video.embedUrl));
     return `
       <article class="card">
@@ -856,6 +891,10 @@
       location.replace(new URL("sessions/", document.baseURI));
       return;
     }
+    if (session.type === "guide" && session.url) {
+      location.replace(new URL(session.url, document.baseURI));
+      return;
+    }
 
     document.title = `${session.title} | ${site.siteName}`;
     const email = site.contactEmail || FALLBACK_SITE.contactEmail;
@@ -882,6 +921,7 @@
             <section id="video">
               <p class="eyebrow">Watch</p>
               <h2>Session video</h2>
+              ${session.video && session.video.duration ? `<div class="module-meta"><span>${videoDuration(session.video)}</span></div>` : ""}
               ${videoBlock({ ...(session.video || {}), title: session.title }, "Video coming soon", true)}
               ${session.video && session.video.summary ? `<details><summary>Video summary</summary><div class="details-body"><p>${esc(session.video.summary)}</p></div></details>` : ""}
             </section>
@@ -1309,6 +1349,15 @@
       <section class="section section-tint">
         <div class="container"><div class="callout"><p class="eyebrow">Content currency</p><h2>Every capability claim needs a vintage stamp.</h2><p>AI capabilities change quickly. Modules and articles carry a last-reviewed date, while stable pedagogical values remain visible across revisions.</p>${site.lastReviewed ? `<p><strong>Site last reviewed:</strong> ${esc(site.lastReviewed)}</p>` : ""}</div></div>
       </section>
+      <section class="section-sm">
+        <div class="container">
+          <div class="callout">
+            <p class="eyebrow">Speaking and sessions</p>
+            <h2>Conference talks come with companion guides.</h2>
+            <p>Materials from talks and workshops &mdash; including the SWFA 2026 guide to the top 10 AI applications for finance classroom instruction &mdash; live in the <a href="sessions/">Sessions</a> section.</p>
+          </div>
+        </div>
+      </section>
       ${ctaBanner()}`;
   }
 
@@ -1316,6 +1365,342 @@
     main.innerHTML = `
       ${pageHero("Thank you", "You are on the list.", "Watch for the next weekly update. In the meantime, the archive shows what the newsletter delivers.", `<div class="button-row"><a class="button" href="./">Return home</a><a class="button button-outline" href="updates/">Browse updates</a></div>`)}
     `;
+  }
+
+
+  /* ---------- finance classroom guide (SWFA companion) ---------- */
+
+  const DIFF_LABELS = { beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced" };
+
+  function diffBadge(difficulty) {
+    const key = String(difficulty || "").toLowerCase();
+    return badge(DIFF_LABELS[key] || esc(difficulty), `badge-diff badge-diff-${esc(key)}`);
+  }
+
+  async function financeSession() {
+    const sessions = await fetchData("sessions");
+    return sessions.find((item) => item.id === "ai-in-finance");
+  }
+
+  function financeBreadcrumbs(trail = []) {
+    const parts = [`<a href="sessions/">Sessions</a>`, `<a href="sessions/ai-in-finance/">AI in the Finance Classroom</a>`, ...trail];
+    return `<nav class="breadcrumbs" aria-label="Breadcrumb">${parts.join("<span>&rsaquo;</span>")}</nav>`;
+  }
+
+  function financeSubnav(active) {
+    const links = [
+      ["overview", "Overview", "sessions/ai-in-finance/"],
+      ["applications", "Applications", "sessions/ai-in-finance/application.html?a=1"],
+      ["prompts", "Prompt Library", "sessions/ai-in-finance/prompts.html"],
+      ["quickstart", "Quick Start", "sessions/ai-in-finance/quick-start.html"],
+      ["frameworks", "Frameworks", "sessions/ai-in-finance/frameworks.html"],
+      ["presentation", "AI Presentation", "sessions/ai-in-finance/ai-presentation.html"],
+      ["references", "References", "sessions/ai-in-finance/references.html"]
+    ];
+    return `<nav class="session-subnav" aria-label="Guide sections">${links.map(([key, label, url]) => `<a href="${url}" ${key === active ? 'aria-current="page"' : ""}>${label}</a>`).join("")}</nav>`;
+  }
+
+  function financeDownloadCards(downloads) {
+    return `<div class="resource-list">${downloads.map((doc) => `
+      <article class="resource-card">
+        <div class="resource-icon">PDF</div>
+        <div><h3>${esc(doc.title)}</h3><p class="small muted">${esc(doc.description)}</p></div>
+        <div class="resource-actions">${actionButton("Download PDF", doc.url, "button-outline button-small")}</div>
+      </article>`).join("")}</div>`;
+  }
+
+  async function renderFinance() {
+    const [session, apps] = await Promise.all([financeSession(), fetchData("finance-applications")]);
+    main.innerHTML = `
+      <section class="page-hero">
+        <div class="container">
+          <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="sessions/">Sessions</a><span>&rsaquo;</span><span>AI in the Finance Classroom</span></nav>
+          <div class="badge-row">${badge(esc(session.kind), "badge-gold")} ${badge(esc(session.venue))} ${badge(esc(session.date))}</div>
+          <h1>${esc(session.title)}</h1>
+          <p class="lede">Implementation guide with ready-to-use prompts for integrating AI into finance courses.</p>
+          <div class="button-row">
+            <a class="button button-gold" href="#applications">Explore all 10 applications</a>
+            <a class="button button-light" href="sessions/ai-in-finance/quick-start.html">Quick start guides</a>
+            <a class="button button-light" href="#downloads">Download handouts</a>
+          </div>
+        </div>
+      </section>
+      <section class="section-sm"><div class="container">${financeSubnav("overview")}</div></section>
+      <section class="section-sm">
+        <div class="container">
+          <div class="callout">
+            <p class="eyebrow">How to use this guide</p>
+            ${(session.howToUse || []).map((paragraph) => `<p>${paragraph}</p>`).join("")}
+            <p class="small muted">${session.oecdNote}</p>
+          </div>
+        </div>
+      </section>
+      <section class="section-sm">
+        <div class="container">
+          <div class="callout callout-gold">
+            <h3>Tools you need</h3>
+            <p>${session.toolsNote}</p>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="applications">
+        <div class="container">
+          <div class="section-heading"><div><p class="eyebrow">Ranked by impact, feasibility, and evidence</p><h2>The top 10 applications</h2></div></div>
+          <div class="filter-bar" aria-label="Filter applications by difficulty">
+            <button class="filter-button" type="button" aria-pressed="true" data-app-filter="all">All</button>
+            ${(session.difficultyLevels || []).map((level) => `<button class="filter-button" type="button" aria-pressed="false" data-app-filter="${esc(level.key)}">${esc(level.label)}</button>`).join("")}
+          </div>
+          <div class="grid grid-2">
+            ${apps.map((app) => `
+              <a class="card app-card" data-app-difficulty="${esc(app.difficulty)}" href="sessions/ai-in-finance/application.html?a=${app.id}">
+                <div class="app-card-head"><span class="rank-number">#${app.id}</span>${diffBadge(app.difficulty)}</div>
+                <h3>${esc(app.title)}</h3>
+                <p class="muted">${esc(app.summary || app.tagline)}</p>
+                <span class="text-link">Open application &rarr;</span>
+              </a>`).join("")}
+          </div>
+          <div class="grid grid-3" style="margin-top:2rem">
+            ${(session.difficultyLevels || []).map((level) => `<div class="card">${diffBadge(level.key)}<p class="small muted" style="margin-top:.75rem">${esc(level.description)}</p></div>`).join("")}
+          </div>
+        </div>
+      </section>
+      <section class="section section-tint">
+        <div class="container">
+          <div class="section-heading"><div><p class="eyebrow">Ranking methodology</p><h2>Three weighted criteria</h2></div></div>
+          <div class="grid grid-3">
+            ${(session.methodology || []).map((item) => `<div class="card"><div class="methodology-weight-big">${esc(item.weight)}</div><h3>${esc(item.label)}</h3><p class="muted">${esc(item.description)}</p></div>`).join("")}
+          </div>
+        </div>
+      </section>
+      <section class="section" id="downloads">
+        <div class="container">
+          <div class="section-heading"><div><p class="eyebrow">Take it with you</p><h2>Download resources</h2></div></div>
+          ${financeDownloadCards(session.downloads || [])}
+          <p class="small muted" style="margin-top:1.5rem">Guide content is licensed under <a href="${esc(session.licenseUrl)}" target="_blank" rel="noopener noreferrer">${esc(session.license)}</a>. Originally published as the <a href="${esc(session.originalUrl)}" target="_blank" rel="noopener noreferrer">SWFA companion site</a>.</p>
+        </div>
+      </section>
+      ${ctaBanner()}`;
+
+    document.querySelectorAll("[data-app-filter]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.appFilter;
+        document.querySelectorAll("[data-app-filter]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        document.querySelectorAll(".app-card[data-app-difficulty]").forEach((card) => {
+          card.hidden = filter !== "all" && card.dataset.appDifficulty !== filter;
+        });
+      });
+    });
+  }
+
+  async function renderFinanceApplication() {
+    const apps = await fetchData("finance-applications");
+    const appId = Number(new URLSearchParams(location.search).get("a"));
+    const app = apps.find((item) => item.id === appId);
+    if (!app) {
+      location.replace(new URL("sessions/ai-in-finance/", document.baseURI));
+      return;
+    }
+    document.title = `#${app.id} ${app.title} | ${site.siteName}`;
+    const previous = apps.find((item) => item.id === app.id - 1);
+    const next = apps.find((item) => item.id === app.id + 1);
+
+    main.innerHTML = `
+      <section class="page-hero">
+        <div class="container">
+          ${financeBreadcrumbs([`<span>#${app.id}</span>`])}
+          <div class="badge-row">${badge(`Application #${app.id} of 10`)} ${diffBadge(app.difficulty)}</div>
+          <h1>${esc(app.title)}</h1>
+          <p class="lede">${esc(app.tagline)}</p>
+        </div>
+      </section>
+      <section class="section-sm"><div class="container">${financeSubnav("applications")}</div></section>
+      <section class="section">
+        <div class="container content-layout">
+          <div class="stack session-prose">
+            ${app.sections.map((section) => section.kind === "pilot"
+              ? `<div class="callout callout-gold pilot-callout"><p class="eyebrow">Try it this week</p><h2>${esc(section.heading)}</h2>${section.html}</div>`
+              : `<section>${section.heading ? `<h2>${esc(section.heading)}</h2>` : ""}${section.html}</section>`).join("")}
+            <nav class="button-row" aria-label="Application navigation">
+              ${previous ? `<a class="button button-outline" href="sessions/ai-in-finance/application.html?a=${previous.id}">&larr; #${previous.id}</a>` : `<a class="button button-outline" href="sessions/ai-in-finance/">Guide overview</a>`}
+              ${next ? `<a class="button" href="sessions/ai-in-finance/application.html?a=${next.id}">#${next.id} ${esc(next.title)} &rarr;</a>` : `<a class="button" href="sessions/ai-in-finance/quick-start.html">Quick start guides &rarr;</a>`}
+            </nav>
+          </div>
+          <aside class="sidebar">
+            <div class="card">
+              <p class="eyebrow">All applications</p>
+              <ol class="app-jump-list">
+                ${apps.map((item) => `<li><a href="sessions/ai-in-finance/application.html?a=${item.id}" ${item.id === app.id ? 'aria-current="page"' : ""}>#${item.id} ${esc(item.title)}</a></li>`).join("")}
+              </ol>
+            </div>
+            <div class="card">
+              <p class="eyebrow">Guide resources</p>
+              <div class="stack-sm">
+                <a class="text-link" href="sessions/ai-in-finance/prompts.html">Prompt Library &rarr;</a>
+                <a class="text-link" href="sessions/ai-in-finance/quick-start.html">Quick Start Guides &rarr;</a>
+                <a class="text-link" href="sessions/ai-in-finance/frameworks.html">OECD Frameworks &rarr;</a>
+              </div>
+            </div>
+            <div class="card">
+              <p class="eyebrow">Related course modules</p>
+              <p class="small muted">The Teaching with AI course covers the discipline-agnostic version of these design moves.</p>
+              <div class="stack-sm">
+                <a class="text-link" href="course/module.html?m=3">Module 3: Assessment Redesign &rarr;</a>
+                <a class="text-link" href="course/module.html?m=4">Module 4: Assignment Redesign &rarr;</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+      ${ctaBanner()}`;
+  }
+
+  async function renderFinancePrompts() {
+    const [library, session] = await Promise.all([fetchData("finance-prompts"), financeSession()]);
+    main.innerHTML = `
+      <section class="page-hero">
+        <div class="container">
+          ${financeBreadcrumbs([`<span>Prompt Library</span>`])}
+          <h1>Prompt Library</h1>
+          <p class="lede">Ready-to-use prompts for every application. Copy with one click, then adapt to your course.</p>
+        </div>
+      </section>
+      <section class="section-sm"><div class="container">${financeSubnav("prompts")}</div></section>
+      <section class="section-sm">
+        <div class="container">
+          <div class="callout">
+            <h3>How to adapt these prompts</h3>
+            <p>${esc(library.adaptIntro)}</p>
+            <ol>${(library.adaptTips || []).map((tip) => `<li>${tip}</li>`).join("")}</ol>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="filter-bar" aria-label="Filter prompts by difficulty">
+            <button class="filter-button" type="button" aria-pressed="true" data-prompt-filter="all">All</button>
+            ${(session.difficultyLevels || []).map((level) => `<button class="filter-button" type="button" aria-pressed="false" data-prompt-filter="${esc(level.key)}">${esc(level.label)}</button>`).join("")}
+          </div>
+          <div class="stack">
+            ${library.prompts.map((prompt) => `
+              <article class="card prompt-library-card" data-prompt-difficulty="${esc(prompt.difficulty)}" id="${esc(prompt.id)}-card">
+                <div class="prompt-library-meta">
+                  <a class="text-link" href="sessions/ai-in-finance/application.html?a=${prompt.app}">From #${prompt.app}: ${esc(prompt.appTitle)}</a>
+                  ${diffBadge(prompt.difficulty)}
+                </div>
+                <div class="prompt-card">
+                  <div class="prompt-card__header"><h3>${esc(prompt.title)}</h3><button class="copy-btn" type="button" data-copy-target="${esc(prompt.id)}">Copy</button></div>
+                  <pre><code id="${esc(prompt.id)}">${esc(prompt.text)}</code></pre>
+                </div>
+              </article>`).join("")}
+          </div>
+          <div class="empty-state" id="prompt-empty" hidden>No prompts match that difficulty filter.</div>
+        </div>
+      </section>
+      ${ctaBanner()}`;
+
+    document.querySelectorAll("[data-prompt-filter]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.promptFilter;
+        document.querySelectorAll("[data-prompt-filter]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        let visible = 0;
+        document.querySelectorAll(".prompt-library-card[data-prompt-difficulty]").forEach((card) => {
+          card.hidden = filter !== "all" && card.dataset.promptDifficulty !== filter;
+          if (!card.hidden) visible += 1;
+        });
+        document.querySelector("#prompt-empty").hidden = visible !== 0;
+      });
+    });
+  }
+
+  async function renderFinanceQuickstart() {
+    const [cards, session] = await Promise.all([fetchData("finance-quickstart"), financeSession()]);
+    main.innerHTML = `
+      <section class="page-hero">
+        <div class="container">
+          ${financeBreadcrumbs([`<span>Quick Start</span>`])}
+          <h1>Quick Start Guides</h1>
+          <p class="lede">First-week implementation pilots for every application. Each one requires minimal setup and can be tried in 10 minutes or less.</p>
+        </div>
+      </section>
+      <section class="section-sm"><div class="container">${financeSubnav("quickstart")}</div></section>
+      <section class="section">
+        <div class="container">
+          <div class="filter-bar" aria-label="Filter quick starts by difficulty">
+            <button class="filter-button" type="button" aria-pressed="true" data-qs-filter="all">All</button>
+            ${(session.difficultyLevels || []).map((level) => `<button class="filter-button" type="button" aria-pressed="false" data-qs-filter="${esc(level.key)}">${esc(level.label)}</button>`).join("")}
+          </div>
+          <div class="stack">
+            ${cards.map((card) => `
+              <article class="card quickstart-card" data-qs-difficulty="${esc(card.difficulty)}">
+                <div class="app-card-head"><span class="rank-number">#${card.rank}</span><h2 class="quickstart-title">${esc(card.title)}</h2>${diffBadge(card.difficulty)}</div>
+                <div class="session-prose">${card.html}</div>
+                <div class="quickstart-footer">
+                  ${card.time ? `<span class="badge badge-gold">${esc(card.time)}</span>` : ""}
+                  ${card.submit ? `<p class="small muted">${card.submit}</p>` : ""}
+                  <a class="text-link" href="sessions/ai-in-finance/application.html?a=${card.rank}">Read the full application &rarr;</a>
+                </div>
+              </article>`).join("")}
+          </div>
+        </div>
+      </section>
+      ${ctaBanner()}`;
+
+    document.querySelectorAll("[data-qs-filter]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.qsFilter;
+        document.querySelectorAll("[data-qs-filter]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        document.querySelectorAll(".quickstart-card[data-qs-difficulty]").forEach((card) => {
+          card.hidden = filter !== "all" && card.dataset.qsDifficulty !== filter;
+        });
+      });
+    });
+  }
+
+  function renderFinanceSectionsPage(data, breadcrumbLabel, subnavKey) {
+    main.innerHTML = `
+      <section class="page-hero">
+        <div class="container">
+          ${financeBreadcrumbs([`<span>${esc(breadcrumbLabel)}</span>`])}
+          <h1>${esc(data.title)}</h1>
+          <p class="lede">${data.lede || ""}</p>
+        </div>
+      </section>
+      <section class="section-sm"><div class="container">${financeSubnav(subnavKey)}</div></section>
+      <section class="section">
+        <div class="container">
+          <div class="stack session-prose">
+            ${data.sections.map((section) => `<section ${section.id ? `id="${esc(section.id)}"` : ""}>${section.heading ? `<h2>${esc(section.heading)}</h2>` : ""}${section.html}</section>`).join("")}
+          </div>
+        </div>
+      </section>
+      ${ctaBanner()}`;
+  }
+
+  async function renderFinanceFrameworks() {
+    renderFinanceSectionsPage(await fetchData("finance-frameworks"), "Frameworks", "frameworks");
+  }
+
+  async function renderFinancePresentation() {
+    renderFinanceSectionsPage(await fetchData("finance-presentation"), "AI Presentation", "presentation");
+  }
+
+  async function renderFinanceReferences() {
+    const refs = await fetchData("finance-references");
+    main.innerHTML = `
+      <section class="page-hero">
+        <div class="container">
+          ${financeBreadcrumbs([`<span>References</span>`])}
+          <h1>References</h1>
+          <p class="lede">Sources cited across the Top 10 AI Applications for Finance Classroom Instruction.</p>
+        </div>
+      </section>
+      <section class="section-sm"><div class="container">${financeSubnav("references")}</div></section>
+      <section class="section">
+        <div class="container session-prose">
+          <ul class="reference-list">${refs.items.map((item) => `<li>${item}</li>`).join("")}</ul>
+        </div>
+      </section>
+      ${ctaBanner()}`;
   }
 
   function renderNotFound() {
@@ -1330,6 +1715,13 @@
     module: renderModule,
     sessions: renderSessions,
     session: renderSession,
+    finance: renderFinance,
+    "finance-application": renderFinanceApplication,
+    "finance-prompts": renderFinancePrompts,
+    "finance-quickstart": renderFinanceQuickstart,
+    "finance-frameworks": renderFinanceFrameworks,
+    "finance-presentation": renderFinancePresentation,
+    "finance-references": renderFinanceReferences,
     "key-terms": renderKeyTerms,
     articles: renderArticles,
     chatbots: renderChatbots,

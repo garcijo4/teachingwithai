@@ -36,6 +36,10 @@ JS to update content.**
 | `site.json` | Site name, tagline, contact email, support URL, site URL, last-reviewed date, intro/conclusion videos, analytics code |
 | `modules.json` | Module titles, objectives, videos, reading, worksheets, slides, artifacts |
 | `sessions.json` | Standalone sessions (outside the course): title, blurb, video, slides, worksheet, try-it steps, related modules/terms. Add an object to the array and the listing page, session page, and homepage strip update automatically |
+| `finance-applications.json` | Finance guide (SWFA companion): the 10 ranked applications shown at `/sessions/ai-in-finance/`. Each entry holds title, difficulty, tagline, summary, and ordered content sections |
+| `finance-prompts.json` | Finance guide prompt library: every prompt with title, source application, difficulty, and full text (one-click copy on the page) |
+| `finance-quickstart.json` | Finance guide first-week pilots, one card per application |
+| `finance-frameworks.json`, `finance-presentation.json`, `finance-references.json` | Finance guide appendix pages (OECD frameworks, slide-generation tutorial, reference list) |
 | `key-terms.json` | Glossary definitions, video scripts, tooltip aliases |
 | `articles.json` | Curated article cards |
 | `feeds.json` | RSS feeds for the auto-updating articles section |
@@ -114,3 +118,14 @@ with approved artwork anytime, keeping the same filenames.
 6. Confirm CTL-credit language in `faq.json` and the instructor bio on About.
 7. Replace placeholder artwork in `assets/img/`.
 8. Run a Lighthouse pass (target 90+) and a link check.
+
+## Finance guide (SWFA companion)
+
+The `/sessions/ai-in-finance/` section is the migrated companion site for the
+Southwestern Finance Association 2026 session ("Top 10 AI Applications for
+Finance Classroom Instruction"). Its content lives in the `finance-*.json`
+files listed above; the guide's PDFs live in `assets/docs/`. The session is
+registered in `sessions.json` as a `"type": "guide"` entry, which makes it
+appear on the Sessions hub and homepage strip, and on Module 3/4/5 pages via
+`relatedModules`. The original site (garcijo4.github.io/ai_in_finance_classroom)
+stays online for SWFA citations and points here via canonical links.

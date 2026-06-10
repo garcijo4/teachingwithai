@@ -3,14 +3,19 @@
     "id": "ai-role-play",
     "title": "From Static Cases to AI Role-Play",
     "shortTitle": "AI Role-Play",
-    "duration": "12 min",
-    "topics": ["Assignment design", "Simulation", "Assessment"],
+    "duration": "9 min",
+    "topics": [
+      "Assignment design",
+      "Simulation",
+      "Assessment"
+    ],
     "blurb": "Turn an existing case discussion into live practice. Build a bounded chatbot scenario partner that students must reason with while the decision is still unfolding.",
     "description": "Case discussions usually look backward: the decision is already made and the pressure is gone. This session shows how a bounded chatbot role-play puts students inside the situation while the decision is still unfolding, so they practice judgment under realistic pressure instead of recalling someone else's answer.",
     "takeaway": "Leave with one role, one decision, and one debrief question you could pilot in a course you already teach. The chatbot is the practice environment, not the teacher or the assessment. The student's revised judgment is the evidence.",
     "video": {
-      "embedUrl": "PLACEHOLDER",
-      "summary": "A five-step build for an AI scenario partner: define the objective, build the scaffold, write the prompt, test and iterate, then run and debrief. The prompt anatomy covers role, situation, boundaries, behavior, and debrief. The key design principle: assess the reflection, not the chatbot conversation."
+      "embedUrl": "https://GARCIA.screencasthost.com/player/cO16FunuOMY?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+      "summary": "Case discussions look backward: the decision is made and the pressure is gone. This session flips the timing by letting students step into a situation while the decision is still unfolding, with a chatbot as scenario partner \u2014 a nervous investor, skeptical client, or confused patient \u2014 never an answer machine. The loop is simple: students enter the scenario, respond, the AI responds in character, the exchange repeats with rising pressure, then reflection and your debrief. The key design principle: assess the reflection, not the chatbot conversation \u2014 the student's revised judgment is the evidence. A five-step build (define the objective, build the scaffold, write the prompt, test and iterate, run and debrief) and a five-block prompt anatomy (role, situation, boundaries, behavior, debrief) keep the bot from solving the task or grading without you. A green/yellow/red boundary keeps faculty judgment in the loop: simulate and support reflection, verify any formative feedback, never private student data or final grades. It closes with a modest pilot \u2014 one role, one decision, one debrief question, on a 5/10/5/10-minute clock \u2014 and three assessment questions: What did you decide? What evidence did you use? What did the role-play make you reconsider? Slides: https://github.com/garcijo4/teachingwithai/blob/main/assets/slides/A1.%20From_Static_Cases_to_AI_Role-Play.pdf",
+      "duration": "9.1 min"
     },
     "slides": {
       "title": "AI Role-Play session slides",
@@ -30,9 +35,97 @@
       "Keep the timing modest: five minutes setup, ten minutes role-play, five minutes reflection, ten minutes debrief.",
       "Assess three questions: What did you decide? What evidence did you use? What did the role-play make you reconsider?"
     ],
-    "relatedModules": [4],
-    "relatedTerms": ["oracle-tutor-adversary", "productive-struggle"],
+    "relatedModules": [
+      4
+    ],
+    "relatedTerms": [
+      "oracle-tutor-adversary",
+      "productive-struggle"
+    ],
     "published": "2026-06-10",
+    "lastReviewed": "2026-06-10"
+  },
+  {
+    "id": "ai-in-finance",
+    "type": "guide",
+    "title": "Top 10 AI Applications for Finance Classroom Instruction",
+    "shortTitle": "AI in the Finance Classroom",
+    "kind": "Conference companion guide",
+    "venue": "Southwestern Finance Association Annual Meeting",
+    "date": "March 2026",
+    "topics": [
+      "Finance",
+      "Prompts",
+      "Assessment"
+    ],
+    "blurb": "A ranked implementation guide to the ten highest-impact AI applications for finance teaching, each with workflows, ready-to-use prompts, rubrics, and a ten-minute first-week pilot.",
+    "url": "sessions/ai-in-finance/",
+    "originalUrl": "https://garcijo4.github.io/ai_in_finance_classroom/",
+    "license": "CC BY-NC-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "howToUse": [
+      "AI is forcing a fundamental shift in finance pedagogy: the question is no longer <em>can the student compute this?</em> but <em>can the student explain why this answer matters, what assumptions drive it, and whether to trust it?</em> These 10 applications are ranked by how effectively they address that shift &mdash; and by how quickly a faculty member at a typical regional university can adopt them starting next week, with no budget and no IT support.",
+      "Each application entry follows a consistent structure with complete implementation details, including student and instructor workflows, sample prompts ready for immediate use, assessment rubrics, and concrete first-week pilot instructions. Start with the <a href=\"sessions/ai-in-finance/quick-start.html\">Quick Start Guides</a> for the fastest path to trying an application. The <a href=\"sessions/ai-in-finance/prompts.html\">Prompt Library</a> lets you copy any prompt with one click."
+    ],
+    "oecdNote": "The applications and design principles in this guide are strongly consistent with the <a href=\"https://www.oecd.org/en/publications/oecd-digital-education-outlook-2026_062a7394-en.html\" target=\"_blank\" rel=\"noopener noreferrer\">OECD Digital Education Outlook 2026</a>, which emphasizes pedagogy-first AI implementation, process-oriented assessment, foundational knowledge, and instructor augmentation rather than replacement. Each entry reflects those principles, and two appendices provide an <a href=\"sessions/ai-in-finance/frameworks.html\">OECD-aligned evaluation framework and a discipline-specific AI use policy matrix</a>.",
+    "toolsNote": "Three free tools cover 7 of 10 applications: <strong>ChatGPT</strong> (free tier at chat.openai.com), <strong>Claude</strong> (free tier at claude.ai), and <strong>Perplexity</strong> (free at perplexity.ai, best for web-search tasks). No institutional license, API key, or IT department required to get started.",
+    "difficultyLevels": [
+      {
+        "key": "beginner",
+        "label": "Beginner",
+        "description": "No prior AI experience needed. Faculty can adopt immediately with free tools."
+      },
+      {
+        "key": "intermediate",
+        "label": "Intermediate",
+        "description": "Some familiarity with AI tools is assumed. May require prompt engineering skills."
+      },
+      {
+        "key": "advanced",
+        "label": "Advanced",
+        "description": "Requires technical comfort, API access, or infrastructure investment."
+      }
+    ],
+    "methodology": [
+      {
+        "weight": "40%",
+        "label": "Instructional Impact",
+        "description": "How significantly does the application address a core teaching pain point in finance? Applications developing multiple skill categories rank higher."
+      },
+      {
+        "weight": "35%",
+        "label": "Feasibility",
+        "description": "How quickly can a faculty member with moderate technology comfort adopt this? ChatGPT (free tier) and Claude (free tier) suffice for 7 of 10 applications. No institutional IT support or budget required to begin."
+      },
+      {
+        "weight": "25%",
+        "label": "Evidence",
+        "description": "Applications with named institutional adopters and published peer-reviewed studies rank higher. Evidence quality varies: role-play and tutoring have the strongest empirical base; simulation has the most implementation barriers."
+      }
+    ],
+    "downloads": [
+      {
+        "title": "Full Implementation Guide",
+        "description": "Complete PDF with all 10 applications, prompts, rubrics, and references.",
+        "url": "assets/docs/Top_10_AI_Applications.pdf"
+      },
+      {
+        "title": "SWFA Presentation Slides",
+        "description": "Companion slide deck for the high-level overview.",
+        "url": "assets/docs/AI_in_Finance_Classroom_SFA_Presentation.pdf"
+      },
+      {
+        "title": "AI Presentation Tutorial",
+        "description": "Live demo guide: five methods for using AI to generate finance lecture slides.",
+        "url": "assets/docs/AI-for-Faster-Better-Finance-Teaching.pdf"
+      }
+    ],
+    "relatedModules": [
+      3,
+      4,
+      5
+    ],
+    "published": "2026-03-01",
     "lastReviewed": "2026-06-10"
   }
 ]

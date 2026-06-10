@@ -1,0 +1,498 @@
+[
+  {
+    "id": 1,
+    "title": "Simulated C-Suite / Client Role-Play",
+    "difficulty": "intermediate",
+    "tagline": "Practice high-stakes professional conversations with AI personas that push back like real executives.",
+    "sections": [
+      {
+        "heading": "Teaching Problem",
+        "html": "<p>Finance graduates need professional judgment and communication skills—client advising, CFO presentations, investment committee pitches—but classroom practice is limited by class size and lack of realistic counterparties. Peer role-play often lacks expert-level pushback, and students default to reading slides rather than defending analysis under pressure. In large sections, each student may get only one brief opportunity per semester to practice high-stakes professional interactions.</p>"
+      },
+      {
+        "heading": "How AI Addresses the Problem",
+        "html": "<p>Custom AI chatbots adopt configurable personas (skeptical CFO, anxious client, aggressive IC member, compliance officer) with pre-loaded financial data and behavioral instructions. Students practice in a low-stakes, infinitely repeatable environment with realistic pushback that adjusts difficulty dynamically. The AI never tires, never breaks character (when well-prompted), and can simulate a wider range of counterparties than any single instructor.</p>"
+      },
+      {
+        "heading": "Deployment Details",
+        "html": "<dl class=\"deployment-dl\">\n<dt>Courses</dt>\n<dd>Corporate Finance (UG/MBA), Personal Finance (UG), Investments (MBA), Wealth Management, Capstone</dd>\n<dt>Tools</dt>\n<dd>Custom GPTs (OpenAI), Claude Projects, Anthropic/OpenAI API, Poe custom bots, Microsoft Copilot</dd>\n</dl>"
+      },
+      {
+        "heading": "Student Workflow",
+        "html": "<ol>\n<li>Scan QR code or click link to access the custom chatbot on smartphone or laptop.</li>\n<li>Read the scenario brief (e.g., pitching a $50M plant expansion to the CFO of a mid-cap manufacturer).</li>\n<li>Conduct a 7–10 minute interaction: present analysis, respond to objections, adapt in real time.</li>\n<li>The bot pushes back on specific assumptions (growth rate justification, discount rate selection, sensitivity to commodity price swings, timeline feasibility).</li>\n<li>Write a 1-page post-interaction reflection: What objections were hardest to handle? What would you change in your pitch? What data would you bring next time?</li>\n<li>Submit the full chat transcript plus reflection memo for grading.</li>\n</ol>"
+      },
+      {
+        "heading": "Sample Prompts",
+        "html": "<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Personal Finance Client Advising</h4>\n<span>\n<a aria-label=\"Try Chatbot\" class=\"try-bot\" href=\"https://www.playlab.ai/project/cmmv1sjcc05roie0wrsrdzivm\" target=\"_blank\" title=\"Try Chatbot\">Try this bot</a>\n<button class=\"copy-btn\" data-copy-target=\"prompt-1-client\" type=\"button\">Copy</button>\n</span>\n</div>\n<pre><code id=\"prompt-1-client\">You are Jamie, a 35-year-old marketing manager earning $52K. Your spouse earns $48K. You have $82K in combined student loans (weighted avg 5.8%), a 3-month-old baby, $4,200 in monthly fixed expenses, and $8,500 in credit card debt at 22% APR. You have $3,000 in savings and no retirement accounts. You are anxious, sleep-deprived, and overwhelmed. Do NOT volunteer all information at once-share details only when the advisor asks the right questions. If the advisor uses jargon (e.g., 'asset allocation,' 'tax-loss harvesting'), say you do not understand. If the advisor jumps to solutions before understanding your full picture, say 'Wait, I feel like you're not listening to me.' If the advisor shows genuine empathy and prioritizes your emergency fund and high-interest debt, become more open and cooperative.</code></pre>\n</div><div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>CFO Capital Budgeting Role-Play</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-1-cfo\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-1-cfo\">You are Maria Chen, CFO of Apex Manufacturing (NYSE: APEX), a mid-cap industrial firm with $2.1B revenue, WACC of 9.2%, and net debt/EBITDA of 2.4x. A junior analyst is pitching a $50M plant expansion in the Southeast U.S. Your priorities: (1) protect the investment-grade credit rating, (2) maintain dividend coverage, (3) skepticism about management growth projections after a failed 2021 acquisition. Challenge the analyst on: payback period relative to your 4-year threshold, growth rate assumptions vs. industry consensus of 3-4%, sensitivity to steel and energy input costs, and the opportunity cost of not pursuing the competing robotics upgrade project. If the analyst cannot provide a sensitivity table showing NPV under at least 3 scenarios, express frustration and threaten to table the discussion. Maintain a professional but demanding tone throughout.</code></pre>\n</div><div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Investment Committee Stock Pitch</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-1-ic\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-1-ic\">You are a senior portfolio manager on an investment committee reviewing a junior analyst's stock pitch. You manage a $500M large-cap value fund with a 3-year holding horizon. Ask probing questions about: (1) Why this stock now-what is the catalyst? (2) What is the margin of safety in the valuation? (3) What are the top 3 risks and how would each affect the thesis? (4) What would make you sell? If the analyst cannot articulate a clear sell discipline, push back firmly. Rate the pitch on conviction, analytical rigor, and risk awareness on a 1-5 scale at the end.</code></pre>\n</div>"
+      },
+      {
+        "heading": "Assessment Approach",
+        "html": "<ul class=\"rubric-weights\">\n<li><span class=\"criterion\">Financial accuracy and analytical depth</span><span class=\"weight\">30%</span></li>\n<li><span class=\"criterion\">Responsiveness to pushback and ability to adapt arguments</span><span class=\"weight\">25%</span></li>\n<li><span class=\"criterion\">Communication clarity and professional tone</span><span class=\"weight\">25%</span></li>\n<li><span class=\"criterion\">Reflection quality and self-awareness</span><span class=\"weight\">20%</span></li>\n</ul><p>For high-stakes courses (MBA capstone, senior seminar), add an optional 3-minute live oral defense where the student summarizes the interaction and what they learned.</p><div class=\"oecd-box\">\n<h4>OECD Enhancement — Transfer Dimension</h4>\n<p>Add a rubric dimension for evidence of transfer (5–10%): What did the student concretely change in their next role-play attempt based on this interaction? A brief “next attempt plan” submitted with the reflection memo makes this measurable.</p>\n</div><div class=\"oecd-box\">\n<h4>Human Credibility Touchpoints</h4>\n<p>OECD research finds students view human feedback as more credible than AI feedback. Preserve learning quality by requiring: (1) at least one instructor-authored comment on the reflection memo, (2) one student self-explanation of the hardest objection they faced, delivered orally or in writing, and (3) one independent verification step (e.g., confirming a financial figure the AI cited during the role-play against a real source).</p>\n</div>"
+      },
+      {
+        "heading": "Skills Developed",
+        "html": "<div class=\"skills-grid\">\n<div class=\"skill-card\">\n<h4>Finance Concepts</h4>\n<p>Capital budgeting defense, valuation assumptions, sensitivity analysis, financial planning suitability, risk-return tradeoffs</p>\n</div>\n<div class=\"skill-card\">\n<h4>Analytical Skills</h4>\n<p>Argument construction under pressure, assumption stress-testing, real-time scenario thinking, adapting analysis to new information</p>\n</div>\n<div class=\"skill-card\">\n<h4>Professional Skills</h4>\n<p>Client communication, executive presence, handling objections gracefully, empathy in advising, investment committee presentation</p>\n</div>\n<div class=\"skill-card\">\n<h4>AI Literacy Skills</h4>\n<p>System prompt engineering and persona design, evaluating AI persona fidelity, recognizing when the bot breaks character</p>\n</div>\n</div>"
+      },
+      {
+        "heading": "Evidence",
+        "html": "<p>Bowen &amp; Watson (2025, 2nd ed.) significantly expand treatment of AI role-play and custom bot simulations. Greene (AACSB, 2025) documents the Skills/Replacement/Complement three-part framework at Clemson University. Tamoyan et al. (2025, ACL Workshop) found AI role-play indistinguishability rates up to 44% — meaning nearly half of participants could not distinguish the AI persona from a human respondent, supporting the fidelity of well-prompted bots. HBS custom tutor bots reported 75% student usage with highly positive feedback. Research in social work education (arXiv, 2025) shows AI agents can effectively scaffold empathy and communication skills in professional practice scenarios.</p>"
+      },
+      {
+        "heading": "Risks and Safeguards",
+        "html": "<details class=\"risk-item\">\n<summary>Hallucination</summary>\n<p>Bot may cite incorrect financial data or break character. Mitigation: test every bot extensively before deployment; require students to flag moments where the bot seemed unrealistic.</p>\n</details><details class=\"risk-item\">\n<summary>Character Break</summary>\n<p>Even well-prompted AI personas can suddenly switch tone, volunteer answers unprompted, or exit the role. Mitigation: conduct at least 10 test exchanges yourself before assigning; instruct students to note any character breaks in their reflection memo.</p>\n</details><details class=\"risk-item\">\n<summary>Academic Integrity</summary>\n<p>Someone else could complete the interaction. Mitigation: pair with a brief in-class oral defense (2–3 minutes) or require the interaction during class time.</p>\n</details><details class=\"risk-item\">\n<summary>Privacy</summary>\n<p>Students may inadvertently share personal financial information. Mitigation: use explicitly fictional scenarios only; include a privacy reminder in the assignment.</p>\n</details><details class=\"risk-item\">\n<summary>Equity</summary>\n<p>Custom GPTs require a paid ChatGPT account. Mitigation: provide campus-supported access, use Claude (free tier supports projects), or conduct as an in-class activity using a shared link.</p>\n</details>"
+      },
+      {
+        "heading": "First-Week Implementation Pilot",
+        "kind": "pilot",
+        "html": "<p>Use a standard ChatGPT or Claude session (no custom bot needed). Give students this one-paragraph scenario and prompt: ‘You are a skeptical CFO at a manufacturing company. I am a junior analyst about to pitch a $30M warehouse expansion. My NPV analysis shows $4.2M positive NPV at a 10% discount rate. Push back on my assumptions—especially the 6% revenue growth rate and the choice of discount rate. Be tough but fair.’ Have students do a 5-minute interaction on their phones during class and submit 3 bullet points: (1) the toughest objection, (2) how they responded, (3) what they would do differently. Total class time: 10 minutes.</p>"
+      }
+    ],
+    "summary": "Students practice high-stakes professional interactions with AI personas that provide realistic pushback and adapt difficulty dynamically."
+  },
+  {
+    "id": 2,
+    "title": "AI-Assisted Formative Feedback on Student Writing",
+    "difficulty": "beginner",
+    "tagline": "Cut feedback turnaround by 40–50% while improving specificity — AI drafts, faculty review and approve.",
+    "sections": [
+      {
+        "heading": "Teaching Problem",
+        "html": "<p>Providing detailed, individualized feedback on written finance assignments—case analyses, equity research reports, financial plans, investment memos—is the most time-intensive aspect of teaching. In sections of 40 or more, turnaround stretches to two or three weeks, long past the window when feedback drives improvement. Faculty face a painful tradeoff between depth and speed, and students in large sections often receive generic comments that fail to address their specific analytical weaknesses.</p>"
+      },
+      {
+        "heading": "How AI Addresses the Problem",
+        "html": "<p>AI generates a structured first-pass critique aligned to the instructor’s rubric. Faculty then review, edit, and personalize the AI’s draft feedback—adding the human judgment, encouragement, and domain-specific nuance that AI misses. This workflow cuts turnaround time by roughly 40–50% while maintaining (and often improving) feedback specificity. Students can also use AI for self-directed pre-submission revision, turning in stronger drafts that require less corrective feedback.</p>"
+      },
+      {
+        "heading": "Deployment Details",
+        "html": "<dl class=\"deployment-dl\">\n<dt>Courses</dt>\n<dd>All finance courses with written components (UG and MBA): equity research, case analyses, financial plans, investment memos, executive summaries</dd>\n<dt>Tools</dt>\n<dd>ChatGPT, Claude (Projects feature ideal for pre-loaded rubrics and course context), Grammarly, LMS-integrated writing tools</dd>\n</dl>"
+      },
+      {
+        "heading": "Student Workflow (Self-Directed Revision)",
+        "html": "<ol>\n<li>Complete a full first draft of the assignment independently (stock pitch, case analysis, financial plan).</li>\n<li>Paste the draft into AI along with the instructor-provided rubric. Use the structured feedback prompt below.</li>\n<li>Review AI feedback critically: Which suggestions reflect genuine weaknesses? Which are generic or miss the financial point?</li>\n<li>Revise the draft, accepting some suggestions and rejecting others with clear reasoning.</li>\n<li>Submit: original draft, AI feedback transcript, revised draft, and a 5-sentence reflection memo explaining what you changed, what you rejected, and why.</li>\n</ol>"
+      },
+      {
+        "heading": "Sample Prompts",
+        "html": "<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Equity Research Report Feedback</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-2-equity\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-2-equity\">You are a finance professor evaluating an equity research report. Use the following rubric to evaluate this submission. For EACH rubric category, provide: (1) a score estimate on the rubric scale, (2) one specific strength with a direct quote from the submission, (3) one specific weakness with a direct quote, and (4) one concrete, actionable revision suggestion. Be rigorous but constructive. Do not rewrite the student's work-guide them to improve it themselves.\n\nRubric categories: (A) Investment Thesis Clarity [1-5], (B) Valuation Methodology and Assumptions [1-5], (C) Risk Analysis Completeness [1-5], (D) Use of Evidence and Data [1-5], (E) Writing Quality and Professional Tone [1-5].\n\n[Paste rubric details and student submission below]</code></pre>\n</div><div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Financial Plan Review</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-2-plan\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-2-plan\">Review this personal financial plan narrative for completeness and quality. Check for coverage of ALL of the following: (1) clearly stated short-term and long-term goals with dollar amounts and timelines, (2) current income, expenses, and cash flow analysis, (3) debt inventory with interest rates and a prioritized payoff strategy, (4) emergency fund adequacy, (5) risk tolerance assessment and insurance needs, (6) tax considerations relevant to the client's situation, (7) retirement projections with stated assumptions. For each area, rate coverage as Strong / Adequate / Missing and provide one specific suggestion for improvement.</code></pre>\n</div>"
+      },
+      {
+        "heading": "Assessment Approach",
+        "html": "<p>Grade the revision process, not just the final product. Include a process dimension (15–20% of total grade) evaluating the quality of the student’s reflection on AI feedback: Did they exercise judgment in accepting and rejecting suggestions? Did they identify feedback the AI got wrong? Spot-check AI feedback quality periodically to ensure rubric prompts are generating useful critiques.</p><div class=\"oecd-box\">\n<h4>Human Credibility Touchpoints</h4>\n<p>OECD evidence shows that AI and human feedback are not pedagogically interchangeable—students trust human feedback more and respond to it differently. Protect the learning value of this workflow with three touchpoints: (1) the instructor adds at least one comment that only a human who knows the student could make (referencing their improvement arc, career goals, or a class discussion), (2) the student writes one sentence explaining what they would have missed without the AI’s critique, and (3) the instructor spot-checks whether the AI-generated feedback contains any finance-domain errors before returning it to students.</p>\n</div>"
+      },
+      {
+        "heading": "Skills Developed",
+        "html": "<div class=\"skills-grid\">\n<div class=\"skill-card\">\n<h4>Finance Concepts</h4>\n<p>Financial writing craft (research reports, memos, plans), ratio interpretation narrative, valuation storytelling, professional communication for multiple audiences</p>\n</div>\n<div class=\"skill-card\">\n<h4>Analytical Skills</h4>\n<p>Self-assessment, critical evaluation of external feedback, iterative improvement methodology, distinguishing substantive from cosmetic revision</p>\n</div>\n<div class=\"skill-card\">\n<h4>Professional Skills</h4>\n<p>Professional written communication, audience adaptation (board vs. lending committee vs. client), editing discipline, revision as a professional practice</p>\n</div>\n<div class=\"skill-card\">\n<h4>AI Literacy Skills</h4>\n<p>Crafting effective feedback prompts, critically evaluating AI suggestions against domain knowledge, understanding what AI feedback misses</p>\n</div>\n</div>"
+      },
+      {
+        "heading": "Evidence",
+        "html": "<p>Greene (AACSB, 2025) documents structured feedback workflows in finance using the Skills/Replacement/Complement framework. Bowen &amp; Watson (2024, 2nd ed. 2025) provide detailed guidance on the write-first-then-AI-then-reflect pedagogical cycle. Abeysekera (2024) tested ChatGPT on financial accounting assessments, finding GPT-4 scored at the 90th percentile for introductory courses — meaning AI feedback quality benchmarks well against expert human review for foundational content. Broader higher education literature consistently identifies AI feedback as a high-value, low-risk entry point for faculty adoption.</p>"
+      },
+      {
+        "heading": "Risks and Safeguards",
+        "html": "<details class=\"risk-item\">\n<summary>Depersonalization</summary>\n<p>Over-reliance on AI feedback may weaken the mentor-student relationship. Mitigation: always add at least one personal, human-only comment per submission.</p>\n</details><details class=\"risk-item\">\n<summary>Finance Domain Blind Spots</summary>\n<p>AI misses finance-specific errors that sound plausible on the surface. Examples: a terminal growth rate of 4% flagged as \"reasonable\" without noting it exceeds long-run nominal GDP growth; an equity risk premium of 8% accepted without questioning whether it reflects current market conditions; or a WACC calculated correctly but applied to a project with a very different risk profile than the firm. Mitigation: faculty must review all AI-generated feedback before returning it, particularly the valuation and methodology sections.</p>\n</details><details class=\"risk-item\">\n<summary>Gaming</summary>\n<p>Students may use AI to generate entire documents from scratch, defeating the learning purpose. Mitigation: require annotated rough drafts, in-class writing samples for comparison, and the reflection memo.</p>\n</details><details class=\"risk-item\">\n<summary>Privacy</summary>\n<p>Do not paste identifiable student data into non-institutionally-approved tools. Use Claude Projects or Custom GPTs where data stays within the session.</p>\n</details>"
+      },
+      {
+        "heading": "First-Week Implementation Pilot",
+        "kind": "pilot",
+        "html": "<p>Pick one assignment you are grading this week. Paste one student’s submission and your rubric into ChatGPT or Claude. Use this prompt: ‘Evaluate this submission using the attached rubric. For each category, provide a score, one strength with a quote, one weakness with a quote, and one actionable suggestion.’ Compare the AI’s draft to what you would have written. Edit it, add your personal touch, and return it. Track your time—most faculty report saving 15–25 minutes per submission on first use.</p>"
+      }
+    ],
+    "summary": "AI generates structured first-pass critique aligned to your rubric, cutting turnaround time by 40-50% while improving feedback specificity."
+  },
+  {
+    "id": 3,
+    "title": "AI Socratic Tutor for Foundational Finance Concepts",
+    "difficulty": "beginner",
+    "tagline": "Give every student an infinitely patient Socratic tutor available 24/7 for TVM, WACC, and more.",
+    "sections": [
+      {
+        "heading": "Teaching Problem",
+        "html": "<p>Students arrive with widely varying quantitative backgrounds, particularly in Principles and Corporate Finance. Those who fall behind on foundational mechanics—time value of money, bond pricing, CAPM, WACC—disengage before reaching more complex material. Office hours serve only a fraction of students who need help, and the students who need support most are often the most reluctant to ask for it publicly. In sections of 60 or more, individualized attention during class is impractical.</p>"
+      },
+      {
+        "heading": "How AI Addresses the Problem",
+        "html": "<p>AI chatbots serve as always-available, infinitely patient tutoring assistants that use Socratic questioning to guide understanding rather than simply providing answers. Unlike a static answer key, the AI can re-explain concepts using different approaches (formula derivation, financial calculator logic, spreadsheet function, real-world analogy), diagnose specific misunderstandings through targeted questions, and generate unlimited practice problems at calibrated difficulty levels.</p>"
+      },
+      {
+        "heading": "Deployment Details",
+        "html": "<dl class=\"deployment-dl\">\n<dt>Courses</dt>\n<dd>Principles of Finance (UG), Corporate Finance (UG/MBA), Investments (UG/MBA), and any course with foundational quantitative prerequisites</dd>\n<dt>Tools</dt>\n<dd>ChatGPT (Free/Plus/Edu), Claude, Microsoft Copilot, Google Gemini, Khanmigo, custom course bots built with RAG on course materials</dd>\n</dl>"
+      },
+      {
+        "heading": "Student Workflow",
+        "html": "<ol>\n<li>Encounter a concept or problem type they find difficult (e.g., present value of an uneven cash flow stream).</li>\n<li>Open AI tool and use the instructor-provided Socratic prompt template (distributed as a half-page handout or LMS link).</li>\n<li>Work through the problem interactively: the AI asks diagnostic questions to identify the specific point of confusion before explaining.</li>\n<li>Once the concept clicks, ask the AI to generate a similar practice problem at the same difficulty level, then one level harder.</li>\n<li>Complete a verification log: solve the practice problem independently, then compare against textbook formula and AI’s solution.</li>\n<li>Submit an annotated AI dialogue log with brief reflections: ‘What I understood before,’ ‘Where I was confused,’ ‘What I understand now.’</li>\n</ol>"
+      },
+      {
+        "heading": "Sample Prompts",
+        "html": "<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Socratic WACC Tutor</h4>\n<span>\n<a aria-label=\"Try Chatbot\" class=\"try-bot\" href=\"https://www.playlab.ai/project/cmmv25mhh07nqie0w3itsiy94\" target=\"_blank\" title=\"Try Chatbot\">Try this bot</a>\n<button class=\"copy-btn\" data-copy-target=\"prompt-3-wacc\" type=\"button\">Copy</button>\n</span>\n</div>\n<pre><code id=\"prompt-3-wacc\">You are a patient, Socratic finance tutor helping an undergraduate student understand WACC. IMPORTANT RULES: (1) NEVER give the formula or the answer immediately. (2) Start by asking the student what they already know about how companies raise money. (3) Use a mortgage analogy to explain cost of debt: 'If you borrow $300K for a house at 6%, but you get a tax deduction, what is your real cost?' (4) For cost of equity, ask: 'If you were investing your own money in this company, what return would you demand, and why?' (5) Build toward the WACC formula one component at a time. (6) After each step, ask 'Does that make sense? Can you put that in your own words?' before moving on. (7) Once they grasp the concept, generate one practice problem and ask them to solve it before you confirm.</code></pre>\n</div><div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Diagnostic TVM Tutor</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-3-tvm\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-3-tvm\">You are a finance tutor preparing a student for a Corporate Finance midterm. Before teaching anything, ask the student these 3 diagnostic questions to identify their weak spots: (1) 'If I offer you $1,000 today or $1,000 in one year, which do you prefer and why?' (2) 'Can you explain what a discount rate represents in one sentence?' (3) 'What is the difference between an annuity and a perpetuity?' Based on their answers, identify the most fundamental gap and teach from there. Always show intermediate calculation steps with units (e.g., dollars, periods, percent). Use concrete examples: car loans, mortgage payments, retirement savings.</code></pre>\n</div>"
+      },
+      {
+        "heading": "Assessment Approach",
+        "html": "<ul class=\"rubric-weights\">\n<li><span class=\"criterion\">Depth of engagement evidenced by multi-turn exchanges</span><span class=\"weight\">25%</span></li>\n<li><span class=\"criterion\">Quality of student’s follow-up questions showing genuine inquiry</span><span class=\"weight\">25%</span></li>\n<li><span class=\"criterion\">Accuracy and completeness of the verification log</span><span class=\"weight\">25%</span></li>\n<li><span class=\"criterion\">Quality of the “in your own words” summary demonstrating internalized understanding</span><span class=\"weight\">25%</span></li>\n</ul><p>Optional: a brief oral quiz (2–3 questions) to confirm the student can explain the concept without AI assistance.</p><div class=\"oecd-box\">\n<h4>Human Credibility Touchpoints</h4>\n<p>The Socratic tutor’s effectiveness depends on students trusting the learning process. OECD recommends three touchpoints to maintain human instructor presence: (1) the instructor reviews a sample of AI dialogue logs and leaves one personal comment per student per unit, (2) the student self-explains the concept without the AI log in front of them (in the oral quiz or a short written summary), and (3) the student completes at least one textbook verification step independent of AI to build the verification habit.</p>\n</div><div class=\"oecd-box\">\n<h4>OECD Enhancement — Equity Lens</h4>\n<p>OECD flags that AI tutoring tools can reduce performance gaps for underserved learners but may provide uneven support across student types. Before deploying at scale, ask: Do students with lower prior GPA or non-native English speakers engage as effectively with the Socratic format? Consider offering an alternative (small-group instructor session) for students who find the AI interaction format a barrier rather than a bridge.</p>\n</div>"
+      },
+      {
+        "heading": "Skills Developed",
+        "html": "<div class=\"skills-grid\">\n<div class=\"skill-card\">\n<h4>Finance Concepts</h4>\n<p>TVM (single sum, annuity, uneven cash flows), bond pricing, CAPM and beta interpretation, WACC components, ratio analysis, option payoff diagrams</p>\n</div>\n<div class=\"skill-card\">\n<h4>Analytical Skills</h4>\n<p>Step-by-step problem decomposition, self-diagnosis of knowledge gaps, verification against authoritative sources</p>\n</div>\n<div class=\"skill-card\">\n<h4>Professional Skills</h4>\n<p>Self-directed learning habits, intellectual persistence, verification as professional practice</p>\n</div>\n<div class=\"skill-card\">\n<h4>AI Literacy Skills</h4>\n<p>Crafting Socratic prompts, recognizing when AI explanations are incorrect or misleading, output verification methodology</p>\n</div>\n</div>"
+      },
+      {
+        "heading": "Evidence",
+        "html": "<p>HBS deployed custom AI tutor bots (FRC Bot) with 75% student adoption and highly positive feedback. UT Austin’s UT Sage project uses RAG-based AI tutors grounded in specific course materials. The Cogent Education SIUAIT study (2024, ~1,400 finance students across 3 semesters) found students perceived AI tools as essential for enhancing learning. Kestin et al. (2024, PNAS) found that AI-based Socratic tutoring produced twice the learning gains as traditional active learning in physics — the same scaffolding mechanism (guided questioning rather than answer-giving) applies directly to TVM, WACC, and bond pricing concept-building in finance.</p><p><strong>Important verification note:</strong> AI tutors have been observed producing incorrect multi-step WACC calculations with convincingly formatted intermediate steps. Always require students to verify final answers against textbook formulas or a financial calculator before concluding the session.</p>"
+      },
+      {
+        "heading": "Risks and Safeguards",
+        "html": "<details class=\"risk-item\">\n<summary>Hallucination</summary>\n<p>AI can produce numerically plausible but incorrect calculations, especially multi-step TVM problems. Mitigation: require verification against textbook formulas; build verification into the assignment structure.</p>\n</details><details class=\"risk-item\">\n<summary>Over-reliance</summary>\n<p>Students may stop attempting problems independently. Mitigation: require ‘in your own words’ explanations; maintain AI-free exams to verify retained understanding.</p>\n</details><details class=\"risk-item\">\n<summary>Equity</summary>\n<p>Free tiers have usage limits; paid tiers create cost barriers. Mitigation: advocate for campus-wide educational AI licenses; provide alternative supports.</p>\n</details><details class=\"risk-item\">\n<summary>Reduced Human Interaction</summary>\n<p>Over-reliance on AI tutoring may reduce student-to-student and student-to-faculty connection. Mitigation: maintain office hours, study groups, and collaborative in-class activities.</p>\n</details>"
+      },
+      {
+        "heading": "First-Week Implementation Pilot",
+        "kind": "pilot",
+        "html": "<p>Create a half-page handout with 2 prompt templates: one Socratic tutor for your course’s most-struggled concept (e.g., TVM, bond pricing, WACC) and one practice problem generator. Distribute it next class. Ask students to try one problem with the AI tutor before the next session and bring a screenshot of one exchange. Spend 5 minutes debriefing: ‘How many found an error in the AI’s response? What worked well? What didn’t?’ Zero technology setup required.</p>"
+      }
+    ],
+    "summary": "Always-available, infinitely patient tutoring assistants that use Socratic questioning to guide understanding of TVM, WACC, bond pricing, and more."
+  },
+  {
+    "id": 4,
+    "title": "AI-Aware Assessment Design (Process-Based Evaluation)",
+    "difficulty": "intermediate",
+    "tagline": "Redesign assessments to reward judgment, interpretation, and assumption defense — not just correct answers.",
+    "sections": [
+      {
+        "heading": "Teaching Problem",
+        "html": "<p>Traditional take-home exams and generic test-bank questions are increasingly vulnerable to AI completion. AI detection tools (Turnitin, GPTZero) have documented high false-positive rates and should not be used as primary evidence of academic dishonesty. The deeper problem: assessments designed around ‘compute the answer’ are no longer valid measures of student learning in an AI-available world.</p>"
+      },
+      {
+        "heading": "How AI Addresses the Problem",
+        "html": "<p>Redesign assessments to emphasize process documentation, assumption justification, interpretation, and oral verification. The pedagogical shift: from ‘can the student compute this?’ to ‘can the student explain why this answer matters, what could change it, and whether to trust it?’ AI becomes a tool for generating individualized assessment variants at scale and for creating error-detection exercises that test higher-order thinking.</p>"
+      },
+      {
+        "heading": "Deployment Details",
+        "html": "<dl class=\"deployment-dl\">\n<dt>Courses</dt>\n<dd>All finance courses (UG and MBA)</dd>\n<dt>Tools</dt>\n<dd>ChatGPT (for generating variants), parameterized Excel/LMS templates, in-person oral components</dd>\n</dl>"
+      },
+      {
+        "heading": "Student Workflow",
+        "html": "<ol>\n<li>Receive individualized case parameters (different cash flow profiles, tax rates, betas, industry contexts) so each student works with unique numbers.</li>\n<li>Complete quantitative analysis (with or without AI, per course policy clearly stated in the syllabus).</li>\n<li>Write a justification memo (1–2 pages): explain each key assumption, interpret results in business terms, and identify the single assumption most likely to change the decision.</li>\n<li>If AI was used at any stage, submit full prompts and outputs with annotations explaining what you accepted, what you modified, and why.</li>\n<li>Complete a short oral check-in (3–5 minutes) with 2–3 targeted questions: ‘Walk me through your discount rate choice,’ ‘What happens to your recommendation if revenue growth is 2% instead of 5%?’</li>\n</ol>"
+      },
+      {
+        "heading": "Sample Prompts",
+        "html": "<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Capital Budgeting Case Variants Generator</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-4-variants\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-4-variants\">Generate 5 distinct capital budgeting case variants for an upper-division Corporate Finance exam. Requirements for EACH variant: (1) Different industry (manufacturing, healthcare, technology, retail, energy), (2) Project life between 3-7 years, (3) WACC between 8-12%, (4) Distinct cash flow patterns (one with heavy upfront investment and back-loaded returns, one with steady cash flows, one with a mid-project expansion option), (5) Include one variant where NPV is slightly negative (-$50K to -$200K) to test whether students recommend rejection. For each: provide complete cash flow tables, stated assumptions, and 3 interpretation questions requiring judgment, not just computation.</code></pre>\n</div><div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Error-Detection Exercise Generator</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-4-errors\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-4-errors\">Write a 250-word equity research summary for a fictional mid-cap SaaS company called CloudMetrics Inc. Embed exactly 3 analytical errors that a well-prepared Corporate Finance student should catch: (1) a terminal growth rate of 6% in an industry with GDP-level long-term growth, (2) a P/E ratio applied to EBITDA instead of earnings, and (3) no mention of key risk factors (customer concentration, competitive entry). Make the prose confident and professional so the errors are not obvious. Do NOT label the errors.</code></pre>\n</div>"
+      },
+      {
+        "heading": "Assessment Approach",
+        "html": "<ul class=\"rubric-weights\">\n<li><span class=\"criterion\">Computation accuracy</span><span class=\"weight\">20%</span></li>\n<li><span class=\"criterion\">Assumption justification quality</span><span class=\"weight\">25%</span></li>\n<li><span class=\"criterion\">Interpretation of results in business context</span><span class=\"weight\">25%</span></li>\n<li><span class=\"criterion\">AI critique and disclosure quality</span><span class=\"weight\">15%</span></li>\n<li><span class=\"criterion\">Oral defense performance</span><span class=\"weight\">15%</span></li>\n</ul><p>Publish the rubric in advance so students understand that explanation and interpretation carry more weight than getting the number right.</p><p><strong>Grade-band guidance — Assumption Justification (25%):</strong> Full credit requires the student to explain why their specific discount rate reflects <em>this</em> company's risk profile, not just the industry average — e.g., citing the firm's leverage ratio, recent earnings volatility, or credit rating. Partial credit if the student states assumptions but offers no justification. Minimal credit if assumptions are asserted without any business rationale. The oral check-in for large sections can be conducted asynchronously: a 90-second video submission where the student walks through their two most consequential assumptions works well as an alternative to synchronous meetings.</p>"
+      },
+      {
+        "heading": "Skills Developed",
+        "html": "<div class=\"skills-grid\">\n<div class=\"skill-card\">\n<h4>Finance Concepts</h4>\n<p>Valuation interpretation beyond the number, assumption sensitivity and what drives decisions, financial judgment under uncertainty</p>\n</div>\n<div class=\"skill-card\">\n<h4>Analytical Skills</h4>\n<p>Critical evaluation and error detection, assumption stress-testing, distinguishing computational accuracy from analytical quality</p>\n</div>\n<div class=\"skill-card\">\n<h4>Professional Skills</h4>\n<p>Oral communication and defense of analytical decisions, professional accountability, transparent methodology</p>\n</div>\n<div class=\"skill-card\">\n<h4>AI Literacy Skills</h4>\n<p>Evaluating AI output quality, identifying subtle AI errors in financial analysis, transparent and ethical AI disclosure</p>\n</div>\n</div>"
+      },
+      {
+        "heading": "Evidence",
+        "html": "<p>Daigle, Li &amp; Li (Monmouth, 2024) tested ChatGPT-3.5 on principles-of-finance test-bank questions. Abeysekera (2024) found ChatGPT scored at the 80th–90th percentile on introductory financial accounting assessments. OpenAI (2023) explicitly notes AI detectors are unreliable and recommends designing assessments accordingly. Bowen &amp; Watson (2024, 2025) provide the progression framework: AI-prohibited to AI-transparent to AI-required.</p>"
+      },
+      {
+        "heading": "Risks and Safeguards",
+        "html": "<details class=\"risk-item\">\n<summary>Time Investment</summary>\n<p>Oral check-ins are time-intensive. Mitigation: keep to 3–5 minutes with 2–3 pre-planned questions; use TAs for large sections; conduct during office hours.</p>\n</details><details class=\"risk-item\">\n<summary>Upfront Design Cost</summary>\n<p>Parameterized problems require initial investment. Mitigation: use AI to generate variants (see prompt above), then refine.</p>\n</details><details class=\"risk-item\">\n<summary>Perceived Subjectivity</summary>\n<p>Students may view process-based grading as subjective. Mitigation: publish detailed rubrics in advance; provide exemplars.</p>\n</details><details class=\"risk-item\">\n<summary>Equity Concerns</summary>\n<p>Oral assessments may disadvantage non-native English speakers or students with speech anxiety. Mitigation: offer written alternative formats; allow students to prepare notes for the oral check-in.</p>\n</details>"
+      },
+      {
+        "heading": "First-Week Implementation Pilot",
+        "kind": "pilot",
+        "html": "<p>Take one existing exam problem from your current course. Add two interpretation questions that AI cannot easily answer: (1) ‘What does this NPV result mean for the firm’s strategic decision—should they proceed, and why?’ and (2) ‘Identify the single assumption that, if changed, would most likely reverse your recommendation. Explain why.’ No technology, no setup, no AI account needed.</p>"
+      }
+    ],
+    "summary": "Redesign assessments to emphasize process documentation, assumption justification, interpretation, and oral verification."
+  },
+  {
+    "id": 5,
+    "title": "AI-Powered Financial Data Analysis and Visualization",
+    "difficulty": "intermediate",
+    "tagline": "Students describe analyses in plain English; AI generates and runs the code; students interpret results.",
+    "sections": [
+      {
+        "heading": "Teaching Problem",
+        "html": "<p>Finance increasingly requires data literacy, but many students lack programming skills. Faculty spend disproportionate class time debugging pandas syntax or Excel formulas rather than teaching financial interpretation. Students who struggle with code disengage from analytical content entirely.</p>"
+      },
+      {
+        "heading": "How AI Addresses the Problem",
+        "html": "<p>AI tools allow students to describe analyses in natural language—‘calculate annualized returns by sector and create a heatmap’—and receive working code with executed output. This shifts the pedagogical bottleneck from ‘can you write the code?’ to ‘can you interpret the output, identify its limitations, and make a financial recommendation?’</p>"
+      },
+      {
+        "heading": "Deployment Details",
+        "html": "<dl class=\"deployment-dl\">\n<dt>Courses</dt>\n<dd>Financial Analytics (UG/MBA), Investments (UG/MBA), Fintech (UG/MBA), Portfolio Management</dd>\n<dt>Tools</dt>\n<dd>ChatGPT Code Interpreter/Advanced Data Analysis, Claude with code execution, Google Gemini with Sheets, Python (pandas, matplotlib, plotly), Excel Copilot</dd>\n</dl>"
+      },
+      {
+        "heading": "Student Workflow",
+        "html": "<ol>\n<li>Receive a dataset (CSV of stock returns, sector performance, portfolio holdings, or transaction data).</li>\n<li>Upload to AI Code Interpreter and describe the desired analysis in natural language with specific parameters.</li>\n<li>AI generates code, executes it, and produces charts, tables, and statistical outputs.</li>\n<li>Critical review: Are calculations correct? Do axis labels and units make sense? Does the interpretation align with financial theory? Check at least 2 specific calculations manually.</li>\n<li>Write a 1-page interpretation memo including: key findings, investment or business implications, statistical limitations, and what additional analysis would strengthen the conclusions.</li>\n<li>Submit: AI-generated code output, manual verification checklist (minimum 2 calculations), and interpretation memo.</li>\n</ol>"
+      },
+      {
+        "heading": "Sample Prompts",
+        "html": "<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>S&amp;P 500 Sector Analysis</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-5-sector\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-5-sector\">I am uploading a CSV of monthly returns for 11 S&amp;P 500 sectors from January 2015 through December 2024. Please: (1) Calculate annualized return and annualized standard deviation for each sector. (2) Create a correlation matrix heatmap with values displayed. (3) Calculate the Sharpe ratio for each sector assuming Rf = 4.5% annualized. (4) Identify the sector with the best risk-adjusted return and the sector with the worst. (5) Create a scatter plot of annualized return vs. standard deviation with each sector labeled. Comment briefly on which sectors appear to offer favorable risk-return tradeoffs.</code></pre>\n</div><div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Portfolio Regression Analysis</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-5-regression\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-5-regression\">Using the attached portfolio holdings CSV (ticker, shares, current price), calculate the portfolio's weighted beta using each stock's beta vs. S&amp;P 500 over the trailing 3 years. Then run a regression of the portfolio's historical monthly returns against S&amp;P 500 monthly returns. Plot the regression line (Security Characteristic Line) with my portfolio marked. Display alpha, beta, R-squared, and the p-value on alpha. Explain in 3-4 sentences what the alpha and R-squared tell us about this portfolio's performance and diversification.</code></pre>\n</div>"
+      },
+      {
+        "heading": "Assessment Approach",
+        "html": "<ul class=\"rubric-weights\">\n<li><span class=\"criterion\">Correct analytical setup and appropriate methodology choice</span><span class=\"weight\">20%</span></li>\n<li><span class=\"criterion\">Interpretation quality and financial reasoning</span><span class=\"weight\">30%</span></li>\n<li><span class=\"criterion\">Manual verification accuracy</span><span class=\"weight\">20%</span></li>\n<li><span class=\"criterion\">Limitations discussion and intellectual honesty</span><span class=\"weight\">15%</span></li>\n<li><span class=\"criterion\">Communication clarity</span><span class=\"weight\">15%</span></li>\n</ul>"
+      },
+      {
+        "heading": "Skills Developed",
+        "html": "<div class=\"skills-grid\">\n<div class=\"skill-card\">\n<h4>Finance Concepts</h4>\n<p>Return calculation, risk metrics (Sharpe ratio, beta, volatility, tracking error), portfolio construction, regression interpretation, correlation analysis</p>\n</div>\n<div class=\"skill-card\">\n<h4>Analytical Skills</h4>\n<p>Data interpretation, statistical reasoning, visualization literacy, distinguishing statistical significance from economic significance</p>\n</div>\n<div class=\"skill-card\">\n<h4>Professional Skills</h4>\n<p>Data-driven communication, presenting quantitative findings to non-technical audiences, building evidence-based recommendations</p>\n</div>\n<div class=\"skill-card\">\n<h4>AI Literacy Skills</h4>\n<p>Natural language-to-code translation, verifying AI-generated statistical output, understanding what AI code does vs. what you asked for</p>\n</div>\n</div>"
+      },
+      {
+        "heading": "Evidence",
+        "html": "<p>Arizona State’s W.P. Carey School launched fintech-specific curricula (2024). Wharton’s AI for Business major (2025) requires AI/ML coursework. Sadat Shanto et al. (2024) found LLM assistance reduces time-to-first-solution in programming tasks but cautions about dependency without reflection.</p>"
+      },
+      {
+        "heading": "Risks and Safeguards",
+        "html": "<details class=\"risk-item\">\n<summary>False Confidence</summary>\n<p>Students may trust AI-generated statistics without understanding underlying assumptions. Mitigation: require explicit statement of statistical assumptions.</p>\n</details><details class=\"risk-item\">\n<summary>Finance-Specific Data Quality Issues</summary>\n<p>AI-generated code will not automatically handle three critical data quality problems in finance: (1) <strong>Survivorship bias</strong> — historical stock databases often exclude companies that went bankrupt or were delisted, overstating average returns; (2) <strong>Look-ahead bias</strong> — using data in a backtest that would not have been available at the time of the trading decision; (3) <strong>Split-adjusted prices</strong> — raw historical prices are not adjusted for stock splits, making return calculations incorrect without adjustment. Faculty should flag all three before assigning any historical data analysis.</p>\n</details><details class=\"risk-item\">\n<summary>Economically Meaningless Results</summary>\n<p>AI can produce statistically significant but financially nonsensical outputs. Mitigation: every analysis must include a ‘so what?’ interpretation tied to a financial decision.</p>\n</details><details class=\"risk-item\">\n<summary>Ephemeral Sessions</summary>\n<p>Code Interpreter sessions expire. Mitigation: require students to document the full workflow.</p>\n</details><details class=\"risk-item\">\n<summary>Proprietary Data</summary>\n<p>Do not upload restricted or proprietary firm data. Mitigation: use publicly available datasets only. Free data sources: <a href=\"https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html\" rel=\"noopener\" target=\"_blank\">Kenneth French Data Library</a> (factor returns, portfolio sorts), Yahoo Finance via the <code>yfinance</code> Python library (adjusted close prices), and <a href=\"https://fred.stlouisfed.org\" rel=\"noopener\" target=\"_blank\">FRED</a> (macroeconomic series, interest rates, yield curves).</p>\n</details>"
+      },
+      {
+        "heading": "First-Week Implementation Pilot",
+        "kind": "pilot",
+        "html": "<p>Download a free CSV of monthly Fama-French factor returns from <a href=\"https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html\" rel=\"noopener\" target=\"_blank\">Kenneth French’s data library</a>. Upload it to ChatGPT Code Interpreter with this prompt: ‘Calculate the average monthly return and standard deviation for the market factor, SMB, and HML. Display as a bar chart with error bars.’ Show the result in class (takes 30 seconds). Ask students: ‘What would you need to check to trust these numbers?’ Debrief in 3 minutes. No coding knowledge required.</p>"
+      }
+    ],
+    "summary": "Students describe analyses in natural language and receive working code with executed output, shifting focus to interpretation."
+  },
+  {
+    "id": 6,
+    "title": "Content Generation: Exam Variants, Cases, and Course Materials",
+    "difficulty": "beginner",
+    "tagline": "Draft exam variants, mini-cases, and rubrics in minutes — faculty curate, edit, and approve.",
+    "sections": [
+      {
+        "heading": "Teaching Problem",
+        "html": "<p>Developing fresh case studies, problem-set variants, and discussion prompts is time-consuming. Textbook examples can feel dated within a year. Creating multiple assessment versions for academic integrity multiplies the workload.</p>"
+      },
+      {
+        "heading": "How AI Addresses the Problem",
+        "html": "<p>AI drafts multiple variants of problem sets, mini case studies anchored in current events, discussion questions, learning objectives, and even accreditation documentation. Faculty serve as editors and curators—reviewing for accuracy, adding nuance, and calibrating difficulty—reducing content development time from hours to minutes.</p>"
+      },
+      {
+        "heading": "Deployment Details",
+        "html": "<dl class=\"deployment-dl\">\n<dt>Courses</dt>\n<dd>All finance courses (UG and MBA)</dd>\n<dt>Tools</dt>\n<dd>ChatGPT, Claude, Gemini, Microsoft Copilot, Perplexity (for research-grounded content generation)</dd>\n</dl>"
+      },
+      {
+        "heading": "Sample Prompts",
+        "html": "<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>TVM Problem Set Variants</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-6-tvm\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-6-tvm\">Create 5 time-value-of-money problem variants for Principles of Finance. Requirements: (1) Each uses a different realistic business scenario (equipment purchase, commercial real estate loan, lease-vs-buy decision, retirement planning, bond pricing). (2) Vary the number of periods (3-15 years), interest rates (4-12%), and payment structures (lump sum, ordinary annuity, annuity due, uneven cash flows). (3) Include one problem that requires solving for the interest rate and one that requires solving for the number of periods. (4) Provide complete answer keys with intermediate steps showing the financial calculator keystrokes (N, I/Y, PV, PMT, FV). (5) Difficulty should range from straightforward (Problem 1) to challenging (Problem 5).</code></pre>\n</div><div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Tech Acquisition Mini Case</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-6-case\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-6-case\">Draft a 600-word mini case study for MBA Corporate Finance based on a real 2024-2025 technology sector acquisition. Change company names and disguise identifying details. Include: (1) acquirer and target financial profiles (revenue, EBITDA, debt levels), (2) stated strategic rationale, (3) deal structure (cash, stock, or mixed), (4) at least one complicating factor (regulatory scrutiny, cultural integration risk, or customer overlap). End with 4 discussion questions that require students to evaluate the deal using NPV, comparable transactions, and strategic fit analysis.</code></pre>\n</div><div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>AACSB AoL Alignment Matrix</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-6-aacsb\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-6-aacsb\">Generate an AACSB Assurance of Learning alignment matrix for an undergraduate Financial Statement Analysis course. Map 6 student learning objectives to Bloom's Taxonomy levels, specific course assignments, and assessment rubric categories. Include at least 2 objectives at the Analyze or Evaluate level.</code></pre>\n</div>"
+      },
+      {
+        "heading": "Assessment Approach",
+        "html": "<p>Not directly student-assessed (this is primarily an instructor productivity tool). When used as a student exercise in advanced courses—asking students to generate and then critique AI-produced case studies—grade the quality of the critique, not the AI output.</p>"
+      },
+      {
+        "heading": "Skills Developed",
+        "html": "<div class=\"skills-grid\">\n<div class=\"skill-card\">\n<h4>Finance Concepts</h4>\n<p>N/A (instructor tool); when used as student exercise: critical evaluation of financial scenarios, identifying unrealistic assumptions</p>\n</div>\n<div class=\"skill-card\">\n<h4>Analytical Skills</h4>\n<p>Efficiency in assessment design, quality control of AI-generated content</p>\n</div>\n<div class=\"skill-card\">\n<h4>Professional Skills</h4>\n<p>N/A (instructor tool)</p>\n</div>\n<div class=\"skill-card\">\n<h4>AI Literacy Skills</h4>\n<p>Effective prompting for structured content generation, output quality verification, understanding AI’s tendency to fabricate financial data</p>\n</div>\n</div>"
+      },
+      {
+        "heading": "Evidence",
+        "html": "<p>AACSB Insights and the AAC&amp;U Institute on AI, Pedagogy, and the Curriculum (2024–2026) report widespread faculty adoption of AI for content generation. Bowen &amp; Watson (2025, 2nd ed.) include expanded sections on using AI for assignment design.</p>"
+      },
+      {
+        "heading": "Risks and Safeguards",
+        "html": "<details class=\"risk-item\">\n<summary>Fabricated Financial Data</summary>\n<p>AI can invent plausible-sounding but entirely fictional financial figures. Mitigation: ALWAYS verify numbers against primary sources before distributing to students.</p>\n</details><details class=\"risk-item\">\n<summary>Insufficient Complexity</summary>\n<p>AI-generated cases tend to be too ‘clean.’ Mitigation: treat AI output as a first draft; add messiness, conflicting data points, and red herrings.</p>\n</details><details class=\"risk-item\">\n<summary>IP Considerations</summary>\n<p>Check institutional policies on ownership and distribution of AI-generated course materials.</p>\n</details><div class=\"oecd-box\">\n<h4>Curricular Homogenization (OECD Warning)</h4>\n<p>OECD reports that GenAI can improve content quality while reducing the collective diversity of generated material. AI-generated finance cases tend to cluster around large-cap U.S. technology and retail sectors with straightforward deal structures. Build in a diversity check before using any AI-generated case or problem set: rotate across (1) industry sector, (2) firm size (micro-cap to large-cap), (3) geography (U.S., international, emerging markets), (4) stakeholder lens (creditor, equity holder, regulator, employee), and (5) market regime (expansion, recession, rising rates). If your case library lacks diversity on any dimension, prompt explicitly for it.</p>\n</div>"
+      },
+      {
+        "heading": "First-Week Implementation Pilot",
+        "kind": "pilot",
+        "html": "<p>Open ChatGPT right now. Paste this prompt: ‘Generate 3 variants of a bond pricing problem for Principles of Finance. Each should use a different coupon rate (4%, 6%, 8%), different maturity (5, 10, 20 years), and different YTM (3%, 5%, 7%). Include answer keys.’ Compare the output to your existing problem set. Edit the best variant for your next quiz. Total time: 10–15 minutes.</p>"
+      }
+    ],
+    "summary": "AI drafts problem-set variants, mini cases, discussion questions, and accreditation documentation. Faculty serve as editors and curators."
+  },
+  {
+    "id": 7,
+    "title": "Real-Time Market Context and Case Study Enhancement",
+    "difficulty": "beginner",
+    "tagline": "Keep cases current: AI with web search surfaces what happened to case companies since they were written.",
+    "sections": [
+      {
+        "heading": "Teaching Problem",
+        "html": "<p>Published case studies age quickly in finance. By the time a Harvard Business Publishing case reaches students, market conditions, company financials, and regulatory environments may have changed significantly. Faculty want to connect classroom theory to current events but lack the time to continuously update materials.</p>"
+      },
+      {
+        "heading": "How AI Addresses the Problem",
+        "html": "<p>AI tools with web-search capabilities provide real-time market context: recent earnings data, analyst consensus estimates, material events since a case was written, and current rate environments. Students learn that financial analysis is never ‘finished’—it must be continuously updated.</p>"
+      },
+      {
+        "heading": "Deployment Details",
+        "html": "<dl class=\"deployment-dl\">\n<dt>Courses</dt>\n<dd>Corporate Finance (UG/MBA), Investments (UG/MBA), Personal Finance (UG)</dd>\n<dt>Tools</dt>\n<dd>ChatGPT (with web browsing), Claude, Perplexity AI, custom GPTs pre-loaded with case data, Microsoft Copilot</dd>\n</dl>"
+      },
+      {
+        "heading": "Student Workflow",
+        "html": "<ol>\n<li>Receive the assigned case study along with a ‘Case Update Assignment’ template.</li>\n<li>Use AI with web search to find the company’s most recent earnings, analyst consensus estimates, credit rating changes, and any material events since the case was written.</li>\n<li>Write a 1-page ‘Case Update Memo’ that bridges the case’s time period to today.</li>\n<li>Identify 2–3 specific ways the new information would change the analysis or recommendation in the original case.</li>\n<li>Cite at least 2 primary sources (10-K filing, earnings transcript, press release, SEC filing) to verify every claim. AI-generated statements without primary-source verification receive zero credit.</li>\n</ol>"
+      },
+      {
+        "heading": "Sample Prompts",
+        "html": "<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Case Update Research</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-7-update\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-7-update\">I am preparing for a class discussion of a case study about [Company X] written in [Year]. Summarize the 3 most significant developments since the case was written, including: (1) most recent quarterly earnings vs. analyst expectations, (2) any major strategic announcements (M&amp;A, restructuring, new product launches), (3) changes in analyst consensus price target or rating. For each development, explain how it would affect the analysis in the original case. Provide specific source URLs I can verify.</code></pre>\n</div><div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Personal Finance Current Data Lookup</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-7-personal\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-7-personal\">I am building a personal financial plan for a class assignment. Look up current data for: (1) average 30-year fixed mortgage rate, (2) average high-yield savings account APY, (3) current federal income tax brackets for married filing jointly, (4) current federal student loan interest rates for undergraduate and graduate loans, (5) 2025 401(k) contribution limits and catch-up contribution limits. Provide source URLs for each.</code></pre>\n</div>"
+      },
+      {
+        "heading": "Assessment Approach",
+        "html": "<ul class=\"rubric-weights\">\n<li><span class=\"criterion\">Accuracy and relevance of identified updates</span><span class=\"weight\">30%</span></li>\n<li><span class=\"criterion\">Quality of analysis connecting updates to original case themes</span><span class=\"weight\">35%</span></li>\n<li><span class=\"criterion\">Source quality and verification rigor</span><span class=\"weight\">20%</span></li>\n<li><span class=\"criterion\">Writing clarity and professional tone</span><span class=\"weight\">15%</span></li>\n</ul>"
+      },
+      {
+        "heading": "Skills Developed",
+        "html": "<div class=\"skills-grid\">\n<div class=\"skill-card\">\n<h4>Finance Concepts</h4>\n<p>Fundamental analysis, earnings interpretation, financial statement trend analysis, valuation updating, connecting macro to micro</p>\n</div>\n<div class=\"skill-card\">\n<h4>Analytical Skills</h4>\n<p>Source verification, time-series comparison, identifying material changes, distinguishing signal from noise</p>\n</div>\n<div class=\"skill-card\">\n<h4>Professional Skills</h4>\n<p>Research efficiency, professional memo writing, current-events awareness, the analyst’s habit of continuous updating</p>\n</div>\n<div class=\"skill-card\">\n<h4>AI Literacy Skills</h4>\n<p>Using AI for research acceleration with mandatory verification, understanding data freshness limitations, recognizing hallucinated financial data</p>\n</div>\n</div>"
+      },
+      {
+        "heading": "Evidence",
+        "html": "<p>FMA and SFA pedagogy conference sessions describe growing faculty use of AI for case study augmentation. MIT Sloan’s ‘AI and Money’ course (Gensler, 2025) examines real-world AI implications in market analysis. Trent (2024) provides a transferable classroom assignment design.</p>"
+      },
+      {
+        "heading": "Risks and Safeguards",
+        "html": "<details class=\"risk-item\">\n<summary>Hallucinated Data</summary>\n<p>AI may fabricate earnings figures, deal terms, or analyst estimates. Mitigation: require primary source citations for every factual claim; zero credit for unverified AI-generated ‘facts.’</p>\n</details><details class=\"risk-item\">\n<summary>Paywalled Data</summary>\n<p>AI with web search cannot access Bloomberg, Refinitiv, S&amp;P Capital IQ, or paywalled analyst reports — the very sources finance professionals rely on most. Limit student source requirements to publicly available documents: SEC filings via <a href=\"https://www.sec.gov/edgar\" rel=\"noopener\" target=\"_blank\">EDGAR</a>, earnings call transcripts (Seeking Alpha free tier), official company press releases, and Federal Reserve data via <a href=\"https://fred.stlouisfed.org\" rel=\"noopener\" target=\"_blank\">FRED</a>. State this constraint explicitly in the assignment so students don't feel they are missing required resources.</p>\n</details><details class=\"risk-item\">\n<summary>AI as ‘Source’</summary>\n<p>Students may cite ‘ChatGPT said’ as evidence. Mitigation: explicit course policy that AI is a research assistant, not a citable source.</p>\n</details><div class=\"oecd-box\">\n<h4>Curricular Diversity Safeguard (OECD)</h4>\n<p>When using AI to update existing cases or build new discussion materials, the instructor-as-curator role is essential. AI tends to emphasize recent high-profile events and dominant-market narratives. Deliberately rotate the macro context you incorporate: rising vs. falling rate environments, domestic vs. cross-border deals, regulated vs. lightly regulated industries, and firms at different lifecycle stages. Preventing “case library convergence” is an active editorial task, not a passive one.</p>\n</div>"
+      },
+      {
+        "heading": "First-Week Implementation Pilot",
+        "kind": "pilot",
+        "html": "<p>Before your next case discussion, post this 5-minute pre-class task: ‘Open ChatGPT or Perplexity. Ask: What has happened to [Case Company] since [case year]? Find one development that would change the case analysis. Verify it with one primary source (10-K, earnings transcript, or press release). Bring your finding to class.’ Open class by having 2–3 students share their updates. Zero setup required.</p>"
+      }
+    ],
+    "summary": "AI with web search provides real-time market context to keep case studies current and connect classroom theory to live markets."
+  },
+  {
+    "id": 8,
+    "title": "Coding Assistance and “Vibe Coding” for Financial Modeling",
+    "difficulty": "intermediate",
+    "tagline": "Students describe financial logic in English; AI writes the code; students verify, annotate, and explain it.",
+    "sections": [
+      {
+        "heading": "Teaching Problem",
+        "html": "<p>Finance courses increasingly require programming (Python, R, VBA, SQL) for financial modeling, data analysis, and algorithmic trading. Students without computer science backgrounds stall on syntax errors and debugging—problems that consume class time better spent on financial reasoning.</p>"
+      },
+      {
+        "heading": "How AI Addresses the Problem",
+        "html": "<p>The concept of ‘vibe coding’ (articulated by Prof. Kerry Back at Rice University) represents a paradigm shift: students describe financial logic in natural language, AI generates the code, and students verify, annotate, modify, and interpret the output. The student’s role shifts from ‘coder’ to ‘systems architect.’</p>"
+      },
+      {
+        "heading": "Deployment Details",
+        "html": "<dl class=\"deployment-dl\">\n<dt>Courses</dt>\n<dd>Financial Modeling (UG/MBA), Financial Analytics (UG/MBA), Fintech/Algorithmic Trading (MBA), Derivatives, Capstone projects</dd>\n<dt>Tools</dt>\n<dd>GitHub Copilot, ChatGPT Code Interpreter, Claude (Artifacts), Cursor IDE, Google Colab with Gemini, Replit AI</dd>\n</dl>"
+      },
+      {
+        "heading": "Student Workflow",
+        "html": "<ol>\n<li>Receive a financial modeling task with clearly specified requirements.</li>\n<li>Write a plain-English specification describing inputs, calculations, outputs, and edge cases—before touching AI.</li>\n<li>Submit the specification to AI and receive generated Python/R/VBA code.</li>\n<li>Annotate the code line-by-line: for each meaningful section, explain the financial logic.</li>\n<li>Modify the code to handle at least one extension (add transaction costs, incorporate short-selling constraints, test with different time periods, add a risk metric).</li>\n<li>Run the final code, interpret outputs in a written memo, and present findings with a 3-minute oral walkthrough defending the financial logic.</li>\n</ol>"
+      },
+      {
+        "heading": "Sample Prompts",
+        "html": "<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Factor Model Construction</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-8-factor\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-8-factor\">Build a Python script that: (1) Pulls 3 years of daily adjusted close prices for SPY and a user-defined list of 5 stock tickers from Yahoo Finance using yfinance. (2) Calculates daily log returns for each. (3) Runs an OLS regression of each stock's returns against SPY returns to estimate Beta. (4) Displays a summary table showing each stock's Beta, Alpha (annualized), R-squared, and p-value on Alpha. (5) Plots the regression line (Security Characteristic Line) for each stock with the data points. (6) Adds a brief interpretation comment below each plot explaining what the Beta and R-squared imply about the stock's risk profile.</code></pre>\n</div><div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Black-Scholes Options Pricing Calculator</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-8-bs\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-8-bs\">Build a Black-Scholes option pricing calculator in Python. Inputs: current stock price, strike price, risk-free rate, annualized volatility, and time to expiration in years. Outputs: (1) European call and put prices, (2) all five Greeks (Delta, Gamma, Theta, Vega, Rho) for both call and put, (3) a 3D surface plot showing how call option price varies with stock price (x-axis: 50-150% of current price) and volatility (y-axis: 10-60%). (4) Add a payoff diagram at expiration overlaid with the current option value curve. Label all axes clearly with units.</code></pre>\n</div>"
+      },
+      {
+        "heading": "Assessment Approach",
+        "html": "<ul class=\"rubric-weights\">\n<li><span class=\"criterion\">Code annotation quality</span><span class=\"weight\">25%</span></li>\n<li><span class=\"criterion\">Financial logic accuracy</span><span class=\"weight\">25%</span></li>\n<li><span class=\"criterion\">Modification quality</span><span class=\"weight\">20%</span></li>\n<li><span class=\"criterion\">Output interpretation and memo quality</span><span class=\"weight\">20%</span></li>\n<li><span class=\"criterion\">Oral walkthrough</span><span class=\"weight\">10%</span></li>\n</ul>"
+      },
+      {
+        "heading": "Skills Developed",
+        "html": "<div class=\"skills-grid\">\n<div class=\"skill-card\">\n<h4>Finance Concepts</h4>\n<p>DCF modeling, Monte Carlo simulation, option pricing and Greeks, factor models, portfolio optimization, backtesting methodology</p>\n</div>\n<div class=\"skill-card\">\n<h4>Analytical Skills</h4>\n<p>Code auditing for financial logic errors, model validation against analytical solutions, sensitivity analysis</p>\n</div>\n<div class=\"skill-card\">\n<h4>Professional Skills</h4>\n<p>Technical specification writing, working with AI as a professional co-pilot, communicating quantitative results</p>\n</div>\n<div class=\"skill-card\">\n<h4>AI Literacy Skills</h4>\n<p>Natural language-to-code translation, verifying AI-generated code against known solutions, understanding coding limitations and edge cases</p>\n</div>\n</div>"
+      },
+      {
+        "heading": "Evidence",
+        "html": "<p>Prof. Kerry Back (Rice University, 2025) has been a leading advocate for ‘vibe coding’ in finance education. Becker et al. (2023) and Denny et al. (2024) document AI coding assistance in CS education. Wharton’s AI for Business major (2025) includes required coursework in applied machine learning.</p>"
+      },
+      {
+        "heading": "Risks and Safeguards",
+        "html": "<details class=\"risk-item\">\n<summary>Financial Logic Errors in AI Code</summary>\n<p>AI may calculate returns using price levels instead of log returns, mishandle ex-dividend dates, apply wrong sign conventions. <strong>Sign convention errors are especially common in finance code</strong>: AI frequently treats cash outflows as positive when they should be negative (or vice versa), producing DCF values with the wrong sign or NPV calculations that recommend rejection when the project is actually positive. Mitigation: require students to manually verify the sign and unit of at least one cash flow in their annotated code; include a \"break it\" exercise where students deliberately flip a sign and explain what the incorrect output would imply.</p>\n</details><details class=\"risk-item\">\n<summary>Copy-Paste Without Understanding</summary>\n<p>Mitigation: oral walkthroughs are highly effective at distinguishing students who understand from those who do not.</p>\n</details><details class=\"risk-item\">\n<summary>API Key Exposure</summary>\n<p>Students may paste API keys into chatbot sessions. Mitigation: explicit policy; use only free data sources.</p>\n</details><details class=\"risk-item\">\n<summary>Academic Integrity</summary>\n<p>Clearly define acceptable AI use for each assignment in the syllabus.</p>\n</details>"
+      },
+      {
+        "heading": "First-Week Implementation Pilot",
+        "kind": "pilot",
+        "html": "<p>In class, open ChatGPT or Claude and type: ‘Write Python code to calculate the present value of $10,000 received in 5 years at a 7% annual discount rate. Show the formula in a comment.’ Display the result (15 seconds). Then ask students: ‘What would you need to change if there were also annual $500 coupon payments?’ Have a student describe the change in plain English. Paste their description into the AI. Display the updated code. Debrief: ‘The AI wrote it—how would you verify it’s correct?’ Total time: 8 minutes.</p>"
+      }
+    ],
+    "summary": "Students describe financial logic in natural language, AI generates code, and students verify, annotate, modify, and interpret the output."
+  },
+  {
+    "id": 9,
+    "title": "AI Literacy and Critical Evaluation of AI Outputs",
+    "difficulty": "beginner",
+    "tagline": "Build professional AI skepticism: students test, break, and critique AI outputs on finance questions they know.",
+    "sections": [
+      {
+        "heading": "Teaching Problem",
+        "html": "<p>Students will enter a workforce where AI is embedded in virtually every financial tool—robo-advisors, algorithmic trading platforms, credit scoring models, fraud detection systems. Without understanding AI’s capabilities and limitations, graduates risk making costly errors or blindly trusting AI-generated recommendations.</p>"
+      },
+      {
+        "heading": "How AI Addresses the Problem",
+        "html": "<p>Embed AI literacy as a cross-cutting theme woven throughout the finance curriculum, not siloed into a single lecture. Design exercises where students explicitly test, evaluate, and critique AI outputs on finance topics they already understand. The ‘AI Audit’ becomes a repeatable assignment format.</p>"
+      },
+      {
+        "heading": "Deployment Details",
+        "html": "<dl class=\"deployment-dl\">\n<dt>Courses</dt>\n<dd>All finance courses (UG and MBA); particularly central to Fintech courses</dd>\n<dt>Tools</dt>\n<dd>Multiple AI platforms for cross-platform comparison (ChatGPT, Claude, Gemini, Copilot), custom evaluation rubrics, instructor-designed audit templates</dd>\n</dl>"
+      },
+      {
+        "heading": "Student Workflow",
+        "html": "<ol>\n<li>AI Audit exercise: Ask AI a finance question you already know the answer to from class or the textbook. Document the question and AI’s full response.</li>\n<li>Identify and categorize every error or imprecision: factual, computational, conceptual, reasoning, or omission.</li>\n<li>Cross-platform comparison: Ask the identical question to ChatGPT, Claude, and Gemini. Document differences in accuracy, depth, and confidence level.</li>\n<li>Write a 1–2 page ‘AI Reliability Report’ documenting: error types and patterns observed, which platform performed best and worst, specific recommendations for when and how to use AI as a finance professional, and what verification steps you would require before acting on AI output.</li>\n</ol>"
+      },
+      {
+        "heading": "Sample Prompts",
+        "html": "<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Theory Audit (Modigliani-Miller)</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-9-mm\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-9-mm\">Explain the Modigliani-Miller theorem. Provide the mathematical proof for Proposition I under the no-tax assumption. Then explain Proposition II and show how the cost of equity changes with leverage. [Student verifies the derivation step-by-step against the textbook, checking for sign errors, missing assumptions, or circular reasoning.]</code></pre>\n</div><div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Quantitative Audit (Apple Ratios)</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-9-apple\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-9-apple\">Using Apple's most recent 10-K filing, calculate the current ratio, debt-to-equity ratio, and return on equity. Show all calculations with the specific line items used. [Student downloads the actual 10-K from SEC EDGAR and verifies every number and calculation independently.]</code></pre>\n</div><div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Cross-Platform Comparison</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-9-cross\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-9-cross\">Ask ChatGPT, Claude, and Gemini: 'What was the S&amp;P 500 total return in 2024? Break down the return into price appreciation and dividend yield.' Compare the three responses for accuracy, specificity, source citation, and confidence level. Which platform hedges most appropriately?</code></pre>\n</div><p><small><strong>Instructor note:</strong> Different AI models have different training data cutoffs. Before this exercise, ask each model \"What is your knowledge cutoff date?\" and have students record the answer. Discrepancies in S&amp;P 500 return figures may reflect cutoff differences rather than reasoning errors — distinguishing between these two explanations is itself a valuable critical thinking exercise.</small></p>"
+      },
+      {
+        "heading": "Assessment Approach",
+        "html": "<ul class=\"rubric-weights\">\n<li><span class=\"criterion\">Thoroughness of error identification</span><span class=\"weight\">30%</span></li>\n<li><span class=\"criterion\">Accuracy and specificity of error categorization</span><span class=\"weight\">25%</span></li>\n<li><span class=\"criterion\">Quality of actionable recommendations for professional AI use</span><span class=\"weight\">25%</span></li>\n<li><span class=\"criterion\">Depth of cross-platform comparison insights</span><span class=\"weight\">20%</span></li>\n</ul>"
+      },
+      {
+        "heading": "Skills Developed",
+        "html": "<div class=\"skills-grid\">\n<div class=\"skill-card\">\n<h4>Finance Concepts</h4>\n<p>Reinforces whatever concept is being audited—students learn content by finding where AI gets it wrong</p>\n</div>\n<div class=\"skill-card\">\n<h4>Analytical Skills</h4>\n<p>Critical evaluation, error taxonomy and pattern recognition, comparative analysis across sources, developing a professional verification methodology</p>\n</div>\n<div class=\"skill-card\">\n<h4>Professional Skills</h4>\n<p>Professional skepticism as a habit, verification protocols, responsible and transparent technology use</p>\n</div>\n<div class=\"skill-card\">\n<h4>AI Literacy Skills</h4>\n<p>Understanding AI limitations (hallucination, training data cutoffs, confident incorrectness), prompt engineering for diagnostic testing, cross-platform evaluation methodology</p>\n</div>\n</div>"
+      },
+      {
+        "heading": "Evidence",
+        "html": "<p>The AAC&amp;U Institute on AI, Pedagogy, and the Curriculum (2024–2026) emphasizes AI literacy as a critical cross-cutting learning outcome. Wharton requires ‘Big Data, Big Responsibilities’ in its AI for Business major. BloombergGPT (Wu et al., 2023) and FinGPT (Yang et al., 2023) provide domain-specific context.</p>"
+      },
+      {
+        "heading": "Risks and Safeguards",
+        "html": "<details class=\"risk-item\">\n<summary>Cynicism</summary>\n<p>Students may conclude AI is ‘useless’ rather than developing nuanced understanding. Mitigation: balance critique exercises with productive-use exercises.</p>\n</details><details class=\"risk-item\">\n<summary>Rapid Obsolescence</summary>\n<p>AI capabilities change quarterly. Mitigation: teach the evaluation methodology (how to audit), not just current findings.</p>\n</details><details class=\"risk-item\">\n<summary>Faculty Readiness</summary>\n<p>Faculty need their own AI literacy before teaching it. Mitigation: institutional training support; start with the 2-Minute AI Audit exercise.</p>\n</details>"
+      },
+      {
+        "heading": "First-Week Implementation Pilot",
+        "kind": "pilot",
+        "html": "<p>The 2-Minute AI Audit (works with zero preparation): In class, tell every student to open any AI tool on their phone. Ask them a finance question they know the answer to cold—something from last week’s lecture. They have exactly 2 minutes to find at least one error or imprecision in the AI’s response. Quick show of hands: How many found an error? What kinds of errors? This exercise takes 5 minutes total, requires zero setup, immediately demonstrates that AI is accessible and fallible. Do it on day one of any course.</p>"
+      }
+    ],
+    "summary": "Students explicitly test, evaluate, and critique AI outputs on finance topics, building professional skepticism as a habit."
+  },
+  {
+    "id": 10,
+    "title": "Simulation, Monte Carlo Modeling, and Scenario Analysis",
+    "difficulty": "advanced",
+    "tagline": "Lower the barrier to Monte Carlo simulation, option pricing, and scenario analysis dramatically.",
+    "sections": [
+      {
+        "heading": "Teaching Problem",
+        "html": "<p>Finance is fundamentally about decision-making under uncertainty, but building realistic simulations—Monte Carlo portfolio projections, multi-scenario DCF models, option pricing with stochastic volatility, stress tests—traditionally requires significant programming expertise that most finance faculty and students lack.</p>"
+      },
+      {
+        "heading": "How AI Addresses the Problem",
+        "html": "<p>AI dramatically lowers the barrier to creating sophisticated financial simulations. Faculty or students describe a scenario in natural language—specifying assumptions, distributions, correlations, and output metrics—and AI generates complete, executable simulation code. The pedagogical value is not in the code generation but in what follows: students must set and defend assumptions, modify parameters, interpret distributional outputs, and make recommendations under genuine uncertainty.</p>"
+      },
+      {
+        "heading": "Deployment Details",
+        "html": "<dl class=\"deployment-dl\">\n<dt>Courses</dt>\n<dd>Investments/Portfolio Management (UG/MBA), Derivatives (UG/MBA), Risk Management (MBA), Financial Modeling (UG/MBA), Capstone courses</dd>\n<dt>Tools</dt>\n<dd>ChatGPT Code Interpreter/Advanced Data Analysis, Claude with code execution, GitHub Copilot, Python (numpy, scipy, pandas, matplotlib), Google Colab</dd>\n</dl>"
+      },
+      {
+        "heading": "Student Workflow",
+        "html": "<ol>\n<li>Receive a modeling scenario with specified requirements.</li>\n<li>Before using AI, write a 1-page specification document: what assumptions about return distributions, correlations, rebalancing frequency, withdrawal rates, and inflation? Justify each choice.</li>\n<li>Use AI to generate simulation code based on your specification.</li>\n<li>Run the simulation and produce required visualizations (terminal wealth distributions, probability of ruin, efficient frontier, convergence plots).</li>\n<li>Modify at least 2 assumptions and re-run: What happens with fat-tailed return distributions? With regime switching? With higher withdrawal rates?</li>\n<li>Write a 2-page investment recommendation memo supported by simulation evidence.</li>\n<li>Present findings to the class (5–7 minutes), defending assumptions under Q&amp;A.</li>\n</ol>"
+      },
+      {
+        "heading": "Sample Prompts",
+        "html": "<div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Retirement Monte Carlo Simulation</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-10-retirement\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-10-retirement\">Build a Monte Carlo retirement simulation in Python with the following specifications: (1) Simulate 10,000 return paths over 30 years for 3 portfolios: 60/40 stocks/bonds, 80/20 stocks/bonds, and a target-date glide path that starts at 90/10 and linearly shifts to 30/70 over 30 years. (2) Use historical Ibbotson-style parameters: stocks with 10.5% mean annual return and 20% standard deviation; bonds with 5.5% mean and 6% standard deviation; correlation of 0.05. (3) Assume $1M starting balance with $50,000 real annual withdrawals (adjusted for 2.5% inflation). (4) Plot: terminal wealth distributions for all 3 portfolios on one chart, probability of ruin (account hitting $0) over time for each portfolio, and the median and 5th/95th percentile wealth paths. (5) Print a summary table showing median terminal wealth, probability of ruin, and the 5th percentile terminal wealth for each portfolio. (6) Set random seed to 42 for reproducibility.</code></pre>\n</div><div class=\"prompt-card\">\n<div class=\"prompt-card__header\">\n<h4>Option Pricing Convergence Study</h4>\n<button class=\"copy-btn\" data-copy-target=\"prompt-10-options\" type=\"button\">Copy</button>\n</div>\n<pre><code id=\"prompt-10-options\">Implement both the Black-Scholes analytical solution and a Monte Carlo option pricing model in Python. Parameters: S0 = $100, K = $105, r = 5%, sigma = 25%, T = 1 year. For Monte Carlo, simulate with N = [100, 500, 1000, 5000, 10000, 50000] paths. Plot: (1) Monte Carlo price vs. number of paths with the Black-Scholes analytical price as a horizontal reference line, (2) 95% confidence interval around the Monte Carlo estimate at each N, (3) computation time vs. number of paths. Explain in comments why the Monte Carlo price converges to the analytical solution and what drives the width of the confidence interval.</code></pre>\n</div>"
+      },
+      {
+        "heading": "Assessment Approach",
+        "html": "<ul class=\"rubric-weights\">\n<li><span class=\"criterion\">Assumption quality and justification</span><span class=\"weight\">25%</span></li>\n<li><span class=\"criterion\">Code modification sophistication</span><span class=\"weight\">20%</span></li>\n<li><span class=\"criterion\">Output interpretation and memo quality</span><span class=\"weight\">25%</span></li>\n<li><span class=\"criterion\">Presentation and defense under Q&amp;A</span><span class=\"weight\">20%</span></li>\n<li><span class=\"criterion\">Verification against analytical solutions</span><span class=\"weight\">10%</span></li>\n</ul><p><strong>Grade-band guidance — Assumption Quality (25%):</strong> Full credit requires citing a specific, verifiable data source for each key parameter — e.g., \"I used a 10.5% equity mean return based on Ibbotson Associates' long-run historical series, available through Damodaran's data library.\" Partial credit for reasonable assumptions stated without sources. Minimal credit for assumptions asserted without justification (\"I assumed 7% because that seemed reasonable\"). The goal is to develop the professional discipline of defending every parameter choice with evidence.</p>"
+      },
+      {
+        "heading": "Skills Developed",
+        "html": "<div class=\"skills-grid\">\n<div class=\"skill-card\">\n<h4>Finance Concepts</h4>\n<p>Portfolio theory, retirement planning under uncertainty, option pricing theory, risk management, sensitivity analysis, distributional thinking vs. point estimates</p>\n</div>\n<div class=\"skill-card\">\n<h4>Analytical Skills</h4>\n<p>Stochastic modeling, distribution analysis, simulation design, model validation, understanding convergence and sampling error</p>\n</div>\n<div class=\"skill-card\">\n<h4>Professional Skills</h4>\n<p>Data-driven decision-making under uncertainty, presenting quantitative results to non-technical stakeholders, recommendation writing with caveats</p>\n</div>\n<div class=\"skill-card\">\n<h4>AI Literacy Skills</h4>\n<p>Complex multi-parameter prompt engineering, code verification against known analytical solutions, understanding simulation limitations</p>\n</div>\n</div>"
+      },
+      {
+        "heading": "Evidence",
+        "html": "<p>MIT Sloan’s ‘AI and Money’ course (Gensler, 2025) and ‘AI and Machine Learning Applications in Finance’ (Chen, Kogan, Thesmar, 2025) integrate AI-driven modeling. Wharton provides ChatGPT Enterprise to all MBA students (2024). FinGPT (Yang et al., 2023) and PIXIU (Xie et al., 2023) provide open-source frameworks.</p>"
+      },
+      {
+        "heading": "Risks and Safeguards",
+        "html": "<details class=\"risk-item\">\n<summary>Subtle Code Errors</summary>\n<p>AI may use wrong return distributions, incorrect correlation structures, or inappropriate rebalancing logic. Mitigation: require verification against analytical solutions; check limiting cases.</p>\n</details><details class=\"risk-item\">\n<summary>High Setup Cost</summary>\n<p>Full simulation projects require Python environments. Mitigation: start with ChatGPT Code Interpreter; use pre-built Colab notebooks.</p>\n</details><details class=\"risk-item\">\n<summary>Reproducibility</summary>\n<p>Different results on re-run confuse students. Mitigation: always set random seeds; save and submit complete code.</p>\n</details><details class=\"risk-item\">\n<summary>Pedagogical Tension</summary>\n<p>If AI builds the entire model, has the student learned anything? Mitigation: specification document, required modifications, and oral defense.</p>\n</details>"
+      },
+      {
+        "heading": "First-Week Implementation Pilot",
+        "kind": "pilot",
+        "html": "<p>Zero-infrastructure demonstration: Open ChatGPT Code Interpreter in class. Type: ‘Simulate 1,000 coin flips. Plot the running average after each flip. Add a horizontal line at 0.5.’ Result appears in 15 seconds. Show the convergence. Then say: ‘Now imagine this, but instead of coin flips, these are annual stock returns. And instead of a running average, we are tracking a retirement account balance. That is a Monte Carlo simulation.’ This 60-second demo plants the conceptual seed. For the next class, provide a pre-built Colab notebook link where students can modify 3 parameters.</p>"
+      }
+    ],
+    "summary": "AI dramatically lowers the barrier to creating sophisticated financial simulations: Monte Carlo projections, option pricing, and stress tests."
+  }
+]

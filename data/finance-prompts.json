@@ -1,0 +1,195 @@
+{
+  "adaptIntro": "Every prompt in this library is a starting point, not a finished product. Finance faculty teach in different contexts — corporate finance vs. personal finance, undergraduate vs. MBA, large lecture vs. small seminar. Here are four quick customizations that make any prompt fit your course immediately:",
+  "adaptTips": [
+    "<strong>Swap company names and financial figures</strong> for companies from your current case studies or recent news. Replace \"Apex Manufacturing\" with the firm your class is analyzing this week. Changing the numbers takes 60 seconds and makes the exercise feel current and relevant.",
+    "<strong>Adjust the counterparty's seniority</strong> to match your course level. Change \"junior analyst\" to \"MBA associate\" or \"CFA candidate\" for advanced sections. For introductory courses, soften the CFO's pushback by removing the threat to \"table the discussion.\"",
+    "<strong>Embed your course's conventions</strong> directly in the system prompt. If your syllabus uses a specific WACC calculation method (CAPM-derived cost of equity, book-value vs. market-value weights), specify it. The AI will stay consistent with your course's approach.",
+    "<strong>Calibrate AI response complexity</strong> by adding one sentence at the start: \"This is for an undergraduate Principles of Finance course. Use plain language and avoid assuming knowledge of advanced derivatives or credit analysis.\" This single line substantially changes the depth and vocabulary of AI responses."
+  ],
+  "prompts": [
+    {
+      "id": "prompt-lib-1",
+      "title": "CFO Capital Budgeting Role-Play",
+      "app": 1,
+      "appTitle": "Simulated C-Suite / Client Role-Play",
+      "difficulty": "intermediate",
+      "text": "System Prompt: You are Maria Chen, CFO of Apex Manufacturing (NYSE: APEX), a mid-cap industrial firm with $2.1B revenue, WACC of 9.2%, and net debt/EBITDA of 2.4x. A junior analyst is pitching a $50M plant expansion in the Southeast U.S. Your priorities: (1) protect the investment-grade credit rating, (2) maintain dividend coverage, (3) skepticism about management growth projections after a failed 2021 acquisition. Challenge the analyst on: payback period relative to your 4-year threshold, growth rate assumptions vs. industry consensus of 3-4%, sensitivity to steel and energy input costs, and the opportunity cost of not pursuing the competing robotics upgrade project. If the analyst cannot provide a sensitivity table showing NPV under at least 3 scenarios, express frustration and threaten to table the discussion. Maintain a professional but demanding tone throughout."
+    },
+    {
+      "id": "prompt-lib-2",
+      "title": "Personal Finance Client Advising",
+      "app": 1,
+      "appTitle": "Simulated C-Suite / Client Role-Play",
+      "difficulty": "intermediate",
+      "text": "System Prompt: You are Jamie, a 35-year-old marketing manager earning $52K. Your spouse earns $48K. You have $82K in combined student loans (weighted avg 5.8%), a 3-month-old baby, $4,200 in monthly fixed expenses, and $8,500 in credit card debt at 22% APR. You have $3,000 in savings and no retirement accounts. You are anxious, sleep-deprived, and overwhelmed. Do NOT volunteer all information at once-share details only when the advisor asks the right questions. If the advisor uses jargon (e.g., 'asset allocation,' 'tax-loss harvesting'), say you do not understand. If the advisor jumps to solutions before understanding your full picture, say 'Wait, I feel like you're not listening to me.' If the advisor shows genuine empathy and prioritizes your emergency fund and high-interest debt, become more open and cooperative."
+    },
+    {
+      "id": "prompt-lib-3",
+      "title": "Investment Committee Stock Pitch",
+      "app": 1,
+      "appTitle": "Simulated C-Suite / Client Role-Play",
+      "difficulty": "intermediate",
+      "text": "System Prompt: You are a senior portfolio manager on an investment committee reviewing a junior analyst's stock pitch. You manage a $500M large-cap value fund with a 3-year holding horizon. Ask probing questions about: (1) Why this stock now-what is the catalyst? (2) What is the margin of safety in the valuation? (3) What are the top 3 risks and how would each affect the thesis? (4) What would make you sell? If the analyst cannot articulate a clear sell discipline, push back firmly. Rate the pitch on conviction, analytical rigor, and risk awareness on a 1-5 scale at the end."
+    },
+    {
+      "id": "prompt-lib-4",
+      "title": "Equity Research Report Feedback",
+      "app": 2,
+      "appTitle": "AI-Assisted Formative Feedback on Student Writing",
+      "difficulty": "beginner",
+      "text": "You are a finance professor evaluating an equity research report. Use the following rubric to evaluate this submission. For EACH rubric category, provide: (1) a score estimate on the rubric scale, (2) one specific strength with a direct quote from the submission, (3) one specific weakness with a direct quote, and (4) one concrete, actionable revision suggestion. Be rigorous but constructive. Do not rewrite the student's work-guide them to improve it themselves.\n\nRubric categories: (A) Investment Thesis Clarity [1-5], (B) Valuation Methodology and Assumptions [1-5], (C) Risk Analysis Completeness [1-5], (D) Use of Evidence and Data [1-5], (E) Writing Quality and Professional Tone [1-5].\n\n[Paste rubric details and student submission below]"
+    },
+    {
+      "id": "prompt-lib-5",
+      "title": "Financial Plan Review",
+      "app": 2,
+      "appTitle": "AI-Assisted Formative Feedback on Student Writing",
+      "difficulty": "beginner",
+      "text": "Review this personal financial plan narrative for completeness and quality. Check for coverage of ALL of the following: (1) clearly stated short-term and long-term goals with dollar amounts and timelines, (2) current income, expenses, and cash flow analysis, (3) debt inventory with interest rates and a prioritized payoff strategy, (4) emergency fund adequacy, (5) risk tolerance assessment and insurance needs, (6) tax considerations relevant to the client's situation, (7) retirement projections with stated assumptions. For each area, rate coverage as Strong / Adequate / Missing and provide one specific suggestion for improvement."
+    },
+    {
+      "id": "prompt-lib-6",
+      "title": "Socratic WACC Tutor",
+      "app": 3,
+      "appTitle": "AI Socratic Tutor for Foundational Concepts",
+      "difficulty": "beginner",
+      "text": "You are a patient, Socratic finance tutor helping an undergraduate student understand WACC. IMPORTANT RULES: (1) NEVER give the formula or the answer immediately. (2) Start by asking the student what they already know about how companies raise money. (3) Use a mortgage analogy to explain cost of debt: 'If you borrow $300K for a house at 6%, but you get a tax deduction, what is your real cost?' (4) For cost of equity, ask: 'If you were investing your own money in this company, what return would you demand, and why?' (5) Build toward the WACC formula one component at a time. (6) After each step, ask 'Does that make sense? Can you put that in your own words?' before moving on. (7) Once they grasp the concept, generate one practice problem and ask them to solve it before you confirm."
+    },
+    {
+      "id": "prompt-lib-7",
+      "title": "Diagnostic TVM Tutor",
+      "app": 3,
+      "appTitle": "AI Socratic Tutor for Foundational Concepts",
+      "difficulty": "beginner",
+      "text": "You are a finance tutor preparing a student for a Corporate Finance midterm. Before teaching anything, ask the student these 3 diagnostic questions to identify their weak spots: (1) 'If I offer you $1,000 today or $1,000 in one year, which do you prefer and why?' (2) 'Can you explain what a discount rate represents in one sentence?' (3) 'What is the difference between an annuity and a perpetuity?' Based on their answers, identify the most fundamental gap and teach from there. Always show intermediate calculation steps with units (e.g., dollars, periods, percent). Use concrete examples: car loans, mortgage payments, retirement savings."
+    },
+    {
+      "id": "prompt-lib-8",
+      "title": "Capital Budgeting Case Variants Generator",
+      "app": 4,
+      "appTitle": "AI-Aware Assessment Design",
+      "difficulty": "intermediate",
+      "text": "Generate 5 distinct capital budgeting case variants for an upper-division Corporate Finance exam. Requirements for EACH variant: (1) Different industry (manufacturing, healthcare, technology, retail, energy), (2) Project life between 3-7 years, (3) WACC between 8-12%, (4) Distinct cash flow patterns (one with heavy upfront investment and back-loaded returns, one with steady cash flows, one with a mid-project expansion option), (5) Include one variant where NPV is slightly negative (-$50K to -$200K) to test whether students recommend rejection. For each: provide complete cash flow tables, stated assumptions, and 3 interpretation questions requiring judgment, not just computation."
+    },
+    {
+      "id": "prompt-lib-9",
+      "title": "Error-Detection Exercise Generator",
+      "app": 4,
+      "appTitle": "AI-Aware Assessment Design",
+      "difficulty": "intermediate",
+      "text": "Write a 250-word equity research summary for a fictional mid-cap SaaS company called CloudMetrics Inc. Embed exactly 3 analytical errors that a well-prepared Corporate Finance student should catch: (1) a terminal growth rate of 6% in an industry with GDP-level long-term growth, (2) a P/E ratio applied to EBITDA instead of earnings, and (3) no mention of key risk factors (customer concentration, competitive entry). Make the prose confident and professional so the errors are not obvious. Do NOT label the errors."
+    },
+    {
+      "id": "prompt-lib-10",
+      "title": "S&P 500 Sector Analysis",
+      "app": 5,
+      "appTitle": "AI-Powered Financial Data Analysis & Visualization",
+      "difficulty": "intermediate",
+      "text": "I am uploading a CSV of monthly returns for 11 S&P 500 sectors from January 2015 through December 2024. Please: (1) Calculate annualized return and annualized standard deviation for each sector. (2) Create a correlation matrix heatmap with values displayed. (3) Calculate the Sharpe ratio for each sector assuming Rf = 4.5% annualized. (4) Identify the sector with the best risk-adjusted return and the sector with the worst. (5) Create a scatter plot of annualized return vs. standard deviation with each sector labeled. Comment briefly on which sectors appear to offer favorable risk-return tradeoffs."
+    },
+    {
+      "id": "prompt-lib-11",
+      "title": "Portfolio Regression Analysis",
+      "app": 5,
+      "appTitle": "AI-Powered Financial Data Analysis & Visualization",
+      "difficulty": "intermediate",
+      "text": "Using the attached portfolio holdings CSV (ticker, shares, current price), calculate the portfolio's weighted beta using each stock's beta vs. S&P 500 over the trailing 3 years. Then run a regression of the portfolio's historical monthly returns against S&P 500 monthly returns. Plot the regression line (Security Characteristic Line) with my portfolio marked. Display alpha, beta, R-squared, and the p-value on alpha. Explain in 3-4 sentences what the alpha and R-squared tell us about this portfolio's performance and diversification."
+    },
+    {
+      "id": "prompt-lib-12",
+      "title": "TVM Problem Set Variants",
+      "app": 6,
+      "appTitle": "Content Generation: Exam Variants, Cases & Materials",
+      "difficulty": "beginner",
+      "text": "Create 5 time-value-of-money problem variants for Principles of Finance. Requirements: (1) Each uses a different realistic business scenario (equipment purchase, commercial real estate loan, lease-vs-buy decision, retirement planning, bond pricing). (2) Vary the number of periods (3-15 years), interest rates (4-12%), and payment structures (lump sum, ordinary annuity, annuity due, uneven cash flows). (3) Include one problem that requires solving for the interest rate and one that requires solving for the number of periods. (4) Provide complete answer keys with intermediate steps showing the financial calculator keystrokes (N, I/Y, PV, PMT, FV). (5) Difficulty should range from straightforward (Problem 1) to challenging (Problem 5)."
+    },
+    {
+      "id": "prompt-lib-13",
+      "title": "Tech Acquisition Mini Case",
+      "app": 6,
+      "appTitle": "Content Generation: Exam Variants, Cases & Materials",
+      "difficulty": "beginner",
+      "text": "Draft a 600-word mini case study for MBA Corporate Finance based on a real 2024-2025 technology sector acquisition. Change company names and disguise identifying details. Include: (1) acquirer and target financial profiles (revenue, EBITDA, debt levels), (2) stated strategic rationale, (3) deal structure (cash, stock, or mixed), (4) at least one complicating factor (regulatory scrutiny, cultural integration risk, or customer overlap). End with 4 discussion questions that require students to evaluate the deal using NPV, comparable transactions, and strategic fit analysis."
+    },
+    {
+      "id": "prompt-lib-14",
+      "title": "AACSB AoL Alignment Matrix",
+      "app": 6,
+      "appTitle": "Content Generation: Exam Variants, Cases & Materials",
+      "difficulty": "beginner",
+      "text": "Generate an AACSB Assurance of Learning alignment matrix for an undergraduate Financial Statement Analysis course. Map 6 student learning objectives to Bloom's Taxonomy levels, specific course assignments, and assessment rubric categories. Include at least 2 objectives at the Analyze or Evaluate level."
+    },
+    {
+      "id": "prompt-lib-15",
+      "title": "Case Update Research",
+      "app": 7,
+      "appTitle": "Real-Time Market Context & Case Enhancement",
+      "difficulty": "beginner",
+      "text": "I am preparing for a class discussion of a case study about [Company X] written in [Year]. Summarize the 3 most significant developments since the case was written, including: (1) most recent quarterly earnings vs. analyst expectations, (2) any major strategic announcements (M&A, restructuring, new product launches), (3) changes in analyst consensus price target or rating. For each development, explain how it would affect the analysis in the original case. Provide specific source URLs I can verify."
+    },
+    {
+      "id": "prompt-lib-16",
+      "title": "Personal Finance Current Data Lookup",
+      "app": 7,
+      "appTitle": "Real-Time Market Context & Case Enhancement",
+      "difficulty": "beginner",
+      "text": "I am building a personal financial plan for a class assignment. Look up current data for: (1) average 30-year fixed mortgage rate, (2) average high-yield savings account APY, (3) current federal income tax brackets for married filing jointly, (4) current federal student loan interest rates for undergraduate and graduate loans, (5) 2025 401(k) contribution limits and catch-up contribution limits. Provide source URLs for each."
+    },
+    {
+      "id": "prompt-lib-17",
+      "title": "Factor Model Construction",
+      "app": 8,
+      "appTitle": "Coding Assistance & “Vibe Coding” for Financial Modeling",
+      "difficulty": "intermediate",
+      "text": "Build a Python script that: (1) Pulls 3 years of daily adjusted close prices for SPY and a user-defined list of 5 stock tickers from Yahoo Finance using yfinance. (2) Calculates daily log returns for each. (3) Runs an OLS regression of each stock's returns against SPY returns to estimate Beta. (4) Displays a summary table showing each stock's Beta, Alpha (annualized), R-squared, and p-value on Alpha. (5) Plots the regression line (Security Characteristic Line) for each stock with the data points. (6) Adds a brief interpretation comment below each plot explaining what the Beta and R-squared imply about the stock's risk profile."
+    },
+    {
+      "id": "prompt-lib-18",
+      "title": "Black-Scholes Options Pricing Calculator",
+      "app": 8,
+      "appTitle": "Coding Assistance & “Vibe Coding” for Financial Modeling",
+      "difficulty": "intermediate",
+      "text": "Build a Black-Scholes option pricing calculator in Python. Inputs: current stock price, strike price, risk-free rate, annualized volatility, and time to expiration in years. Outputs: (1) European call and put prices, (2) all five Greeks (Delta, Gamma, Theta, Vega, Rho) for both call and put, (3) a 3D surface plot showing how call option price varies with stock price (x-axis: 50-150% of current price) and volatility (y-axis: 10-60%). (4) Add a payoff diagram at expiration overlaid with the current option value curve. Label all axes clearly with units."
+    },
+    {
+      "id": "prompt-lib-19",
+      "title": "Theory Audit (Modigliani-Miller)",
+      "app": 9,
+      "appTitle": "AI Literacy & Critical Evaluation of AI Outputs",
+      "difficulty": "beginner",
+      "text": "Explain the Modigliani-Miller theorem. Provide the mathematical proof for Proposition I under the no-tax assumption. Then explain Proposition II and show how the cost of equity changes with leverage. [Student verifies the derivation step-by-step against the textbook, checking for sign errors, missing assumptions, or circular reasoning.]"
+    },
+    {
+      "id": "prompt-lib-20",
+      "title": "Quantitative Audit (Apple Ratios)",
+      "app": 9,
+      "appTitle": "AI Literacy & Critical Evaluation of AI Outputs",
+      "difficulty": "beginner",
+      "text": "Using Apple's most recent 10-K filing, calculate the current ratio, debt-to-equity ratio, and return on equity. Show all calculations with the specific line items used. [Student downloads the actual 10-K from SEC EDGAR and verifies every number and calculation independently.]"
+    },
+    {
+      "id": "prompt-lib-21",
+      "title": "Cross-Platform Comparison",
+      "app": 9,
+      "appTitle": "AI Literacy & Critical Evaluation of AI Outputs",
+      "difficulty": "beginner",
+      "text": "Ask ChatGPT, Claude, and Gemini: 'What was the S&P 500 total return in 2024? Break down the return into price appreciation and dividend yield.' Compare the three responses for accuracy, specificity, source citation, and confidence level. Which platform hedges most appropriately?"
+    },
+    {
+      "id": "prompt-lib-22",
+      "title": "Retirement Monte Carlo Simulation",
+      "app": 10,
+      "appTitle": "Simulation, Monte Carlo & Scenario Analysis",
+      "difficulty": "advanced",
+      "text": "Build a Monte Carlo retirement simulation in Python with the following specifications: (1) Simulate 10,000 return paths over 30 years for 3 portfolios: 60/40 stocks/bonds, 80/20 stocks/bonds, and a target-date glide path that starts at 90/10 and linearly shifts to 30/70 over 30 years. (2) Use historical Ibbotson-style parameters: stocks with 10.5% mean annual return and 20% standard deviation; bonds with 5.5% mean and 6% standard deviation; correlation of 0.05. (3) Assume $1M starting balance with $50,000 real annual withdrawals (adjusted for 2.5% inflation). (4) Plot: terminal wealth distributions for all 3 portfolios on one chart, probability of ruin (account hitting $0) over time for each portfolio, and the median and 5th/95th percentile wealth paths. (5) Print a summary table showing median terminal wealth, probability of ruin, and the 5th percentile terminal wealth for each portfolio. (6) Set random seed to 42 for reproducibility."
+    },
+    {
+      "id": "prompt-lib-23",
+      "title": "Option Pricing Convergence Study",
+      "app": 10,
+      "appTitle": "Simulation, Monte Carlo & Scenario Analysis",
+      "difficulty": "advanced",
+      "text": "Implement both the Black-Scholes analytical solution and a Monte Carlo option pricing model in Python. Parameters: S0 = $100, K = $105, r = 5%, sigma = 25%, T = 1 year. For Monte Carlo, simulate with N = [100, 500, 1000, 5000, 10000, 50000] paths. Plot: (1) Monte Carlo price vs. number of paths with the Black-Scholes analytical price as a horizontal reference line, (2) 95% confidence interval around the Monte Carlo estimate at each N, (3) computation time vs. number of paths. Explain in comments why the Monte Carlo price converges to the analytical solution and what drives the width of the confidence interval."
+    }
+  ]
+}

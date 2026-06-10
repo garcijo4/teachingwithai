@@ -1,0 +1,41 @@
+{
+  "title": "AI for Faster, Better Finance Teaching",
+  "lede": "A live demo guide showing finance faculty how to use AI to build presentation slides in minutes — not hours.",
+  "sections": [
+    {
+      "id": "",
+      "heading": "Overview",
+      "html": "<p>This tutorial demonstrates how to use generative AI tools to create polished, content-rich presentation slides for finance courses. Rather than starting from a blank slide deck, you'll learn a structured workflow that combines AI-generated content with AI-powered design — then apply your own expertise to verify the result.</p>\n<p>The guide walks through a complete example using a <strong>Time Value of Money (TVM)</strong> lecture — covering present value, future value, compounding, and annuities — to show how each method works in practice. Every technique can be replicated with free-tier AI tools and requires no coding or IT support.</p>"
+    },
+    {
+      "id": "",
+      "heading": "The Think → Design → Verify Workflow",
+      "html": "<p>The tutorial is built around a three-phase workflow that separates content generation from visual design and faculty review:</p>\n<ul>\n<li><strong>Think</strong> — Use AI to generate a slide outline, learning objectives, and worked examples. This eliminates \"blank-page\" time and accelerates the drafting phase.</li>\n<li><strong>Design</strong> — Move the outline into an AI slide tool for visual layout, typography, and imagery. This produces professional-looking decks without manual formatting.</li>\n<li><strong>Verify</strong> — Faculty reviews and edits slides for voice, accuracy, and pedagogical fit. This is where disciplinary expertise ensures quality.</li>\n</ul>"
+    },
+    {
+      "id": "",
+      "heading": "The Five-Element Prompt Pattern",
+      "html": "<p>To get high-quality output from any AI tool, the tutorial recommends structuring every prompt with five elements:</p>\n<ul>\n<li><strong>Task</strong> — What to create (e.g., \"a 10-slide lecture deck\")</li>\n<li><strong>Audience</strong> — Who it's for (e.g., \"sophomores with no prior finance background\")</li>\n<li><strong>Goal</strong> — The learning objective (e.g., \"explain why money has time value\")</li>\n<li><strong>Constraints</strong> — Slide count, tone, specific topics to include or exclude</li>\n<li><strong>Output</strong> — Desired format (e.g., \"outline with speaker notes\")</li>\n</ul>"
+    },
+    {
+      "id": "",
+      "heading": "Five Methods for AI Slide Generation",
+      "html": "<div class=\"methodology-grid\">\n<div class=\"methodology-card\">\n<h3>Method 1: Claude (Desktop App)</h3>\n<p><strong>Best for:</strong> Quick drafts with strong content structure. Claude generates a <code>.pptx</code> file directly from a prompt.</p>\n<p><strong>Rating:</strong> Content: A  |  Design: D — excellent content, limited visual polish.</p>\n</div>\n<div class=\"methodology-card\">\n<h3>Method 2: Gamma (gamma.app)</h3>\n<p><strong>Best for:</strong> Fast, visually professional decks. Gamma builds layout, typography, and images in ~60 seconds.</p>\n<p><strong>Rating:</strong> Content: C  |  Design: A — design-focused, needs strong prompts for depth.</p>\n</div>\n<div class=\"methodology-card\">\n<h3>Method 3: Claude + Gamma (Recommended)</h3>\n<p><strong>Best for:</strong> High-stakes presentations (conferences, accreditation). Claude handles research and content; Gamma handles design via the Gamma Connector.</p>\n<p><strong>Rating:</strong> Content: A  |  Design: A — the best of both tools.</p>\n</div>\n<div class=\"methodology-card\">\n<h3>Method 4: Microsoft Copilot in PowerPoint</h3>\n<p><strong>Best for:</strong> Faculty in the Microsoft 365 ecosystem. Native integration; can build slides directly from Word documents.</p>\n<p><strong>Note:</strong> Requires a $20–$30/month Copilot license. Research and design quality is mid-range.</p>\n</div>\n<div class=\"methodology-card\">\n<h3>Method 5: Google Gemini in Slides</h3>\n<p><strong>Best for:</strong> Google Workspace users. Familiar interface and good for real-time collaboration.</p>\n<p><strong>Note:</strong> Design options and research depth are currently more limited than Gamma or Claude.</p>\n</div>\n</div>"
+    },
+    {
+      "id": "",
+      "heading": "Guardrails for Finance Content",
+      "html": "<ul>\n<li><strong>Verify formulas</strong> — Always check sign conventions (PV/FV), compounding periods, and calculation results.</li>\n<li><strong>Verify data</strong> — AI can hallucinate specific market data, dates, or statistics. Confirm every number.</li>\n<li><strong>Protect privacy</strong> — Never paste FERPA-protected student data or confidential institutional information into AI tools.</li>\n<li><strong>Maintain judgment</strong> — Treat AI as a drafting partner, not a substitute for disciplinary expertise.</li>\n</ul>"
+    },
+    {
+      "id": "",
+      "heading": "Tool Costs (March 2026)",
+      "html": "<div class=\"methodology-grid\">\n<div class=\"methodology-card\">\n<div class=\"methodology-weight\">Free*</div>\n<h3>Claude</h3>\n<p>Free tier available. Pro: $20/mo</p>\n</div>\n<div class=\"methodology-card\">\n<div class=\"methodology-weight\">Free*</div>\n<h3>Gamma</h3>\n<p>Generous free tier. Pro: $15/mo</p>\n</div>\n<div class=\"methodology-card\">\n<div class=\"methodology-weight\">$20+</div>\n<h3>Copilot</h3>\n<p>Requires Microsoft 365 license. No free tier.</p>\n</div>\n</div>"
+    },
+    {
+      "id": "",
+      "heading": "Download the Tutorial",
+      "html": "<div class=\"download-grid\">\n<a class=\"download-card\" download=\"\" href=\"assets/docs/AI-for-Faster-Better-Finance-Teaching.pdf\">\n\n<h3>AI for Faster, Better Finance Teaching (PDF)</h3>\n<p>Complete 11-page guide with the five-element prompt pattern, all five methods, worked TVM demo, and guardrails checklist.</p>\n</a>\n</div>"
+    }
+  ]
+}
