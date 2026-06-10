@@ -336,7 +336,11 @@
   }
 
   function moduleItemIds(module) {
-    return [...module.videos.map((video) => video.id), ...module.worksheets.map((worksheet) => worksheet.id)];
+    return [
+      ...module.videos.map((video) => video.id),
+      ...(module.reading ? [module.reading.id] : []),
+      ...module.worksheets.map((worksheet) => worksheet.id)
+    ];
   }
 
   function moduleCard(module) {
@@ -344,7 +348,7 @@
     return `
       <article class="card module-card">
         <div class="module-number">${module.id}</div>
-        <div class="badge-row">${badge(`${fmtMinutes(parseMinutes(module.duration))} video`)} ${badge(`Express ${esc(module.express)}`, "badge-gold")}</div>
+        <div class="badge-row">${badge(`${fmtMinutes(parseMinutes(module.duration))} video`)} ${badge(`Express ${esc(module.express)}`, "badge-gold")}${module.reading ? ` ${badge(esc(module.reading.minutes))}` : ""}</div>
         <h3>${esc(module.title)}</h3>
         <p class="muted">${esc(module.description)}</p>
         <p class="small"><strong>Portfolio artifact:</strong> ${esc(module.artifact)}</p>
@@ -562,6 +566,27 @@
       </article>`;
   }
 
+  function renderReading(reading, termIndex) {
+    if (!reading) return "";
+    const checked = CourseProgress.isComplete(reading.id);
+    const hasLink = Boolean(realUrl(reading.url) || realUrl(reading.exportUrl));
+    return `
+      <article class="reading-card" id="reading-${esc(reading.id)}">
+        <div class="reading-icon" aria-hidden="true">READ</div>
+        <div>
+          <div class="badge-row">${badge(esc(reading.minutes), "badge-gold")} ${badge("Faculty development reading")}${hasLink ? "" : `<span class="placeholder-note">Coming soon</span>`}</div>
+          <h3>${esc(reading.title)}</h3>
+          <p class="muted">${termIndex ? withTermRefs(reading.description, termIndex) : esc(reading.description)}</p>
+          ${reading.version ? `<p class="small muted">${esc(reading.version)}</p>` : ""}
+          <label class="check-row"><input type="checkbox" data-progress-id="${esc(reading.id)}" ${checked ? "checked" : ""}><span><strong>Mark reading complete</strong><br><span class="small muted">Stored only in this browser</span></span></label>
+        </div>
+        <div class="resource-actions">
+          ${actionButton("Read online", reading.url, "button-small")}
+          ${actionButton("Download (Word/PDF)", reading.exportUrl, "button-outline button-small")}
+        </div>
+      </article>`;
+  }
+
   async function renderCourse() {
     const modules = await fetchData("modules");
     const tokens = runtimeTokens(modules);
@@ -573,7 +598,7 @@
         <div class="container">
           <div class="callout">
             <h3>How to take this course</h3>
-            <p>${replaceTokens("The complete lecture sequence runs {{TOTAL_RUNTIME}}. Use one real course as your design substrate. Complete the modules in sequence for the strongest portfolio story, or begin with the problem you need to solve.", tokens)}</p>
+            <p>${replaceTokens("The complete lecture sequence runs {{TOTAL_RUNTIME}}. Each module pairs its lectures with a faculty development reading (roughly 25&ndash;30 minutes) that synthesizes the module and prepares you for its worksheet. Use one real course as your design substrate. Complete the modules in sequence for the strongest portfolio story, or begin with the problem you need to solve.", tokens)}</p>
             <p class="small muted">Progress is stored only in this browser. <button class="copy-link" type="button" data-reset-progress>Reset my progress</button></p>
           </div>
         </div>
@@ -657,13 +682,20 @@
             </section>
             <section>
               <p class="eyebrow">Time budget</p>
-              <div class="callout callout-gold"><h3>${fmtMinutes(parseMinutes(module.duration))} total lecture runtime | ${esc(module.express)} express path</h3><p>The listed runtime reflects the current module lectures. Worksheets and optional portfolio activities add time based on how deeply you choose to engage.${hasExpressItems ? " The express path is the shortest route to this module's artifact &mdash; look for the gold Express badges below." : ""}</p></div>
+              <div class="callout callout-gold"><h3>${fmtMinutes(parseMinutes(module.duration))} total lecture runtime | ${esc(module.express)} express path${module.reading ? ` | ${esc(module.reading.minutes)}` : ""}</h3><p>The listed runtime reflects the current module lectures.${module.reading ? ` The module reading adds a careful ${esc(module.reading.minutes.replace(" read", ""))}.` : ""} Worksheets and optional portfolio activities add time based on how deeply you choose to engage.${hasExpressItems ? " The express path is the shortest route to this module's artifact &mdash; look for the gold Express badges below." : ""}</p></div>
             </section>
             <section id="videos">
               <p class="eyebrow">Watch and reflect</p>
               <h2>Module videos</h2>
               <div class="stack">${module.videos.map(renderVideoCard).join("")}</div>
             </section>
+            ${module.reading ? `
+            <section id="reading">
+              <p class="eyebrow">Read and connect</p>
+              <h2>Module reading</h2>
+              <p class="muted">A faculty development reading that synthesizes this module's lectures, adds cross-disciplinary examples, and closes with a checklist for the module artifact. Read it after the videos and before the worksheet.</p>
+              ${renderReading(module.reading, termIndex)}
+            </section>` : ""}
             <section id="worksheets">
               <p class="eyebrow">Make the work usable</p>
               <h2>Worksheets and resources</h2>

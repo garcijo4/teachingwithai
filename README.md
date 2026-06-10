@@ -34,7 +34,7 @@ JS to update content.**
 | File | Controls |
 |---|---|
 | `site.json` | Site name, tagline, contact email, support URL, site URL, last-reviewed date, intro/conclusion videos, analytics code |
-| `modules.json` | Module titles, objectives, videos, worksheets, slides, artifacts |
+| `modules.json` | Module titles, objectives, videos, reading, worksheets, slides, artifacts |
 | `key-terms.json` | Glossary definitions, video scripts, tooltip aliases |
 | `articles.json` | Curated article cards |
 | `feeds.json` | RSS feeds for the auto-updating articles section |
@@ -51,6 +51,8 @@ automatically** — no other change needed. This applies to:
 
 - `embedUrl` on every video (ScreenPal/HeyGen embed URL → click-to-load player appears)
 - `url` (Google Doc `/copy` link) and `exportUrl` (Word/PDF export) on worksheets
+- `url` (read online) and `exportUrl` (Word/PDF download) on each module's `reading`
+  (the "Module reading" card between videos and worksheets; counts toward module progress)
 - `pdfUrl` / `previewUrl` on each module's `slides`
 - `url` on articles and chatbots
 - `supportUrl` and `portfolioWorkbookUrl` in `site.json`

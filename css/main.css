@@ -1253,11 +1253,13 @@ summary {
   }
 
   .resource-card,
+  .reading-card,
   .portfolio-item {
     grid-template-columns: auto 1fr;
   }
 
   .resource-card .button,
+  .reading-card .button,
   .portfolio-item .button {
     grid-column: 2;
     justify-self: start;
@@ -1464,6 +1466,40 @@ summary {
   padding: 1.5rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--white);
-  text-align: center;
+  backgrou
+/* ---------- module readings (faculty development reading cards) ---------- */
+
+.reading-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  align-items: start;
+  padding: 1.15rem 1rem;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(255, 194, 34, 0.1), transparent 45%),
+    var(--white);
+}
+
+.reading-card h3 {
+  margin: 0.35rem 0 0.3rem;
+}
+
+.reading-card .check-row {
+  margin-top: 0.55rem;
+}
+
+.reading-icon {
+  display: grid;
+  width: 2.6rem;
+  height: 2.6rem;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  background: var(--purple-800);
+  color: var(--white);
+  font-weight: 900;
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
 }

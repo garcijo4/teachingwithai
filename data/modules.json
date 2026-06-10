@@ -50,6 +50,15 @@
         "transcript": "Turn general AI literacy into a specific disciplinary commitment."
       }
     ],
+    "reading": {
+      "id": "m1r1",
+      "title": "Module 1 Reading — Foundations: Grounded Curiosity and Your Disciplinary Anchor",
+      "minutes": "25-30 min read",
+      "description": "Grounded curiosity, what an LLM actually does, Oracle/Adversary/Tutor, the three tiers of AI literacy, and the equity conditions that shape your Discipline Statement and Skeptic's Charter.",
+      "version": "Version 1.0 (June 2026)",
+      "url": "PLACEHOLDER",
+      "exportUrl": "PLACEHOLDER"
+    },
     "worksheets": [
       {
         "id": "m1w1",
@@ -129,6 +138,15 @@
         "transcript": "Three postures for structuring AI use without outsourcing judgment."
       }
     ],
+    "reading": {
+      "id": "m2r1",
+      "title": "Module 2 Reading — Friction, Productive Struggle, and Learning Design",
+      "minutes": "25-30 min read",
+      "description": "The Safety Gap, desirable difficulties, productive struggle versus needless friction, and how to design one Cognitive Sanctuary and one Access Repair before the Friction Audit.",
+      "version": "Version 1.0 (June 2026)",
+      "url": "PLACEHOLDER",
+      "exportUrl": "PLACEHOLDER"
+    },
     "worksheets": [
       {
         "id": "m2w1",
@@ -207,6 +225,15 @@
         "transcript": "Identify where AI can bypass essential cognitive work before choosing a response."
       }
     ],
+    "reading": {
+      "id": "m3r1",
+      "title": "Module 3 Reading — Assessment Stress Testing and the AI Assessment Scale",
+      "minutes": "28-33 min read",
+      "description": "Learning production versus learning measurement, the five AIAS levels as contracts, the four-question Stress Test, and a Decision Memo that answers its strongest counterargument.",
+      "version": "Version 1.0 (June 2026)",
+      "url": "PLACEHOLDER",
+      "exportUrl": "PLACEHOLDER"
+    },
     "worksheets": [
       {
         "id": "m3w1",
@@ -285,6 +312,15 @@
         "transcript": "Build AI into a task only where its role strengthens the intended learning."
       }
     ],
+    "reading": {
+      "id": "m4r1",
+      "title": "Module 4 Reading — Redesigning Assignments with TILT and AI-Aware Scaffolding",
+      "minutes": "28-33 min read",
+      "description": "AI-resilience instead of AI-proofing: the TILT rewrite, the AI Use box, exactly one process-evidence element, and posture-preserving boundaries for Tutor, Adversary, and Collaborator.",
+      "version": "Version 1.0 (June 2026)",
+      "url": "PLACEHOLDER",
+      "exportUrl": "PLACEHOLDER"
+    },
     "worksheets": [
       {
         "id": "m4w1",
@@ -363,6 +399,15 @@
         "transcript": "Treat equity and ethics as design constraints rather than closing disclaimers."
       }
     ],
+    "reading": {
+      "id": "m5r1",
+      "title": "Module 5 Reading — Syllabus AI Policy, Equity, Ethics, and Course Norms",
+      "minutes": "28-33 min read",
+      "description": "Why detection fails as a teaching strategy, core intellectual substance, the seven-component policy paragraph, and the eight-dimension equity and ethics audit.",
+      "version": "Version 1.0 (June 2026)",
+      "url": "PLACEHOLDER",
+      "exportUrl": "PLACEHOLDER"
+    },
     "worksheets": [
       {
         "id": "m5w1",
@@ -441,6 +486,15 @@
         "transcript": "Identify what becomes stale first and budget a sustainable review cadence."
       }
     ],
+    "reading": {
+      "id": "m6r1",
+      "title": "Module 6 Reading — Portfolio Integration, Maintenance, and the Six-Month Plan",
+      "minutes": "22-28 min read",
+      "description": "The teaching-ready portfolio, the substitute-instructor test, reopening the Skeptic's Charter, capability-drift triage, and a six-month plan that fits in 90 minutes a semester.",
+      "version": "Version 1.0 (June 2026)",
+      "url": "PLACEHOLDER",
+      "exportUrl": "PLACEHOLDER"
+    },
     "worksheets": [
       {
         "id": "m6w1",
