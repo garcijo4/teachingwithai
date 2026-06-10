@@ -49,7 +49,8 @@ Any URL field still set to `PLACEHOLDER` renders as a disabled "coming soon"
 control. **Paste a real URL into the JSON and the button or video goes live
 automatically** — no other change needed. This applies to:
 
-- `embedUrl` on every video (ScreenPal/HeyGen embed URL → click-to-load player appears)
+- `embedUrl` on every video (lecture videos render an embedded ScreenPal player
+  directly; key-term videos use a click-to-load panel)
 - `url` (Google Doc `/copy` link) and `exportUrl` (Word/PDF export) on worksheets
 - `url` (read online) and `exportUrl` (Word/PDF download) on each module's `reading`
   (the "Module reading" card between videos and worksheets; counts toward module progress)

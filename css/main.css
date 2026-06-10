@@ -786,7 +786,20 @@ p {
 }
 
 .video-card h3 {
-  margin-top: 1rem;
+  margin: 0 0 0.3rem;
+}
+
+.video-card .module-meta {
+  margin: 0 0 0.9rem;
+}
+
+.video-card .video-embed,
+.video-card .video-placeholder {
+  margin-bottom: 1.1rem;
+}
+
+.video-card .check-row {
+  margin-bottom: 0.9rem;
 }
 
 details {

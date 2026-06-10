@@ -15,14 +15,14 @@
         "id": "introduction-video",
         "title": "Introduction Video",
         "duration": "1.83 min",
-        "embedUrl": "PLACEHOLDER",
+        "embedUrl": "https://GARCIA.screencasthost.com/player/cO1QrQnuZyQ?ff=1&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
         "transcript": "A brief welcome and orientation to the Teaching with AI course."
       },
       {
         "id": "course-overview-intro",
         "title": "Course Overview Intro",
         "duration": "7.75 min",
-        "embedUrl": "PLACEHOLDER",
+        "embedUrl": "https://GARCIA.screencasthost.com/player/cO1QrQnuZyj?ff=1&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
         "transcript": "An overview of the course stance, six-module arc, and portfolio outcomes."
       }
     ],
@@ -30,7 +30,7 @@
       "id": "conclusion-video",
       "title": "Conclusion Video",
       "duration": "2.13 min",
-      "embedUrl": "PLACEHOLDER",
+      "embedUrl": "https://GARCIA.screencasthost.com/player/cO1Q3CnuZEf?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
       "transcript": "A closing reflection and invitation to carry the portfolio into the next teaching term."
     }
   }

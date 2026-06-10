@@ -323,10 +323,16 @@
       </div>`;
   }
 
-  function videoBlock(item, comingSoonLabel = "Video coming soon") {
+  function videoBlock(item, comingSoonLabel = "Video coming soon", direct = false) {
     const url = realUrl(item.embedUrl || item.videoEmbedUrl);
     const title = item.title || item.term || "Course video";
     if (!url) return videoPlaceholder(title, comingSoonLabel);
+    if (direct) {
+      return `
+      <div class="video-embed is-loaded">
+        <iframe src="${esc(url)}" title="${esc(title)}" loading="lazy" scrolling="no" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+      </div>`;
+    }
     return `
       <div class="video-embed" data-video-embed data-embed-url="${esc(url)}" data-embed-title="${esc(title)}">
         <button class="play-button" type="button" aria-label="Play video: ${esc(title)}">Play</button>
@@ -541,9 +547,9 @@
     const hasUrl = Boolean(realUrl(video.embedUrl));
     return `
       <article class="video-card" id="video-${video.id}">
-        ${videoBlock(video)}
-        <div class="module-meta"><span>${videoDuration(video)}</span>${video.express ? badge("Express path", "badge-gold") : ""}${hasUrl ? "" : `<span class="placeholder-note">Coming soon</span>`}</div>
         <h3>${esc(video.title)}</h3>
+        <div class="module-meta"><span>${videoDuration(video)}</span>${video.express ? badge("Express path", "badge-gold") : ""}${hasUrl ? "" : `<span class="placeholder-note">Coming soon</span>`}</div>
+        ${videoBlock(video, "Video coming soon", true)}
         <label class="check-row"><input type="checkbox" data-progress-id="${esc(video.id)}" ${checked ? "checked" : ""}><span><strong>Mark video complete</strong><br><span class="small muted">Stored only in this browser</span></span></label>
         <details><summary>Read transcript${video.transcriptFull ? "" : " preview"}</summary><div class="details-body"><p>${esc(video.transcriptFull || video.transcript)}</p>${video.transcriptFull ? "" : `<p class="small">Full transcript will be loaded from the final content data.</p>`}</div></details>
       </article>`;
