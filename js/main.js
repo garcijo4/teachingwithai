@@ -977,7 +977,7 @@
                 <h4>Starter prompts</h4>
                 <ul class="starter-prompts">${bot.prompts.map((prompt) => `<li>&ldquo;${esc(prompt)}&rdquo;</li>`).join("")}</ul>
                 <p class="small muted"><strong>Expectation:</strong> ${esc(bot.expectation)}</p>
-                ${live ? actionButton("Launch chatbot", bot.url, "button-small") : placeholderButton("Coming soon", "button-small")}
+                ${live ? actionButton("Click here to use", bot.url, "button-small") : placeholderButton("Coming soon", "button-small")}
               </article>`;
             }).join("")}
           </div>
