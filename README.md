@@ -65,6 +65,9 @@ automatically** — no other change needed. This applies to:
   `modules.json`, so durations never drift when videos change.
 - **Express path:** add `"express": true` to a video in `modules.json` to give
   it a gold "Express path" badge (the module page then explains the badge).
+- **Video summaries:** each video's `summary` field renders as a collapsible
+  "Video summary" dropdown under the player. Edit the text in `modules.json`
+  (or `site.json` for the intro/conclusion videos).
 - **Term tooltips:** module descriptions and objectives automatically link
   glossary terms (dotted underline + hover definition). Matching uses each
   term's `term` plus its `aliases` array in `key-terms.json`.

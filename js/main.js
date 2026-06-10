@@ -551,7 +551,7 @@
         <div class="module-meta"><span>${videoDuration(video)}</span>${video.express ? badge("Express path", "badge-gold") : ""}${hasUrl ? "" : `<span class="placeholder-note">Coming soon</span>`}</div>
         ${videoBlock(video, "Video coming soon", true)}
         <label class="check-row"><input type="checkbox" data-progress-id="${esc(video.id)}" ${checked ? "checked" : ""}><span><strong>Mark video complete</strong><br><span class="small muted">Stored only in this browser</span></span></label>
-        <details><summary>Read transcript${video.transcriptFull ? "" : " preview"}</summary><div class="details-body"><p>${esc(video.transcriptFull || video.transcript)}</p>${video.transcriptFull ? "" : `<p class="small">Full transcript will be loaded from the final content data.</p>`}</div></details>
+        <details><summary>${video.summary ? "Video summary" : `Read transcript${video.transcriptFull ? "" : " preview"}`}</summary><div class="details-body"><p>${esc(video.summary || video.transcriptFull || video.transcript)}</p>${video.summary || video.transcriptFull ? "" : `<p class="small">Full transcript will be loaded from the final content data.</p>`}</div></details>
       </article>`;
   }
 
