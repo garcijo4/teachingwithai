@@ -798,6 +798,22 @@ p {
   margin-bottom: 1.1rem;
 }
 
+.slides-link {
+  margin: 0 0 0.9rem;
+  font-size: 0.88rem;
+}
+
+.slides-link a {
+  color: var(--purple-800);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.slides-link a:hover {
+  color: var(--purple-950);
+}
+
 .video-card .check-row {
   margin-bottom: 0.9rem;
 }
@@ -914,6 +930,44 @@ summary {
   color: var(--muted);
   font-size: 0.82rem;
   font-weight: 750;
+}
+
+.article-title-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: #cfc6df;
+  text-underline-offset: 0.18em;
+}
+
+.article-title-link:hover,
+.article-title-link:focus-visible {
+  color: var(--purple-800);
+  text-decoration-color: currentColor;
+}
+
+.article-authors {
+  margin: -0.35rem 0 0.45rem;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.article-dimension {
+  margin: 0 0 0.55rem;
+  color: var(--purple-800);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.article-why {
+  font-size: 0.92rem;
+}
+
+.article-evidence {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-style: italic;
 }
 
 .status-coming {
@@ -1479,7 +1533,10 @@ summary {
   padding: 1.5rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  backgrou
+  background: var(--white);
+  text-align: center;
+}
+
 /* ---------- module readings (faculty development reading cards) ---------- */
 
 .reading-card {
@@ -1571,6 +1628,24 @@ summary {
 
 .quickstart-title { margin: 0; flex: 1; font-size: 1.35rem; }
 
+.app-content-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--purple-800);
+}
+
+.app-content-header .rank-number { font-size: 2rem; }
+
+.app-content-title {
+  margin: 0;
+  flex: 1;
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+
 .quickstart-footer {
   display: flex;
   flex-direction: column;
@@ -1594,6 +1669,13 @@ summary {
 .app-jump-list a { color: var(--purple-800); text-decoration: none; }
 .app-jump-list a:hover { text-decoration: underline; }
 .app-jump-list a[aria-current="page"] { font-weight: 750; color: var(--purple-950); }
+
+.app-jump-list .badge {
+  font-size: 0.58rem;
+  padding: 0.14rem 0.45rem;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+}
 
 .stack-sm { display: flex; flex-direction: column; gap: 0.65rem; }
 
@@ -1649,7 +1731,20 @@ summary {
 
 .prompt-card__header h3, .prompt-card__header h4 { margin: 0; font-size: 1rem; }
 
-.prompt-card pre { border-radius: 0; }
+.prompt-card pre {
+  border-radius: 0;
+  background: var(--purple-950);
+  color: #f3effc;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+}
+
+.prompt-card pre code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; }
 
 .copy-btn {
   flex-shrink: 0;
@@ -1813,3 +1908,6 @@ details.risk-item { margin-bottom: 0.5rem; }
   .deployment-dl dd { margin-bottom: 0.6rem; }
   .app-card-head { gap: 0.5rem; }
 }
+
+.session-author { margin-top: 0.4rem; line-height: 1.6; }
+.session-author a { color: var(--purple-800); }

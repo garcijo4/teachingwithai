@@ -20,15 +20,11 @@
     "answer": "No. Progress is stored only in this browser using localStorage. There are no accounts or server-side learner records."
   },
   {
-    "question": "Can I receive CTL or professional-development credit?",
-    "answer": "PLACEHOLDER: confirm the local arrangement with Cal Lutheran Faculty Development. The portfolio page includes a printable completion summary."
-  },
-  {
     "question": "Who sees my data?",
     "answer": "Your course progress stays in this browser. The newsletter form collects only what you submit. Never enter student PII into a chatbot."
   },
   {
     "question": "What if a link or video is broken?",
-    "answer": "Use the persistent Ask John link to report the page and item name. Resources marked coming soon are being connected as the course media is finalized."
+    "answer": "Send me an email to report the page and item name. Resources marked coming soon are being connected as the course media is finalized."
   }
 ]

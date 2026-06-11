@@ -8,24 +8,26 @@
   "courseDuration": "3 hours",
   "lastReviewed": "2026-06-09",
   "siteUrl": "https://teachingwithartificialintelligence.netlify.app",
-  "goatcounterCode": "",
+  "goatcounterCode": "teachingwithai",
+  "portfolioWorkbookUrl": "assets/worksheets/Module%206/Module6_Portfolio_Template.docx",
   "courseVideos": {
     "opening": [
       {
         "id": "introduction-video",
         "title": "Introduction Video",
         "duration": "1.83 min",
-        "embedUrl": "https://GARCIA.screencasthost.com/player/cO1QrQnuZyQ?ff=1&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+        "embedUrl": "https://GARCIA.screencasthost.com/player/cO1QrQnuZyQ?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
         "transcript": "A brief welcome and orientation to the Teaching with AI course.",
-        "summary": "A short welcome that frames the whole course around one question: if a student completed an assignment you care about with substantial AI assistance, what would you still know about their learning? It introduces the stance of grounded curiosity \u2014 neither hype nor panic, with skepticism treated as professional judgment \u2014 and previews the six cumulative modules that end in a teaching-ready portfolio. All you need to bring is one course and a willingness to make one defensible decision at a time."
+        "summary": "A short welcome that frames the whole course around one question: if a student completed an assignment you care about with substantial AI assistance, what would you still know about their learning? It introduces the stance of grounded curiosity — neither hype nor panic, with skepticism treated as professional judgment — and previews the six cumulative modules that end in a teaching-ready portfolio. All you need to bring is one course and a willingness to make one defensible decision at a time."
       },
       {
         "id": "course-overview-intro",
         "title": "Course Overview Intro",
         "duration": "7.75 min",
-        "embedUrl": "https://GARCIA.screencasthost.com/player/cO1QrQnuZyj?ff=1&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+        "embedUrl": "https://GARCIA.screencasthost.com/player/cO1QrQnuZyj?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
         "transcript": "An overview of the course stance, six-module arc, and portfolio outcomes.",
-        "summary": "A guided tour of the full course: why AI is a design problem rather than a panic, how the six modules build on each other (stance, diagnose, judge, build, communicate, sustain), and the artifact each one produces. It introduces the five frameworks used throughout \u2014 the AI Assessment Scale, TILT, the Safety Gap, Oracle/Tutor/Adversary, and the Equity and Ethics Audit \u2014 and the course's two standing commitments: equity is more than access, and design must survive changing tools. It closes with exactly where to start and what you do not need (no paid tools, no live sessions, no technical expertise). Slides: https://github.com/garcijo4/teachingwithai/blob/main/assets/slides/0.%20Teaching_with_AI_Course_Overview_Intro.pdf"
+        "summary": "A guided tour of the full course: why AI is a design problem rather than a panic, how the six modules build on each other (stance, diagnose, judge, build, communicate, sustain), and the artifact each one produces. It introduces the five frameworks used throughout — the AI Assessment Scale, TILT, the Safety Gap, Oracle/Tutor/Adversary, and the Equity and Ethics Audit — and the course's two standing commitments: equity is more than access, and design must survive changing tools. It closes with exactly where to start and what you do not need (no paid tools, no live sessions, no technical expertise).",
+        "slidesUrl": "https://github.com/garcijo4/teachingwithai/blob/main/assets/slides/0.%20Teaching_with_AI_Course_Overview_Intro.pdf"
       }
     ],
     "conclusion": {
@@ -34,7 +36,7 @@
       "duration": "2.13 min",
       "embedUrl": "https://GARCIA.screencasthost.com/player/cO1Q3CnuZEf?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
       "transcript": "A closing reflection and invitation to carry the portfolio into the next teaching term.",
-      "summary": "A closing look at what you built: a named line in the sand, a friction audit, a stress-tested assessment, a redesigned assignment whose evidence holds with or without AI, a policy grounded in what students must own, an equity and ethics audit, and a packet a colleague could teach from. The durable distinction underneath all of it: the tool is not the learning evidence \u2014 student reasoning, judgment, and reflection are. The portfolio ends as a decision record with a maintenance habit, not a final verdict on AI."
+      "summary": "A closing look at what you built: a named line in the sand, a friction audit, a stress-tested assessment, a redesigned assignment whose evidence holds with or without AI, a policy grounded in what students must own, an equity and ethics audit, and a packet a colleague could teach from. The durable distinction underneath all of it: the tool is not the learning evidence — student reasoning, judgment, and reflection are. The portfolio ends as a decision record with a maintenance habit, not a final verdict on AI."
     }
   }
 }

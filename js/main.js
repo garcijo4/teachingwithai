@@ -153,7 +153,7 @@
         <div class="container header-inner">
           <a class="wordmark" href="./">
             <strong>${esc(site.siteName)}</strong>
-            <span>Cal Lutheran Faculty Development</span>
+            <span>A FACULTY LEARNING SERIES FOR HIGHER EDUCATION</span>
           </a>
           <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">Menu</button>
           <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
@@ -178,13 +178,9 @@
               <p class="eyebrow" style="color: var(--gold)">Weekly update</p>
               <h2>Stay thoughtful, not breathless.</h2>
               <p>Receive a short weekly digest of useful developments in AI and teaching.</p>
-              <form class="footer-form" name="weekly-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="thanks.html">
-                <input type="hidden" name="form-name" value="weekly-updates">
-                <p hidden><input name="bot-field"></p>
-                <label class="small" for="footer-email">Email address</label>
-                <input id="footer-email" type="email" name="email" required placeholder="you@example.edu" autocomplete="email">
-                <button class="button button-gold button-small" type="submit">Subscribe</button>
-              </form>
+              <div style="margin-top: 1.5rem;">
+                <a class="button button-gold button-small" href="subscribe/">Subscribe</a>
+              </div>
             </div>
             <div>
               <h3>Explore</h3>
@@ -214,7 +210,7 @@
           </div>
         </div>
       </footer>
-      <a class="ask-john" href="mailto:${esc(email)}?subject=${subject}">Stuck? Ask John</a>
+
       <div class="toast" role="status" aria-live="polite"></div>`;
 
     document.querySelector("[data-current-year]").textContent = new Date().getFullYear();
@@ -260,6 +256,20 @@
     script.async = true;
     script.dataset.goatcounter = `https://${code}.goatcounter.com/count`;
     script.src = "https://gc.zgo.at/count.js";
+    document.head.appendChild(script);
+  }
+
+  function injectPickaxeEmbed() {
+    const deploymentId = "deployment-e49e0f58-5a50-4472-b3b8-4a9bec17f9d4";
+    if (document.getElementById(deploymentId)) return;
+
+    const deployment = document.createElement("div");
+    deployment.id = deploymentId;
+    document.body.appendChild(deployment);
+
+    const script = document.createElement("script");
+    script.src = "https://studio.pickaxe.co/api/embed/bundle.js";
+    script.defer = true;
     document.head.appendChild(script);
   }
 
@@ -537,7 +547,7 @@
       <section class="section">
         <div class="container">
           <div class="section-heading"><div><p class="eyebrow">Curated context</p><h2>Latest AI and teaching articles</h2></div><a class="button button-outline" href="articles/">All articles</a></div>
-          <div class="grid grid-3">${articles.slice(0, 3).map(articleCard).join("")}</div>
+          <div class="grid grid-3">${articles.slice(0, 3).map((article) => articleCard(article, true)).join("")}</div>
         </div>
       </section>
       ${sessions.length ? `
@@ -575,6 +585,7 @@
       <article class="video-card" id="video-${video.id}">
         <h3>${esc(video.title)}</h3>
         <div class="module-meta"><span>${videoDuration(video)}</span>${video.express ? badge("Express path", "badge-gold") : ""}${hasUrl ? "" : `<span class="placeholder-note">Coming soon</span>`}</div>
+        ${realUrl(video.slidesUrl) ? `<p class="slides-link"><a href="${esc(realUrl(video.slidesUrl))}" target="_blank" rel="noopener noreferrer">View the slides for this lecture (PDF)</a></p>` : ""}
         ${videoBlock(video, "Video coming soon", true)}
         <label class="check-row"><input type="checkbox" data-progress-id="${esc(video.id)}" ${checked ? "checked" : ""}><span><strong>Mark video complete</strong><br><span class="small muted">Stored only in this browser</span></span></label>
         <details><summary>${video.summary ? "Video summary" : `Read transcript${video.transcriptFull ? "" : " preview"}`}</summary><div class="details-body"><p>${esc(video.summary || video.transcriptFull || video.transcript)}</p>${video.summary || video.transcriptFull ? "" : `<p class="small">Full transcript will be loaded from the final content data.</p>`}</div></details>
@@ -582,18 +593,16 @@
   }
 
   function renderWorksheet(worksheet) {
-    const checked = CourseProgress.isComplete(worksheet.id);
+    const isExcel = /\.xlsx(?:$|[?#])/i.test(worksheet.exportUrl || "");
     return `
       <article class="resource-card">
-        <div class="resource-icon">DOC</div>
+        <div class="resource-icon">${isExcel ? "XLS" : "DOC"}</div>
         <div>
           <h3>${esc(worksheet.title)}</h3>
-          <p class="small muted">${esc(worksheet.minutes)}${realUrl(worksheet.url) ? "" : " | Links coming soon"}</p>
-          <label class="check-row"><input type="checkbox" data-progress-id="${esc(worksheet.id)}" ${checked ? "checked" : ""}><span>Mark complete</span></label>
+          <p class="small muted">${esc(worksheet.minutes)}</p>
         </div>
         <div class="resource-actions">
-          ${actionButton("Make your own copy", worksheet.url, "button-small")}
-          ${actionButton("Word/PDF export", worksheet.exportUrl, "button-outline button-small")}
+          ${actionButton(isExcel ? "Download Excel File" : "Download Word File", worksheet.exportUrl, "button-small")}
         </div>
       </article>`;
   }
@@ -601,20 +610,20 @@
   function renderReading(reading, termIndex) {
     if (!reading) return "";
     const checked = CourseProgress.isComplete(reading.id);
-    const hasLink = Boolean(realUrl(reading.url) || realUrl(reading.exportUrl));
     return `
       <article class="reading-card" id="reading-${esc(reading.id)}">
-        <div class="reading-icon" aria-hidden="true">READ</div>
+        <div class="resource-icon dark">READ</div>
         <div>
-          <div class="badge-row">${badge(esc(reading.minutes), "badge-gold")} ${badge("Faculty development reading")}${hasLink ? "" : `<span class="placeholder-note">Coming soon</span>`}</div>
+          <div class="badge-row">
+            ${reading.duration ? `<span class="badge badge-yellow">${esc(reading.duration)}</span>` : ""}
+            <span class="badge badge-purple">FACULTY DEVELOPMENT READING</span>
+          </div>
           <h3>${esc(reading.title)}</h3>
           <p class="muted">${termIndex ? withTermRefs(reading.description, termIndex) : esc(reading.description)}</p>
-          ${reading.version ? `<p class="small muted">${esc(reading.version)}</p>` : ""}
           <label class="check-row"><input type="checkbox" data-progress-id="${esc(reading.id)}" ${checked ? "checked" : ""}><span><strong>Mark reading complete</strong><br><span class="small muted">Stored only in this browser</span></span></label>
         </div>
         <div class="resource-actions">
-          ${actionButton("Read online", reading.url, "button-small")}
-          ${actionButton("Download (Word/PDF)", reading.exportUrl, "button-outline button-small")}
+          ${actionButton("Download PDF", reading.exportUrl, "button-small")}
         </div>
       </article>`;
   }
@@ -693,7 +702,6 @@
     const percent = CourseProgress.percent(ids);
     const previous = modules.find((item) => item.id === module.id - 1);
     const next = modules.find((item) => item.id === module.id + 1);
-    const slides = module.slides || {};
     const hasExpressItems = module.videos.some((video) => video.express);
     const relatedSessions = allSessions.filter((item) => (item.relatedModules || []).includes(module.id));
 
@@ -734,42 +742,14 @@
             <section id="worksheets">
               <p class="eyebrow">Make the work usable</p>
               <h2>Worksheets and resources</h2>
-              <p class="muted">Each worksheet offers a one-click Google copy and a Word/PDF export, so you never hit a permissions wall.</p>
+              <p class="muted">Download the worksheets and resources for this module.</p>
               <div class="resource-list">${module.worksheets.map(renderWorksheet).join("")}</div>
-            </section>
-            <section>
-              <p class="eyebrow">Slides</p>
-              <div class="resource-card">
-                <div class="resource-icon">PDF</div>
-                <div><h3>${esc(slides.title || `Module ${module.id} slide deck`)}</h3><p class="small muted">${realUrl(slides.pdfUrl) || realUrl(slides.previewUrl) ? "View in Google Drive or download the PDF." : "Slide links coming soon."}</p></div>
-                <div class="resource-actions">
-                  ${actionButton("Preview slides", slides.previewUrl, "button-small")}
-                  ${actionButton("Open PDF", slides.pdfUrl, "button-outline button-small")}
-                </div>
-              </div>
             </section>
             <section>
               <p class="eyebrow">Portfolio connection</p>
               <div class="callout"><h2>${withTermRefs(module.artifact, termIndex)}</h2><p>By the end of this module, this artifact should be ready to carry into the next design decision.</p><a class="button button-small" href="portfolio/">Open portfolio checklist</a></div>
             </section>
-            <section>
-              <p class="eyebrow">Quick feedback</p>
-              <div class="form-card">
-                <h2>Was this module helpful?</h2>
-                <form class="form-grid" name="module-feedback" data-feedback-form>
-                  <input type="hidden" name="form-name" value="module-feedback">
-                  <input type="hidden" name="module" value="${module.id}">
-                  <input type="hidden" name="helpful" value="">
-                  <p hidden><input name="bot-field"></p>
-                  <div class="feedback-buttons" role="group" aria-label="Was this module helpful?">
-                    <button class="button button-outline button-small" type="button" data-helpful="yes" aria-pressed="false">Yes, helpful</button>
-                    <button class="button button-outline button-small" type="button" data-helpful="no" aria-pressed="false">Not yet</button>
-                  </div>
-                  <div class="form-field"><label for="feedback-comment">Optional comment</label><textarea id="feedback-comment" name="comment" placeholder="What should change?"></textarea></div>
-                  <button class="button button-small" type="submit">Send feedback</button>
-                </form>
-              </div>
-            </section>
+
             <nav class="button-row" aria-label="Module navigation">
               ${previous ? `<a class="button button-outline" href="course/module.html?m=${previous.id}">&larr; Module ${previous.id}</a>` : `<a class="button button-outline" href="course/">Course hub</a>`}
               ${next ? `<a class="button" href="course/module.html?m=${next.id}">Module ${next.id} &rarr;</a>` : `<a class="button" href="portfolio/">Complete portfolio &rarr;</a>`}
@@ -790,11 +770,7 @@
                 ${relatedSessions.map((item) => `<div><a class="text-link" href="${esc(item.type === "guide" && item.url ? item.url : `sessions/session.html?s=${item.id}`)}">${esc(item.shortTitle || item.title)} &rarr;</a><p class="small muted" style="margin:.25rem 0 0">${esc(item.blurb || "")}</p></div>`).join("")}
               </div>
             </div>` : ""}
-            <div class="card">
-              <h3>Stuck on Module ${module.id}?</h3>
-              <p class="small muted">A human escape hatch matters. Ask a focused question and include the page or item name.</p>
-              <a class="button button-small" href="mailto:${esc(email)}?subject=${moduleSubject}">Ask John</a>
-            </div>
+
             <div class="card"><p class="small muted">Progress is stored only in this browser.</p><button class="copy-link" type="button" data-reset-progress>Reset my progress</button></div>
           </aside>
         </div>
@@ -922,6 +898,7 @@
               <p class="eyebrow">Watch</p>
               <h2>Session video</h2>
               ${session.video && session.video.duration ? `<div class="module-meta"><span>${videoDuration(session.video)}</span></div>` : ""}
+              ${session.video && realUrl(session.video.slidesUrl) ? `<p class="slides-link"><a href="${esc(realUrl(session.video.slidesUrl))}" target="_blank" rel="noopener noreferrer">View the slides for this session (PDF)</a></p>` : ""}
               ${videoBlock({ ...(session.video || {}), title: session.title }, "Video coming soon", true)}
               ${session.video && session.video.summary ? `<details><summary>Video summary</summary><div class="details-body"><p>${esc(session.video.summary)}</p></div></details>` : ""}
             </section>
@@ -958,6 +935,14 @@
                     ${actionButton("Open PDF", slides.pdfUrl, "button-outline button-small")}
                   </div>
                 </article>
+                ${(session.resources || []).map(r => `
+                <article class="resource-card">
+                  <div class="resource-icon">${esc(r.icon || 'LINK')}</div>
+                  <div><h3>${esc(r.title)}</h3><p class="small muted">${esc(r.description || "")}</p></div>
+                  <div class="resource-actions">
+                    ${actionButton(r.buttonText || "Open link", r.url, "button-small")}
+                  </div>
+                </article>`).join("")}
               </div>
             </section>` : ""}
             ${related.length ? `
@@ -965,24 +950,7 @@
               <p class="eyebrow">Go deeper</p>
               <div class="callout"><h2>Connect this session to the course</h2><p>This session pairs naturally with ${related.map((module) => `Module ${module.id}: ${esc(module.shortTitle)}`).join(" and ")}. The module adds the frameworks, reading, and portfolio artifact behind this design move.</p><div class="button-row">${related.map((module) => `<a class="button button-small" href="course/module.html?m=${module.id}">Open Module ${module.id}</a>`).join("")}</div></div>
             </section>` : ""}
-            <section>
-              <p class="eyebrow">Quick feedback</p>
-              <div class="form-card">
-                <h2>Was this session helpful?</h2>
-                <form class="form-grid" name="module-feedback" data-feedback-form>
-                  <input type="hidden" name="form-name" value="module-feedback">
-                  <input type="hidden" name="module" value="session-${esc(session.id)}">
-                  <input type="hidden" name="helpful" value="">
-                  <p hidden><input name="bot-field"></p>
-                  <div class="feedback-buttons" role="group" aria-label="Was this session helpful?">
-                    <button class="button button-outline button-small" type="button" data-helpful="yes" aria-pressed="false">Yes, helpful</button>
-                    <button class="button button-outline button-small" type="button" data-helpful="no" aria-pressed="false">Not yet</button>
-                  </div>
-                  <div class="form-field"><label for="feedback-comment">Optional comment</label><textarea id="feedback-comment" name="comment" placeholder="What should change?"></textarea></div>
-                  <button class="button button-small" type="submit">Send feedback</button>
-                </form>
-              </div>
-            </section>
+
             <nav class="button-row" aria-label="Session navigation">
               <a class="button button-outline" href="sessions/">&larr; All sessions</a>
               <a class="button" href="course/">Explore the full course &rarr;</a>
@@ -997,11 +965,17 @@
                 return `<a class="badge" href="key-terms/#${esc(termSlug)}">${esc(term ? term.term : termSlug.replaceAll("-", " "))}</a>`;
               }).join("")}</div>
             </div>` : ""}
+            ${session.id === "ai-role-play" ? `
+            <div class="card">
+              <h3>AI Role-Play Chatbot Builder</h3>
+              <p class="small muted">Need some help building the instructions for a role-play chatbot? Use this chatbot builder tool. It helps faculty design an AI chatbot that plays a realistic stakeholder, challenges students’ reasoning, and supports reflection.</p>
+              <a class="button button-small" href="https://www.playlab.ai/project/cmq9kt6cv3c7mlr0wtozyu6au" target="_blank" rel="noopener noreferrer">Try the Builder</a>
+            </div>` : `
             <div class="card">
               <h3>Want to build one together?</h3>
               <p class="small muted">A human escape hatch matters. Ask a focused question and name the course or assignment you have in mind.</p>
               <a class="button button-small" href="mailto:${esc(email)}?subject=${sessionSubject}">Ask John</a>
-            </div>
+            </div>`}
             <div class="card"><p class="small muted">Sessions sit outside the six-module course, so they do not count toward course progress.</p></div>
           </aside>
         </div>
@@ -1018,7 +992,6 @@
         <h3>${esc(term.term)}</h3>
         <p>${esc(term.definition)}</p>
         ${videoBlock(term, "Key-term video coming soon")}
-        <details><summary>Read full script</summary><div class="details-body"><p>${esc(term.script)}</p></div></details>
         <button class="copy-link" type="button" data-copy-term="${esc(term.slug)}">Copy link to this term</button>
       </article>`;
   }
@@ -1104,14 +1077,21 @@
     });
   }
 
-  function articleCard(article) {
+  function articleCard(article, compact = false) {
+    const peerReviewed = /^peer/i.test(article.status || "");
+    const statusBadge = article.status ? badge(esc(article.status), peerReviewed ? "badge-success" : "badge-gold") : "";
+    const url = realUrl(article.url);
     return `
-      <article class="card article-card" data-article-tags="${esc(article.tags.join(" "))}">
-        <div class="badge-row">${article.tags.map((tag) => badge(esc(tag))).join("")}</div>
+      <article class="card article-card" data-article-tags="${esc(article.tags.join(" "))}" data-article-dimension="${esc(article.dimension || "")}">
+        <div class="badge-row">${statusBadge}${article.tags.map((tag) => badge(esc(tag))).join("")}</div>
         <div class="article-meta"><span>${esc(article.source)}</span><span>${esc(article.date)}</span></div>
-        <h3>${esc(article.title)}</h3>
+        <h3>${url ? `<a class="article-title-link" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(article.title)}</a>` : esc(article.title)}</h3>
+        ${article.authors ? `<p class="article-authors">${esc(article.authors)}</p>` : ""}
+        ${article.dimension ? `<p class="article-dimension">${esc(article.dimension)}</p>` : ""}
         <p>${esc(article.annotation)}</p>
-        ${actionButton("Read article", article.url, "button-outline button-small")}
+        ${!compact && article.why ? `<p class="article-why"><strong>Why it matters:</strong> ${esc(article.why)}</p>` : ""}
+        ${!compact && article.evidence ? `<p class="article-evidence">Evidence note: ${esc(article.evidence)}</p>` : ""}
+        ${actionButton("Read the paper", article.url, "button-outline button-small")}
       </article>`;
   }
 
@@ -1125,15 +1105,24 @@
     }
     const feedItems = (feed && Array.isArray(feed.items) ? feed.items : []).slice(0, 12);
     const tags = [...new Set(articles.flatMap((article) => article.tags))].sort();
+    const dimensions = [...new Set(articles.map((article) => article.dimension).filter(Boolean))];
     main.innerHTML = `
-      ${pageHero("Curated context", "AI and teaching, with a reason to read.", "Each featured article includes a short explanation of why it matters for faculty.")}
+      ${pageHero("Curated context", "AI and teaching research, with a reason to read.", "Recent academic papers on teaching and learning with generative AI - each verified, labeled peer-reviewed or preprint, and annotated with why it matters for faculty.")}
       <section class="section">
         <div class="container">
-          <div class="filter-bar" aria-label="Filter articles">
+          ${dimensions.length ? `
+          <p class="eyebrow">Filter by research dimension</p>
+          <div class="filter-bar" aria-label="Filter articles by research dimension">
+            <button class="filter-button" type="button" aria-pressed="true" data-dimension-filter="all">All dimensions</button>
+            ${dimensions.map((dimension) => `<button class="filter-button" type="button" aria-pressed="false" data-dimension-filter="${esc(dimension)}">${esc(dimension)}</button>`).join("")}
+          </div>` : ""}
+          <p class="eyebrow">Filter by tag</p>
+          <div class="filter-bar" aria-label="Filter articles by tag">
             <button class="filter-button" type="button" aria-pressed="true" data-article-filter="all">All</button>
             ${tags.map((tag) => `<button class="filter-button" type="button" aria-pressed="false" data-article-filter="${esc(tag)}">${esc(tag)}</button>`).join("")}
           </div>
-          <div class="grid grid-3">${articles.map(articleCard).join("")}</div>
+
+          <div class="grid grid-3" style="margin-top:1.25rem">${articles.map((article) => articleCard(article)).join("")}</div>
         </div>
       </section>
       ${feedItems.length ? `
@@ -1154,13 +1143,27 @@
       </section>` : ""}
       ${ctaBanner()}`;
 
+    let activeTag = "all";
+    let activeDimension = "all";
+    const applyArticleFilters = () => {
+      document.querySelectorAll(".article-card[data-article-tags]").forEach((card) => {
+        const tagMiss = activeTag !== "all" && !card.dataset.articleTags.split(" ").includes(activeTag);
+        const dimensionMiss = activeDimension !== "all" && card.dataset.articleDimension !== activeDimension;
+        card.hidden = tagMiss || dimensionMiss;
+      });
+    };
     document.querySelectorAll("[data-article-filter]").forEach((button) => {
       button.addEventListener("click", () => {
-        const filter = button.dataset.articleFilter;
+        activeTag = button.dataset.articleFilter;
         document.querySelectorAll("[data-article-filter]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
-        document.querySelectorAll(".article-card[data-article-tags]").forEach((card) => {
-          card.hidden = filter !== "all" && !card.dataset.articleTags.split(" ").includes(filter);
-        });
+        applyArticleFilters();
+      });
+    });
+    document.querySelectorAll("[data-dimension-filter]").forEach((button) => {
+      button.addEventListener("click", () => {
+        activeDimension = button.dataset.dimensionFilter;
+        document.querySelectorAll("[data-dimension-filter]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        applyArticleFilters();
       });
     });
   }
@@ -1198,7 +1201,7 @@
     const modules = await fetchData("modules");
     const artifactIds = modules.map((module) => `artifact-${module.id}`);
     main.innerHTML = `
-      ${pageHero("Course redesign portfolio", "Six connected artifacts. One usable teaching packet.", "Track the documents you have built, make a copy of the final workbook, and print a completion summary when the packet is ready.", `<div class="button-row">${actionButton("Make a copy of the Portfolio Workbook", site.portfolioWorkbookUrl)}<button class="button button-outline" type="button" onclick="window.print()">Print completion summary</button></div>`)}
+      ${pageHero("Course redesign portfolio", "Six connected artifacts. One usable teaching packet.", "Track the documents you have built, download the final workbook, and print a completion summary when the packet is ready.", `<div class="button-row">${actionButton("Download Portfolio Workbook", site.portfolioWorkbookUrl)}<button class="button button-outline" type="button" onclick="window.print()">Print completion summary</button></div>`)}
       <section class="section-sm">
         <div class="container">
           <div class="callout"><h3>Your portfolio progress</h3>${progressBar(CourseProgress.percent(artifactIds))}<p><strong><span data-portfolio-percent>${CourseProgress.percent(artifactIds)}</span>% complete</strong> | Stored only in this browser</p></div>
@@ -1297,13 +1300,13 @@
       <section class="section">
         <div class="narrow">
           <div class="form-card">
-            <form class="form-grid" name="weekly-updates" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="thanks.html">
-              <input type="hidden" name="form-name" value="weekly-updates">
-              <p hidden><input name="bot-field"></p>
-              <div class="form-field"><label for="name">Name <span class="muted">(optional)</span></label><input id="name" type="text" name="name" autocomplete="name"></div>
-              <div class="form-field"><label for="email">Email address</label><input id="email" type="email" name="email" required autocomplete="email"></div>
-              <label class="check-row"><input type="checkbox" name="clu-faculty"><span>I teach at Cal Lutheran</span></label>
-              <button class="button" type="submit">Subscribe</button>
+            <form class="form-grid" name="subscribe" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/subscribe/thanks/">
+              <input type="hidden" name="form-name" value="subscribe" />
+              <p style="display:none;"><label>Do not fill this out:<input name="bot-field" /></label></p>
+              <div class="form-field"><label for="name">Name <span class="muted">(optional)</span></label><input id="name" type="text" name="name" autocomplete="name" /></div>
+              <div class="form-field"><label for="email">Email address</label><input id="email" type="email" name="email" autocomplete="email" required /></div>
+              <label class="check-row"><input type="checkbox" name="cal_lutheran" value="yes" /><span>I teach at Cal Lutheran</span></label>
+              <button type="submit" class="button">Subscribe</button>
             </form>
             <p class="small muted" style="margin-top:1rem">Your email is used only for the weekly update. Unsubscribe anytime.</p>
           </div>
@@ -1339,10 +1342,13 @@
             <p>Named frameworks such as AIAS, TILT, Safety Gap, Oracle/Tutor/Adversary, and capability drift help faculty explain their choices to students and colleagues.</p>
           </article>
           <article class="card">
-            <div class="video-placeholder"><div class="video-placeholder-content"><strong>Instructor photo placeholder</strong><p class="small">Add approved portrait or course artwork.</p></div></div>
+            <img src="https://raw.githubusercontent.com/garcijo4/john.garcia/main/assets/profile.jpg" alt="John Garcia Profile" style="width: 100%; object-fit: cover; aspect-ratio: 16/9; border-radius: 8px;">
             <h2 style="margin-top:1.25rem">John Garcia</h2>
-            <p class="muted">Instructor bio and Faculty Development acknowledgment: PLACEHOLDER.</p>
-            <a class="button button-small" href="mailto:${esc(site.contactEmail)}">Contact John</a>
+            <p class="muted" style="margin-bottom: 1rem;">Associate Professor of Finance &amp; Analytics at California Lutheran University, bridging industry and academia through behavioral finance, machine learning, and AI in education.</p>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <a class="button button-small" href="mailto:${esc(site.contactEmail)}">Contact John</a>
+              <a class="button button-outline button-small" href="https://garcijo4.github.io/john.garcia/" target="_blank" rel="noopener noreferrer">Personal Website</a>
+            </div>
           </article>
         </div>
       </section>
@@ -1418,10 +1424,11 @@
           <div class="badge-row">${badge(esc(session.kind), "badge-gold")} ${badge(esc(session.venue))} ${badge(esc(session.date))}</div>
           <h1>${esc(session.title)}</h1>
           <p class="lede">Implementation guide with ready-to-use prompts for integrating AI into finance courses.</p>
+          ${session.authorLine ? `<p class="small muted session-author">${session.authorLine}</p>` : ""}
           <div class="button-row">
-            <a class="button button-gold" href="#applications">Explore all 10 applications</a>
-            <a class="button button-light" href="sessions/ai-in-finance/quick-start.html">Quick start guides</a>
-            <a class="button button-light" href="#downloads">Download handouts</a>
+            <a class="button" href="sessions/ai-in-finance/#applications">Explore all 10 applications</a>
+            <a class="button button-outline" href="sessions/ai-in-finance/quick-start.html">Quick start guides</a>
+            <a class="button button-outline" href="sessions/ai-in-finance/#downloads">Download handouts</a>
           </div>
         </div>
       </section>
@@ -1459,14 +1466,15 @@
                 <span class="text-link">Open application &rarr;</span>
               </a>`).join("")}
           </div>
-          <div class="grid grid-3" style="margin-top:2rem">
+          <p class="eyebrow" style="margin-top:2.5rem">Adoption difficulty tags</p>
+          <div class="grid grid-3" style="margin-top:0.75rem">
             ${(session.difficultyLevels || []).map((level) => `<div class="card">${diffBadge(level.key)}<p class="small muted" style="margin-top:.75rem">${esc(level.description)}</p></div>`).join("")}
           </div>
         </div>
       </section>
       <section class="section section-tint">
         <div class="container">
-          <div class="section-heading"><div><p class="eyebrow">Ranking methodology</p><h2>Three weighted criteria</h2></div></div>
+          <div class="section-heading"><div><p class="eyebrow">Ranking methodology</p><h2>Three weighted criteria</h2>${session.methodologyIntro ? `<p>${esc(session.methodologyIntro)}</p>` : ""}</div></div>
           <div class="grid grid-3">
             ${(session.methodology || []).map((item) => `<div class="card"><div class="methodology-weight-big">${esc(item.weight)}</div><h3>${esc(item.label)}</h3><p class="muted">${esc(item.description)}</p></div>`).join("")}
           </div>
@@ -1517,6 +1525,11 @@
       <section class="section">
         <div class="container content-layout">
           <div class="stack session-prose">
+            <div class="app-content-header">
+              <span class="rank-number">#${app.id}</span>
+              <h2 class="app-content-title">${esc(app.title)}</h2>
+              ${diffBadge(app.difficulty)}
+            </div>
             ${app.sections.map((section) => section.kind === "pilot"
               ? `<div class="callout callout-gold pilot-callout"><p class="eyebrow">Try it this week</p><h2>${esc(section.heading)}</h2>${section.html}</div>`
               : `<section>${section.heading ? `<h2>${esc(section.heading)}</h2>` : ""}${section.html}</section>`).join("")}
@@ -1529,7 +1542,7 @@
             <div class="card">
               <p class="eyebrow">All applications</p>
               <ol class="app-jump-list">
-                ${apps.map((item) => `<li><a href="sessions/ai-in-finance/application.html?a=${item.id}" ${item.id === app.id ? 'aria-current="page"' : ""}>#${item.id} ${esc(item.title)}</a></li>`).join("")}
+                ${apps.map((item) => `<li><a href="sessions/ai-in-finance/application.html?a=${item.id}" ${item.id === app.id ? 'aria-current="page"' : ""}>#${item.id} ${esc(item.shortTitle || item.title)} ${diffBadge(item.difficulty)}</a></li>`).join("")}
               </ol>
             </div>
             <div class="card">
@@ -1744,6 +1757,7 @@
     }
     injectShell();
     injectAnalytics();
+    injectPickaxeEmbed();
     try {
       await (renderers[page] || renderNotFound)();
       bindGlobalInteractions();

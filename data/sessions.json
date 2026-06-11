@@ -14,20 +14,24 @@
     "takeaway": "Leave with one role, one decision, and one debrief question you could pilot in a course you already teach. The chatbot is the practice environment, not the teacher or the assessment. The student's revised judgment is the evidence.",
     "video": {
       "embedUrl": "https://GARCIA.screencasthost.com/player/cO16FunuOMY?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
-      "summary": "Case discussions look backward: the decision is made and the pressure is gone. This session flips the timing by letting students step into a situation while the decision is still unfolding, with a chatbot as scenario partner \u2014 a nervous investor, skeptical client, or confused patient \u2014 never an answer machine. The loop is simple: students enter the scenario, respond, the AI responds in character, the exchange repeats with rising pressure, then reflection and your debrief. The key design principle: assess the reflection, not the chatbot conversation \u2014 the student's revised judgment is the evidence. A five-step build (define the objective, build the scaffold, write the prompt, test and iterate, run and debrief) and a five-block prompt anatomy (role, situation, boundaries, behavior, debrief) keep the bot from solving the task or grading without you. A green/yellow/red boundary keeps faculty judgment in the loop: simulate and support reflection, verify any formative feedback, never private student data or final grades. It closes with a modest pilot \u2014 one role, one decision, one debrief question, on a 5/10/5/10-minute clock \u2014 and three assessment questions: What did you decide? What evidence did you use? What did the role-play make you reconsider? Slides: https://github.com/garcijo4/teachingwithai/blob/main/assets/slides/A1.%20From_Static_Cases_to_AI_Role-Play.pdf",
-      "duration": "9.1 min"
+      "summary": "Case discussions look backward: the decision is made and the pressure is gone. This session flips the timing by letting students step into a situation while the decision is still unfolding, with a chatbot as scenario partner — a nervous investor, skeptical client, or confused patient — never an answer machine. The loop is simple: students enter the scenario, respond, the AI responds in character, the exchange repeats with rising pressure, then reflection and your debrief. The key design principle: assess the reflection, not the chatbot conversation — the student's revised judgment is the evidence. A five-step build (define the objective, build the scaffold, write the prompt, test and iterate, run and debrief) and a five-block prompt anatomy (role, situation, boundaries, behavior, debrief) keep the bot from solving the task or grading without you. A green/yellow/red boundary keeps faculty judgment in the loop: simulate and support reflection, verify any formative feedback, never private student data or final grades. It closes with a modest pilot — one role, one decision, one debrief question, on a 5/10/5/10-minute clock — and three assessment questions: What did you decide? What evidence did you use? What did the role-play make you reconsider?",
+      "duration": "9.1 min",
+      "slidesUrl": "https://github.com/garcijo4/teachingwithai/blob/main/assets/slides/A1.%20From_Static_Cases_to_AI_Role-Play.pdf"
     },
     "slides": {
       "title": "AI Role-Play session slides",
-      "pdfUrl": "PLACEHOLDER",
-      "previewUrl": "PLACEHOLDER"
+      "pdfUrl": "https://github.com/garcijo4/teachingwithai/blob/main/assets/slides/A1.%20From_Static_Cases_to_AI_Role-Play.pdf",
+      "previewUrl": "https://github.com/garcijo4/teachingwithai/blob/main/assets/slides/A1.%20From_Static_Cases_to_AI_Role-Play.pdf"
     },
-    "worksheet": {
-      "title": "One-decision pilot planner",
-      "minutes": "15 min planning",
-      "url": "PLACEHOLDER",
-      "exportUrl": "PLACEHOLDER"
-    },
+    "resources": [
+      {
+        "title": "Role-Play in Finance Example",
+        "description": "An example of an AI role-play application in the finance classroom.",
+        "url": "/sessions/ai-in-finance/application.html?a=1",
+        "icon": "LINK",
+        "buttonText": "View example"
+      }
+    ],
     "tryIt": [
       "Start with one existing case, scenario, or hard concept you already teach. You already know where students struggle.",
       "Name one decision students should practice. Not five. One.",
@@ -39,7 +43,7 @@
       4
     ],
     "relatedTerms": [
-      "oracle-tutor-adversary",
+      "four-ai-stances",
       "productive-struggle"
     ],
     "published": "2026-06-10",
@@ -63,11 +67,13 @@
     "originalUrl": "https://garcijo4.github.io/ai_in_finance_classroom/",
     "license": "CC BY-NC-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "authorLine": "John Garcia &middot; <a href=\"mailto:jgarcia@callutheran.edu\">jgarcia@callutheran.edu</a> &middot; <a href=\"https://www.linkedin.com/in/johngarcia4/\" target=\"_blank\" rel=\"noopener noreferrer\">LinkedIn</a> &middot; <a href=\"https://garcijo4.github.io/john.garcia/\" target=\"_blank\" rel=\"noopener noreferrer\">Personal Website</a><br>California Lutheran University, School of Management",
+    "methodologyIntro": "The ranking reflects three weighted criteria applied systematically to the evidence base:",
     "howToUse": [
       "AI is forcing a fundamental shift in finance pedagogy: the question is no longer <em>can the student compute this?</em> but <em>can the student explain why this answer matters, what assumptions drive it, and whether to trust it?</em> These 10 applications are ranked by how effectively they address that shift &mdash; and by how quickly a faculty member at a typical regional university can adopt them starting next week, with no budget and no IT support.",
       "Each application entry follows a consistent structure with complete implementation details, including student and instructor workflows, sample prompts ready for immediate use, assessment rubrics, and concrete first-week pilot instructions. Start with the <a href=\"sessions/ai-in-finance/quick-start.html\">Quick Start Guides</a> for the fastest path to trying an application. The <a href=\"sessions/ai-in-finance/prompts.html\">Prompt Library</a> lets you copy any prompt with one click."
     ],
-    "oecdNote": "The applications and design principles in this guide are strongly consistent with the <a href=\"https://www.oecd.org/en/publications/oecd-digital-education-outlook-2026_062a7394-en.html\" target=\"_blank\" rel=\"noopener noreferrer\">OECD Digital Education Outlook 2026</a>, which emphasizes pedagogy-first AI implementation, process-oriented assessment, foundational knowledge, and instructor augmentation rather than replacement. Each entry reflects those principles, and two appendices provide an <a href=\"sessions/ai-in-finance/frameworks.html\">OECD-aligned evaluation framework and a discipline-specific AI use policy matrix</a>.",
+    "oecdNote": "<strong>OECD alignment:</strong> The applications and design principles in this guide are strongly consistent with the <a href=\"https://www.oecd.org/en/publications/oecd-digital-education-outlook-2026_062a7394-en.html\" target=\"_blank\" rel=\"noopener noreferrer\">OECD Digital Education Outlook 2026</a>, which emphasizes pedagogy-first AI implementation, process-oriented assessment, foundational knowledge, and instructor augmentation rather than replacement. Each entry reflects those principles, and two appendices provide an <a href=\"sessions/ai-in-finance/frameworks.html\">OECD-aligned evaluation framework and a discipline-specific AI use policy matrix</a>.",
     "toolsNote": "Three free tools cover 7 of 10 applications: <strong>ChatGPT</strong> (free tier at chat.openai.com), <strong>Claude</strong> (free tier at claude.ai), and <strong>Perplexity</strong> (free at perplexity.ai, best for web-search tasks). No institutional license, API key, or IT department required to get started.",
     "difficultyLevels": [
       {

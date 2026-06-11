@@ -47,7 +47,8 @@
         "html": "<p>Use a standard ChatGPT or Claude session (no custom bot needed). Give students this one-paragraph scenario and prompt: ‘You are a skeptical CFO at a manufacturing company. I am a junior analyst about to pitch a $30M warehouse expansion. My NPV analysis shows $4.2M positive NPV at a 10% discount rate. Push back on my assumptions—especially the 6% revenue growth rate and the choice of discount rate. Be tough but fair.’ Have students do a 5-minute interaction on their phones during class and submit 3 bullet points: (1) the toughest objection, (2) how they responded, (3) what they would do differently. Total class time: 10 minutes.</p>"
       }
     ],
-    "summary": "Students practice high-stakes professional interactions with AI personas that provide realistic pushback and adapt difficulty dynamically."
+    "summary": "Students practice high-stakes professional interactions with AI personas that provide realistic pushback and adapt difficulty dynamically.",
+    "shortTitle": "Simulated C-Suite / Client Role-Play"
   },
   {
     "id": 2,
@@ -97,7 +98,8 @@
         "html": "<p>Pick one assignment you are grading this week. Paste one student’s submission and your rubric into ChatGPT or Claude. Use this prompt: ‘Evaluate this submission using the attached rubric. For each category, provide a score, one strength with a quote, one weakness with a quote, and one actionable suggestion.’ Compare the AI’s draft to what you would have written. Edit it, add your personal touch, and return it. Track your time—most faculty report saving 15–25 minutes per submission on first use.</p>"
       }
     ],
-    "summary": "AI generates structured first-pass critique aligned to your rubric, cutting turnaround time by 40-50% while improving feedback specificity."
+    "summary": "AI generates structured first-pass critique aligned to your rubric, cutting turnaround time by 40-50% while improving feedback specificity.",
+    "shortTitle": "AI-Assisted Formative Feedback"
   },
   {
     "id": 3,
@@ -147,7 +149,8 @@
         "html": "<p>Create a half-page handout with 2 prompt templates: one Socratic tutor for your course’s most-struggled concept (e.g., TVM, bond pricing, WACC) and one practice problem generator. Distribute it next class. Ask students to try one problem with the AI tutor before the next session and bring a screenshot of one exchange. Spend 5 minutes debriefing: ‘How many found an error in the AI’s response? What worked well? What didn’t?’ Zero technology setup required.</p>"
       }
     ],
-    "summary": "Always-available, infinitely patient tutoring assistants that use Socratic questioning to guide understanding of TVM, WACC, bond pricing, and more."
+    "summary": "Always-available, infinitely patient tutoring assistants that use Socratic questioning to guide understanding of TVM, WACC, bond pricing, and more.",
+    "shortTitle": "AI Socratic Tutor"
   },
   {
     "id": 4,
@@ -197,7 +200,8 @@
         "html": "<p>Take one existing exam problem from your current course. Add two interpretation questions that AI cannot easily answer: (1) ‘What does this NPV result mean for the firm’s strategic decision—should they proceed, and why?’ and (2) ‘Identify the single assumption that, if changed, would most likely reverse your recommendation. Explain why.’ No technology, no setup, no AI account needed.</p>"
       }
     ],
-    "summary": "Redesign assessments to emphasize process documentation, assumption justification, interpretation, and oral verification."
+    "summary": "Redesign assessments to emphasize process documentation, assumption justification, interpretation, and oral verification.",
+    "shortTitle": "AI-Aware Assessment Design"
   },
   {
     "id": 5,
@@ -247,7 +251,8 @@
         "html": "<p>Download a free CSV of monthly Fama-French factor returns from <a href=\"https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html\" rel=\"noopener\" target=\"_blank\">Kenneth French’s data library</a>. Upload it to ChatGPT Code Interpreter with this prompt: ‘Calculate the average monthly return and standard deviation for the market factor, SMB, and HML. Display as a bar chart with error bars.’ Show the result in class (takes 30 seconds). Ask students: ‘What would you need to check to trust these numbers?’ Debrief in 3 minutes. No coding knowledge required.</p>"
       }
     ],
-    "summary": "Students describe analyses in natural language and receive working code with executed output, shifting focus to interpretation."
+    "summary": "Students describe analyses in natural language and receive working code with executed output, shifting focus to interpretation.",
+    "shortTitle": "Financial Data Analysis & Visualization"
   },
   {
     "id": 6,
@@ -293,7 +298,8 @@
         "html": "<p>Open ChatGPT right now. Paste this prompt: ‘Generate 3 variants of a bond pricing problem for Principles of Finance. Each should use a different coupon rate (4%, 6%, 8%), different maturity (5, 10, 20 years), and different YTM (3%, 5%, 7%). Include answer keys.’ Compare the output to your existing problem set. Edit the best variant for your next quiz. Total time: 10–15 minutes.</p>"
       }
     ],
-    "summary": "AI drafts problem-set variants, mini cases, discussion questions, and accreditation documentation. Faculty serve as editors and curators."
+    "summary": "AI drafts problem-set variants, mini cases, discussion questions, and accreditation documentation. Faculty serve as editors and curators.",
+    "shortTitle": "Content Generation: Exams, Cases & Materials"
   },
   {
     "id": 7,
@@ -343,7 +349,8 @@
         "html": "<p>Before your next case discussion, post this 5-minute pre-class task: ‘Open ChatGPT or Perplexity. Ask: What has happened to [Case Company] since [case year]? Find one development that would change the case analysis. Verify it with one primary source (10-K, earnings transcript, or press release). Bring your finding to class.’ Open class by having 2–3 students share their updates. Zero setup required.</p>"
       }
     ],
-    "summary": "AI with web search provides real-time market context to keep case studies current and connect classroom theory to live markets."
+    "summary": "AI with web search provides real-time market context to keep case studies current and connect classroom theory to live markets.",
+    "shortTitle": "Real-Time Market Context & Case Enhancement"
   },
   {
     "id": 8,
@@ -393,7 +400,8 @@
         "html": "<p>In class, open ChatGPT or Claude and type: ‘Write Python code to calculate the present value of $10,000 received in 5 years at a 7% annual discount rate. Show the formula in a comment.’ Display the result (15 seconds). Then ask students: ‘What would you need to change if there were also annual $500 coupon payments?’ Have a student describe the change in plain English. Paste their description into the AI. Display the updated code. Debrief: ‘The AI wrote it—how would you verify it’s correct?’ Total time: 8 minutes.</p>"
       }
     ],
-    "summary": "Students describe financial logic in natural language, AI generates code, and students verify, annotate, modify, and interpret the output."
+    "summary": "Students describe financial logic in natural language, AI generates code, and students verify, annotate, modify, and interpret the output.",
+    "shortTitle": "Coding Assistance & Vibe Coding"
   },
   {
     "id": 9,
@@ -443,7 +451,8 @@
         "html": "<p>The 2-Minute AI Audit (works with zero preparation): In class, tell every student to open any AI tool on their phone. Ask them a finance question they know the answer to cold—something from last week’s lecture. They have exactly 2 minutes to find at least one error or imprecision in the AI’s response. Quick show of hands: How many found an error? What kinds of errors? This exercise takes 5 minutes total, requires zero setup, immediately demonstrates that AI is accessible and fallible. Do it on day one of any course.</p>"
       }
     ],
-    "summary": "Students explicitly test, evaluate, and critique AI outputs on finance topics, building professional skepticism as a habit."
+    "summary": "Students explicitly test, evaluate, and critique AI outputs on finance topics, building professional skepticism as a habit.",
+    "shortTitle": "AI Literacy & Critical Evaluation"
   },
   {
     "id": 10,
@@ -493,6 +502,7 @@
         "html": "<p>Zero-infrastructure demonstration: Open ChatGPT Code Interpreter in class. Type: ‘Simulate 1,000 coin flips. Plot the running average after each flip. Add a horizontal line at 0.5.’ Result appears in 15 seconds. Show the convergence. Then say: ‘Now imagine this, but instead of coin flips, these are annual stock returns. And instead of a running average, we are tracking a retirement account balance. That is a Monte Carlo simulation.’ This 60-second demo plants the conceptual seed. For the next class, provide a pre-built Colab notebook link where students can modify 3 parameters.</p>"
       }
     ],
-    "summary": "AI dramatically lowers the barrier to creating sophisticated financial simulations: Monte Carlo projections, option pricing, and stress tests."
+    "summary": "AI dramatically lowers the barrier to creating sophisticated financial simulations: Monte Carlo projections, option pricing, and stress tests.",
+    "shortTitle": "Simulation, Monte Carlo & Scenario Analysis"
   }
 ]

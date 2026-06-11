@@ -1,148 +1,445 @@
 [
   {
-    "slug": "grounded-curiosity",
-    "term": "Grounded Curiosity",
+    "slug": "ai-hallucinations",
+    "term": "AI Hallucinations: Fluent but False",
     "module": 1,
-    "definition": "A pedagogy-first stance that refuses both AI hype and AI panic while remaining open to evidence.",
-    "videoEmbedUrl": "PLACEHOLDER",
-    "script": "Grounded curiosity means staying open enough to test useful possibilities and grounded enough to demand defensible learning-design reasons.",
+    "definition": "A fluent but false, fabricated, or unsupported AI-generated claim. An AI's smooth, confident output is a product of pattern prediction, not comprehension, so polish is no evidence of truth or learning.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qunuOSq?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
     "aliases": [
-      "grounded curiosity"
-    ]
-  },
-  {
-    "slug": "skeptics-charter",
-    "term": "Skeptic's Charter",
-    "module": 1,
-    "definition": "A signed statement naming what AI must not damage in your teaching and what evidence would change your view.",
-    "videoEmbedUrl": "PLACEHOLDER",
-    "script": "The Skeptic's Charter protects your disciplinary values across the course and gives you a standard for judging every later decision.",
-    "aliases": [
-      "Skeptic's Charter"
+      "AI hallucinations",
+      "hallucination",
+      "fluent but false",
+      "fluency is not understanding"
     ]
   },
   {
     "slug": "ai-literacy",
-    "term": "AI Literacy",
+    "term": "AI Literacy: Beyond the Basics",
     "module": 1,
-    "definition": "The technical, applied, and critical capacity to understand, use, and govern AI in context.",
-    "videoEmbedUrl": "PLACEHOLDER",
-    "script": "AI literacy is not generic. Faculty identify which form matters for their discipline and which practices students need to retain.",
+    "definition": "The knowledge, skills, and judgment needed to understand, use, evaluate, question, and govern AI responsibly — including knowing when not to use it. AI literacy is always disciplinary because each field must decide what human judgment students still need to practice.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qunuOSY?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
     "aliases": [
       "AI literacy"
     ]
   },
   {
-    "slug": "safety-gap",
-    "term": "Safety Gap",
-    "module": 2,
-    "definition": "The gap between what an AI tool makes easy and what a novice can safely judge.",
-    "videoEmbedUrl": "PLACEHOLDER",
-    "script": "Experts often spot weak output quickly. Novices may accept the same output because fluency looks like competence.",
-    "aliases": [
-      "Safety Gap",
-      "safety gap"
-    ]
-  },
-  {
-    "slug": "productive-struggle",
-    "term": "Productive Struggle",
-    "module": 2,
-    "definition": "Difficulty that contributes directly to the intended learning rather than merely consuming time.",
-    "videoEmbedUrl": "PLACEHOLDER",
-    "script": "The design question is not whether work is difficult, but whether that difficulty helps students practice the target cognition.",
-    "aliases": [
-      "productive struggle"
-    ]
-  },
-  {
-    "slug": "oracle-tutor-adversary",
-    "term": "Oracle, Tutor, Adversary",
-    "module": 2,
-    "definition": "Three postures for deciding how AI should function inside a learning task.",
-    "videoEmbedUrl": "PLACEHOLDER",
-    "script": "Oracle supplies answers, Tutor supports thinking, and Adversary challenges claims. The posture should be selected intentionally.",
-    "aliases": [
-      "Oracle/Tutor/Adversary",
-      "Oracle, Tutor, Adversary"
-    ]
-  },
-  {
-    "slug": "aias",
-    "term": "AI Assessment Scale (AIAS)",
+    "slug": "ai-modified-assignments",
+    "term": "AI-Modified Assignments: The Middle Path",
     "module": 3,
-    "definition": "A shared vocabulary for communicating the permitted level and purpose of AI use in an assessment.",
-    "videoEmbedUrl": "PLACEHOLDER",
-    "script": "AIAS helps faculty move from vague permission statements to explicit design and communication choices.",
+    "definition": "Assignments redesigned so that AI use is intentionally structured — neither fully banned nor fully open — allowing students to engage meaningfully while preserving the core learning goal.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qunuOSr?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
     "aliases": [
-      "AIAS",
-      "AI Assessment Scale"
+      "AI-modified assignments",
+      "modified assignments"
     ]
   },
   {
-    "slug": "assessment-stress-test",
-    "term": "Assessment Stress Test",
+    "slug": "ai-proofing",
+    "term": "AI-Proofing: A Fragile Goal",
     "module": 3,
-    "definition": "A failure analysis that identifies where AI could bypass the essential learning an assessment is meant to measure.",
-    "videoEmbedUrl": "PLACEHOLDER",
-    "script": "Stress testing comes before redesign. It asks what can fail, what matters, and what evidence should remain visible.",
+    "definition": "The fragile goal of designing assignments AI cannot complete — undermined by capability drift, false confidence, inequitable enforcement, and brittle task design.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qunuOSl?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
     "aliases": [
-      "assessment stress test"
+      "AI-proofing",
+      "AI proofing"
     ]
   },
   {
-    "slug": "tilt",
-    "term": "TILT",
+    "slug": "ai-resilient-design",
+    "term": "AI-Resilient Design: Beyond the Arms Race",
     "module": 3,
-    "definition": "Transparent assignment design that clearly states purpose, task, and criteria for success.",
-    "videoEmbedUrl": "PLACEHOLDER",
-    "script": "TILT reduces avoidable ambiguity by telling students why they are doing the task, what to do, and what success looks like.",
+    "definition": "An assignment designed so AI use does not easily bypass the central learning goal. It assumes students may or may not use AI and makes evidence of learning robust either way through context, process, and judgment.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qunuOSI?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
     "aliases": [
-      "TILT"
+      "AI-resilient design",
+      "AI-resilient assignment"
+    ]
+  },
+  {
+    "slug": "algorithmic-bias",
+    "term": "Algorithmic Bias: Unfair Patterns in AI",
+    "module": 5,
+    "definition": "Systematic unfairness in AI outputs caused by biased data, design decisions, model behavior, or human assumptions. Asking AI to be unbiased is not enough; users must examine outputs, assumptions, and real-world impacts.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qunuOS2?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "algorithmic bias"
+    ]
+  },
+  {
+    "slug": "authentic-assessment",
+    "term": "Authentic Assessment: Applying Knowledge",
+    "module": 3,
+    "definition": "An assessment (Wiggins) that asks learners to apply knowledge, judgment, and skills in meaningful, discipline-specific contexts — not \"real-world\" decoration.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qunuOSo?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "authentic assessment"
+    ]
+  },
+  {
+    "slug": "capability-drift",
+    "term": "Capability Drift: AI's Moving Target",
+    "module": 6,
+    "definition": "The way AI tools change over time, making yesterday's examples, policies, or limits potentially outdated. Teaching materials should date capability claims and include a realistic review cycle.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qunuOSD?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "capability drift"
+    ]
+  },
+  {
+    "slug": "cognitive-load",
+    "term": "Cognitive Load",
+    "module": 2,
+    "definition": "The amount of mental effort a learner must use to process information and complete a task. Too much can overwhelm learning, while too little can produce shallow processing; good design reduces unnecessary load while protecting essential thinking.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qunuOSb?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "cognitive load"
+    ]
+  },
+  {
+    "slug": "cognitive-sanctuary",
+    "term": "Cognitive Sanctuary",
+    "module": 2,
+    "definition": "A bounded course moment where students do the essential thinking without AI substitution, so the invisible cognitive work becomes visible.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qunuOSF?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "cognitive sanctuary"
+    ]
+  },
+  {
+    "slug": "copyright-and-training-data",
+    "term": "Copyright and Training Data",
+    "module": 5,
+    "definition": "The legal and ethical questions raised when AI systems are trained on, or generate content based on, existing creative work. Useful review questions include source, consent, ownership, permitted use, and attribution.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qynuOWi?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "copyright and training data"
     ]
   },
   {
     "slug": "core-intellectual-substance",
     "term": "Core Intellectual Substance",
     "module": 4,
-    "definition": "The thinking, judgment, or disciplinary practice a student must personally perform to meet the learning goal.",
-    "videoEmbedUrl": "PLACEHOLDER",
-    "script": "Policy and assignment design should protect the core intellectual substance without pretending every production step is equally important.",
+    "definition": "The essential thinking, judgment, evidence, or decision-making that must remain the student's own work — the anchor of a defensible AI policy.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qynuOWj?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
     "aliases": [
       "core intellectual substance"
     ]
   },
   {
-    "slug": "equity-ethics-audit",
-    "term": "Equity and Ethics Audit",
+    "slug": "defining-ai",
+    "term": "Defining Artificial Intelligence (AI)",
+    "module": 1,
+    "definition": "A broad label for machine-based systems that use data and patterns to generate predictions, recommendations, decisions, or content. AI is not magic or human thinking; the teaching question is what learning purpose it serves.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qynuOWQ?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "artificial intelligence",
+      "AI"
+    ]
+  },
+  {
+    "slug": "desirable-difficulties",
+    "term": "Desirable Difficulties",
+    "module": 2,
+    "definition": "Challenges (from Bjork) that slow learners down in the short term but improve learning, retention, or transfer over time — such as retrieval, spacing, interleaving, and elaboration.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qynuOW6?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "desirable difficulties"
+    ]
+  },
+  {
+    "slug": "detection-led-integrity",
+    "term": "Detection-Led Integrity Practice",
+    "module": 4,
+    "definition": "An academic-integrity approach that relies primarily on AI detectors to identify misuse. Because detectors can be unreliable, inequitable, and corrosive to trust, stronger foundations are transparent policy, sound assignment design, process evidence, and student guidance.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qynuOWX?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "detection-led integrity practice",
+      "detection-led integrity"
+    ]
+  },
+  {
+    "slug": "digital-divide",
+    "term": "Digital Divide",
     "module": 5,
-    "definition": "A structured review of access, language, disability, privacy, truth, copyright, labor, environment, power, and bias.",
-    "videoEmbedUrl": "PLACEHOLDER",
-    "script": "The audit turns equity and ethics into concrete design checks rather than a general statement of concern.",
+    "definition": "Unequal access to technology, connectivity, paid tools, time, language and disability support, and the confidence or help needed to benefit from digital systems. Fair AI design assumes uneven access and provides a reliable free or non-AI path.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16q5nutVj?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
     "aliases": [
-      "equity and ethics audit"
+      "digital divide"
     ]
   },
   {
-    "slug": "substitute-instructor-test",
-    "term": "Substitute-Instructor Test",
-    "module": 6,
-    "definition": "A practical test of whether a colleague could use the portfolio on day one and know what to do.",
-    "videoEmbedUrl": "PLACEHOLDER",
-    "script": "A teaching-ready portfolio passes when another instructor can act on it without reconstructing the author's reasoning.",
+    "slug": "disciplinary-ai-literacy",
+    "term": "Disciplinary AI Literacy: Protecting Core Skills",
+    "module": 1,
+    "definition": "Knowing how to use AI for a specific disciplinary task while recognizing its limits, naming the use, keeping required human review, and questioning its social effects and the power structures behind it.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qynuOWl?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
     "aliases": [
-      "Substitute Instructor Test"
+      "disciplinary AI literacy",
+      "applied AI literacy",
+      "critical AI literacy"
     ]
   },
   {
-    "slug": "capability-drift",
-    "term": "Capability Drift",
-    "module": 6,
-    "definition": "The way AI capabilities and limitations change over time, making examples, policies, and assumptions stale.",
-    "videoEmbedUrl": "PLACEHOLDER",
-    "script": "Capability drift means good design needs a review cadence. Stable values remain, while tool-dependent claims are refreshed.",
+    "slug": "environmental-impact",
+    "term": "Environmental Impact of AI",
+    "module": 5,
+    "definition": "The energy, water, hardware, and infrastructure costs associated with building and running AI systems. Responsible use asks whether an AI activity is educationally meaningful enough to justify those costs.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qynuOWI?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
     "aliases": [
-      "capability drift"
+      "environmental impact of AI"
+    ]
+  },
+  {
+    "slug": "four-ai-stances",
+    "term": "Four AI Stances in Education",
+    "module": 2,
+    "definition": "Four postures for deciding how AI should function inside a learning task: Oracle supplies answers, Tutor supports thinking, Adversary challenges claims, and Collaborator contributes ideas while the human keeps responsibility.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qynuOW2?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "four AI stances",
+      "Oracle",
+      "Tutor",
+      "Adversary",
+      "Collaborator",
+      "Oracle/Tutor/Adversary"
+    ]
+  },
+  {
+    "slug": "friction-audit",
+    "term": "Friction Audit: Balancing AI & Effort",
+    "module": 2,
+    "definition": "A component-by-component review of an assignment that identifies where AI might bypass essential thinking and where helpful support is appropriate. The goal is to preserve friction that produces learning and reduce friction that only blocks access.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qynuOWo?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "friction audit"
+    ]
+  },
+  {
+    "slug": "generative-ai",
+    "term": "Generative AI: Your Drafting Partner",
+    "module": 1,
+    "definition": "AI systems that create new text, images, audio, video, code, or other outputs in response to a prompt. Their output can be useful, wrong, biased, or too polished to question, so treat it as a draft rather than a final authority.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qynuOWD?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "generative AI"
+    ]
+  },
+  {
+    "slug": "grounded-curiosity",
+    "term": "Grounded Curiosity",
+    "module": 1,
+    "definition": "The teaching stance of this course: refusing both AI hype and AI panic while making careful, evidence-informed design choices. It asks what learning is at stake, what evidence exists, what risks should be reduced, and what human judgment must remain central.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qBnutcn?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "grounded curiosity"
+    ]
+  },
+  {
+    "slug": "human-in-the-loop",
+    "term": "Human-in-the-Loop",
+    "module": 4,
+    "definition": "A design principle requiring a person to review, approve, or make consequential decisions rather than leaving them fully to AI. AI may draft, summarize, sort, or suggest; the human remains responsible for accuracy, fairness, privacy, and the final decision.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qBnutce?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "human-in-the-loop",
+      "human in the loop"
+    ]
+  },
+  {
+    "slug": "jagged-frontier",
+    "term": "Jagged Frontier",
+    "module": 1,
+    "definition": "From Co-Intelligence: the uneven boundary of AI ability — a model may handle a hard task easily yet fail at something that looks simple, with no clean line between the two. Test before you trust, and never assume strength on one task transfers to the next.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qBnutch?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "jagged frontier"
+    ]
+  },
+  {
+    "slug": "labor-and-human-cost",
+    "term": "Labor and the Human Cost of AI",
+    "module": 5,
+    "definition": "The often-invisible human work behind AI systems — including data labelers and content moderators whose labor makes models usable, often for low pay and under difficult conditions.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qBnutc1?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "labor and the human cost of AI"
+    ]
+  },
+  {
+    "slug": "llms",
+    "term": "LLMs: Prediction at Scale",
+    "module": 1,
+    "definition": "A type of generative AI trained on massive amounts of text to predict the next likely word, or token, and produce language-like responses. There is no internal fact-checker, so fluent output can still be completely mistaken.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qBnutci?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "LLM",
+      "large language model",
+      "LLMs"
+    ]
+  },
+  {
+    "slug": "needless-friction",
+    "term": "Needless Friction",
+    "module": 2,
+    "definition": "Difficulty that blocks access without building any learning — the counterpart to productive struggle, and often the right thing to remove with AI.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qBnutcj?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "needless friction"
+    ]
+  },
+  {
+    "slug": "post-plagiarism",
+    "term": "Post-Plagiarism",
+    "module": 4,
+    "definition": "The integrity paradigm (Eaton, 2023) in which appropriate, documented AI use is normal — so the question shifts from \"was AI used?\" to \"was the cognitive work done?\"",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qBnutcQ?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "post-plagiarism"
+    ]
+  },
+  {
+    "slug": "posture-mismatch",
+    "term": "Posture Mismatch",
+    "module": 2,
+    "definition": "The common design error of pairing an AI role with the wrong learner stage — most often putting a novice in front of an Oracle, or an Adversary.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qBnutc6?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "posture mismatch"
+    ]
+  },
+  {
+    "slug": "privacy-data-protection",
+    "term": "Privacy and Data Protection in AI",
+    "module": 5,
+    "definition": "Practices that prevent inappropriate sharing, collection, storage, or use of personal or sensitive information in AI tools. Prompts can carry student identities, grades, unpublished work, or sensitive context; do not enter private student data into public AI tools without institutional approval.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qBnutcX?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "privacy and data protection"
+    ]
+  },
+  {
+    "slug": "process-evidence",
+    "term": "Process Evidence",
+    "module": 3,
+    "definition": "Artifacts that show how a student developed their work — notes, drafts, annotations, decision logs, prompt logs, or reflections — sized to reveal thinking, not to create paperwork.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qpnutcJ?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "process evidence"
+    ]
+  },
+  {
+    "slug": "process-evidence-vs-paperwork",
+    "term": "Process Evidence vs. Process Paperwork",
+    "module": 3,
+    "definition": "The discipline that keeps evidence requirements honest: collect only what reveals a learning-relevant decision, and add at most one new element per assignment (the \"rule of one\").",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qpnutcH?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "process evidence vs. process paperwork"
+    ]
+  },
+  {
+    "slug": "productive-struggle",
+    "term": "Productive Struggle",
+    "module": 2,
+    "definition": "The meaningful effort learners experience when comparing evidence, testing ideas, solving problems, or revising work in ways that build understanding. If AI removes all of that struggle, it may also remove the intended learning.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qpnutcd?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "productive struggle"
+    ]
+  },
+  {
+    "slug": "prompt",
+    "term": "Prompt: Guiding the AI",
+    "module": 1,
+    "definition": "The instruction, question, context, role, example, rubric, or source material a user gives an AI system to guide its response. More context and clearer boundaries can improve the response, but no prompt guarantees accuracy.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qpnutcK?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "prompt"
+    ]
+  },
+  {
+    "slug": "restorative-academic-integrity",
+    "term": "Restorative Academic Integrity",
+    "module": 4,
+    "definition": "An integrity approach (aligned with Eaton's post-plagiarism) where a suspected violation begins with a developmental conversation before any sanction. The goal is to understand what happened, repair understanding, and rebuild trust rather than making punishment the opening move.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qpnutc7?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "restorative academic integrity"
+    ]
+  },
+  {
+    "slug": "socratic-prompting",
+    "term": "Socratic Prompting: Guiding Student Reasoning",
+    "module": 2,
+    "definition": "Using AI to ask guiding questions that help learners reason step by step instead of receiving direct answers. The learner still has to explain, choose, revise, and justify their own reasoning.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qpnutcs?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "socratic prompting"
+    ]
+  },
+  {
+    "slug": "syllabus-ai-policy",
+    "term": "Syllabus AI Policy",
+    "module": 4,
+    "definition": "A course-level statement explaining acceptable and unacceptable AI use, disclosure expectations, and the learning rationale behind those rules. Strong policies are clear, assignment-specific, connected to learning goals, and written to invite questions rather than threaten.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qpnutcM?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "syllabus AI policy"
+    ]
+  },
+  {
+    "slug": "five-aias-levels",
+    "term": "The Five AIAS Levels of Integration",
+    "module": 3,
+    "definition": "The scale's five contracts: Level 1 No AI; Level 2 AI Planning; Level 3 AI Collaboration (documented); Level 4 Full AI (student curates); Level 5 AI Exploration, where the AI's behavior is the object of study.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qpnutcL?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "AIAS",
+      "AI Assessment Scale",
+      "five AIAS levels"
+    ]
+  },
+  {
+    "slug": "tilt-framework",
+    "term": "The TILT Framework: Clear Expectations in AI",
+    "module": 3,
+    "definition": "Transparency in Learning and Teaching (Winkelmes): an assignment-design framework that makes purpose, task, and criteria for success explicit.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qpnutcN?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "TILT",
+      "TILT framework"
+    ]
+  },
+  {
+    "slug": "token",
+    "term": "Token: The Building Block of AI",
+    "module": 1,
+    "definition": "A small unit of text — often a word, part of a word, or punctuation — that a language model reads and predicts.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16qpnutc8?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "token"
+    ]
+  },
+  {
+    "slug": "udl-ai",
+    "term": "UDL & AI: Designing for Every Learner",
+    "module": 2,
+    "definition": "A framework (CAST) for designing learning experiences that provide multiple ways to access, engage with, and demonstrate learning. AI can support alternative examples, summaries, translations, or formats, but access is not automatic; accuracy, bias, privacy, and workload still require review.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16q5nutVi?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "UDL",
+      "Universal Design for Learning"
+    ]
+  },
+  {
+    "slug": "icraft",
+    "term": "iCRAFT: Designing the Perfect Prompt",
+    "module": 1,
+    "definition": "A prompt scaffold from the Pedagogical Promptbook — Instruction, Context, Role, Audience, Format, and Tone — used to structure any AI prompt students will work with. Naming each element treats a prompt as a designed object rather than a lucky guess.",
+    "videoEmbedUrl": "https://GARCIA.screencasthost.com/player/cO16Ycnutfy?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
+    "aliases": [
+      "iCRAFT",
+      "iCRAFT prompt structure"
     ]
   }
 ]
