@@ -496,10 +496,44 @@
         <div class="container">
           <p class="eyebrow">A ${hoursNum}-hour asynchronous faculty course</p>
           <h1>${esc(site.fullName || "Teaching with Artificial Intelligence")}</h1>
-          <p class="lede">${esc(site.tagline)}</p>
+          <p class="lede">${esc(site.tagline)} A free, self-paced course for higher-ed faculty &mdash; plus standalone sessions, a plain-language video glossary, and annotated research.</p>
           <div class="button-row">
             <a class="button button-gold" href="course/">Start the Course</a>
-            <a class="button button-light" href="start/">I only have 20 minutes</a>
+            <a class="button button-light" href="start/">Not sure where to begin?</a>
+          </div>
+          <p class="small" style="margin-top: 1.5rem; opacity: 0.85;">Have a question? Click the floating icon at the bottom right of your screen anytime.</p>
+        </div>
+      </section>
+      <section class="section-tint section">
+        <div class="container">
+          <div class="grid grid-2" style="align-items: start;">
+            ${(site.courseVideos && site.courseVideos.opening && site.courseVideos.opening[0]) ? renderVideoCard(site.courseVideos.opening[0]).replace(/<label class="check-row">[\s\S]*?<\/label>/, "") : ""}
+            <div class="grid grid-2">
+              <article class="card">
+                <div class="card-icon">01</div>
+                <h3>Take the full course</h3>
+                <p>Six progressive modules resulting in a teaching portfolio.</p>
+                <a class="text-link" href="course/">Course hub &rarr;</a>
+              </article>
+              <article class="card">
+                <div class="card-icon">02</div>
+                <h3>Short on time?</h3>
+                <p>Choose a tailored quick-start path to find an entry point.</p>
+                <a class="text-link" href="start/">Find your path &rarr;</a>
+              </article>
+              <article class="card">
+                <div class="card-icon">03</div>
+                <h3>Want one idea?</h3>
+                <p>Explore short, standalone faculty sessions you can try tomorrow.</p>
+                <a class="text-link" href="sessions/">View sessions &rarr;</a>
+              </article>
+              <article class="card">
+                <div class="card-icon">04</div>
+                <h3>Reference shelf</h3>
+                <p>Browse key terms, annotated research, and faculty chatbots.</p>
+                <a class="text-link" href="key-terms/">Explore resources &rarr;</a>
+              </article>
+            </div>
           </div>
         </div>
       </section>

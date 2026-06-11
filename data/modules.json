@@ -103,7 +103,16 @@
     "relatedTerms": [
       "grounded-curiosity",
       "ai-literacy",
-      "capability-drift"
+      "capability-drift",
+      "defining-ai",
+      "generative-ai",
+      "llms",
+      "token",
+      "ai-hallucinations",
+      "jagged-frontier",
+      "disciplinary-ai-literacy",
+      "prompt",
+      "icraft"
     ],
     "slides": {
       "title": "Module 1 slide deck (PDF)",
@@ -196,7 +205,15 @@
     ],
     "relatedTerms": [
       "productive-struggle",
-      "four-ai-stances"
+      "four-ai-stances",
+      "needless-friction",
+      "friction-audit",
+      "cognitive-load",
+      "cognitive-sanctuary",
+      "desirable-difficulties",
+      "posture-mismatch",
+      "socratic-prompting",
+      "udl-ai"
     ],
     "slides": {
       "title": "Module 2 slide deck (PDF)",
@@ -289,7 +306,11 @@
     ],
     "relatedTerms": [
       "five-aias-levels",
-      "tilt-framework"
+      "tilt-framework",
+      "authentic-assessment",
+      "process-evidence",
+      "process-evidence-vs-paperwork",
+      "ai-resilient-design"
     ],
     "slides": {
       "title": "Module 3 slide deck (PDF)",
@@ -395,7 +416,12 @@
     "relatedTerms": [
       "core-intellectual-substance",
       "four-ai-stances",
-      "tilt-framework"
+      "tilt-framework",
+      "ai-proofing",
+      "ai-resilient-design",
+      "human-in-the-loop",
+      "post-plagiarism",
+      "restorative-academic-integrity"
     ],
     "slides": {
       "title": "Module 4 slide deck (PDF)",
@@ -512,7 +538,15 @@
     ],
     "relatedTerms": [
       "core-intellectual-substance",
-      "five-aias-levels"
+      "five-aias-levels",
+      "syllabus-ai-policy",
+      "detection-led-integrity",
+      "algorithmic-bias",
+      "copyright-and-training-data",
+      "digital-divide",
+      "environmental-impact",
+      "labor-and-human-cost",
+      "privacy-data-protection"
     ],
     "slides": {
       "title": "Module 5 slide deck (PDF)",
