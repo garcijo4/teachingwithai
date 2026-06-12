@@ -152,8 +152,8 @@
       <div class="site-header">
         <div class="container header-inner">
           <a class="wordmark" href="./">
-            <strong>${esc(site.siteName)}</strong>
-            <span>A FACULTY LEARNING SERIES FOR HIGHER EDUCATION</span>
+            <img src="assets/img/teaching-with-ai-logo-white.png" alt="${esc(site.siteName)}" style="height: 1.8rem; width: auto;" />
+            <span>A FACULTY LEARNING SERIES</span>
           </a>
           <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">Menu</button>
           <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
@@ -1333,20 +1333,17 @@
       ${pageHero("Weekly update", "Useful developments, without the headline chase.", "New articles, course improvements, and faculty-support tools in one short weekly email.")}
       <section class="section">
         <div class="narrow">
-          <div class="form-card">
-            <form class="form-grid" name="subscribe" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/subscribe/thanks/">
-              <input type="hidden" name="form-name" value="subscribe" />
-              <p style="display:none;"><label>Do not fill this out:<input name="bot-field" /></label></p>
-              <div class="form-field"><label for="name">Name <span class="muted">(optional)</span></label><input id="name" type="text" name="name" autocomplete="name" /></div>
-              <div class="form-field"><label for="email">Email address</label><input id="email" type="email" name="email" autocomplete="email" required /></div>
-              <label class="check-row"><input type="checkbox" name="cal_lutheran" value="yes" /><span>I teach at Cal Lutheran</span></label>
-              <button type="submit" class="button">Subscribe</button>
-            </form>
-            <p class="small muted" style="margin-top:1rem">Your email is used only for the weekly update. Unsubscribe anytime.</p>
+          <div class="form-card" id="eo-form-container">
           </div>
           <p style="margin-top:1.5rem"><a class="text-link" href="updates/">Preview past weekly updates &rarr;</a></p>
         </div>
       </section>`;
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = "https://eocampaign1.com/form/38009506-6669-11f1-aec5-3b85e0858f90.js";
+    script.setAttribute('data-form', '38009506-6669-11f1-aec5-3b85e0858f90');
+    document.getElementById('eo-form-container').appendChild(script);
   }
 
   function renderSupport() {
