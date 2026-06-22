@@ -47,6 +47,7 @@ JS to update content.**
 | `quickstart.json` | Time-based quick-start paths |
 | `faq.json` | FAQ entries |
 | `updates.json` | Newsletter archive |
+| `presentations.json` | Collapsed conference-presentation archive on the About page |
 
 ### The PLACEHOLDER convention
 

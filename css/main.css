@@ -888,6 +888,10 @@ summary {
 }
 
 .copy-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.1rem 0.2rem;
   border: 0;
   background: transparent;
   color: var(--purple-800);
@@ -906,8 +910,8 @@ summary {
 
 .az-bar .az-letter {
   display: grid;
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 2.75rem;
+  height: 2.75rem;
   place-items: center;
   border: 0;
   border-radius: 50%;
@@ -1102,6 +1106,95 @@ summary {
   color: #5b4500;
   font-size: 0.75rem;
   font-weight: 800;
+}
+
+.presentation-archive {
+  margin-top: 1.25rem;
+}
+
+.presentation-archive summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.presentation-archive-count {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.presentation-archive-body {
+  color: var(--ink);
+}
+
+.presentation-archive-body > p {
+  max-width: 760px;
+}
+
+.presentation-year {
+  margin-top: 1.3rem;
+}
+
+.presentation-year-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.presentation-year-heading h3 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.presentation-year-heading span {
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 750;
+}
+
+.presentation-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.presentation-item {
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.presentation-item-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.presentation-item h4 {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.presentation-meta,
+.presentation-note {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.presentation-note {
+  color: var(--purple-800);
+  font-weight: 750;
 }
 
 .empty-state {
@@ -1469,6 +1562,7 @@ summary {
 
 .term-ref::after {
   content: attr(data-tip);
+  display: none;
   position: absolute;
   bottom: calc(100% + 0.5rem);
   left: 50%;
@@ -1492,6 +1586,7 @@ summary {
 
 .term-ref:hover::after,
 .term-ref:focus-visible::after {
+  display: block;
   opacity: 1;
   transform: translate(-50%, 0);
 }
@@ -1748,13 +1843,14 @@ summary {
 
 .copy-btn {
   flex-shrink: 0;
+  min-height: 2.75rem;
   border: 1px solid var(--purple-700);
   background: var(--white);
   color: var(--purple-800);
   font: inherit;
   font-size: 0.78rem;
   font-weight: 700;
-  padding: 0.3rem 0.8rem;
+  padding: 0.45rem 0.9rem;
   border-radius: 999px;
   cursor: pointer;
 }

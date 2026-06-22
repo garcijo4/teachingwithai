@@ -77,6 +77,22 @@
     return `${Math.round(minutes)} min`;
   }
 
+  function articleDateValue(article) {
+    const match = String(article?.date || "").match(/^(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?/);
+    if (!match) return 0;
+    const year = Number(match[1]);
+    const month = Number(match[2] || 1) - 1;
+    const day = Number(match[3] || 1);
+    return Date.UTC(year, month, day);
+  }
+
+  function sortArticlesByDate(articles) {
+    return [...articles].sort((a, b) => {
+      const byDate = articleDateValue(b) - articleDateValue(a);
+      return byDate || String(a.title || "").localeCompare(String(b.title || ""));
+    });
+  }
+
   function videoDuration(video) {
     return fmtClock(parseMinutes(video.duration));
   }
@@ -128,12 +144,15 @@
       if (linked.has(slug)) return;
       const escapedName = esc(name).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       const pattern = new RegExp(`(^|[^A-Za-z0-9_-])(${escapedName})(?=$|[^A-Za-z0-9_-])`);
-      if (!pattern.test(output)) return;
+      const parts = output.split(/(<a class="term-ref"[\s\S]*?<\/a>)/g);
+      const matchIndex = parts.findIndex((part) => !part.startsWith('<a class="term-ref"') && pattern.test(part));
+      if (matchIndex === -1) return;
       linked.add(slug);
-      output = output.replace(
+      parts[matchIndex] = parts[matchIndex].replace(
         pattern,
         `$1<a class="term-ref" href="key-terms/#${slug}" data-tip="${esc(definition)}">$2</a>`
       );
+      output = parts.join("");
     });
     return output;
   }
@@ -384,7 +403,7 @@
             <div>
               <p class="eyebrow" style="color:var(--gold)">Keep the conversation going</p>
               <h2>One useful update. Once a week.</h2>
-              <p>Follow new articles, course improvements, and faculty-support tools without chasing every headline.</p>
+              <p>Follow new resources, course improvements, and faculty-support tools without chasing every headline.</p>
             </div>
             <div class="button-row">
               <a class="button button-gold" href="subscribe/">Subscribe</a>
@@ -483,6 +502,7 @@
       fetchData("sessions").catch(() => [])
     ]);
     const termIndex = buildTermIndex(terms);
+    const latestArticles = sortArticlesByDate(articles).slice(0, 3);
     const hoursNum = Math.round(totalRuntimeMinutes(modules) / 60);
     const state = CourseProgress.read();
     const lastId = state._last;
@@ -496,7 +516,7 @@
         <div class="container">
           <p class="eyebrow">A ${hoursNum}-hour asynchronous faculty course</p>
           <h1>${esc(site.fullName || "Teaching with Artificial Intelligence")}</h1>
-          <p class="lede">${esc(site.tagline)} A free, self-paced course for higher-ed faculty &mdash; plus standalone sessions, a plain-language video glossary, and annotated research.</p>
+          <p class="lede">${esc(site.tagline)} A free, self-paced course for higher-ed faculty &mdash; plus standalone sessions, a plain-language video glossary, and curated resources.</p>
           <div class="button-row">
             <a class="button button-gold" href="course/">Start the Course</a>
             <a class="button button-light" href="start/">Not sure where to begin?</a>
@@ -530,7 +550,7 @@
               <article class="card">
                 <div class="card-icon">04</div>
                 <h3>Reference shelf</h3>
-                <p>Browse key terms, annotated research, and faculty chatbots.</p>
+                <p>Browse key terms, curated resources, and faculty chatbots.</p>
                 <a class="text-link" href="key-terms/">Explore resources &rarr;</a>
               </article>
             </div>
@@ -580,8 +600,8 @@
       </section>
       <section class="section">
         <div class="container">
-          <div class="section-heading"><div><p class="eyebrow">Curated context</p><h2>Latest AI and teaching articles</h2></div><a class="button button-outline" href="articles/">All articles</a></div>
-          <div class="grid grid-3">${articles.slice(0, 3).map((article) => articleCard(article, true)).join("")}</div>
+          <div class="section-heading"><div><p class="eyebrow">Curated context</p><h2>Latest AI and teaching resources</h2></div><a class="button button-outline" href="articles/">All articles &amp; resources</a></div>
+          <div class="grid grid-3">${latestArticles.map((article) => articleCard(article, true)).join("")}</div>
         </div>
       </section>
       ${sessions.length ? `
@@ -1115,6 +1135,7 @@
     const peerReviewed = /^peer/i.test(article.status || "");
     const statusBadge = article.status ? badge(esc(article.status), peerReviewed ? "badge-success" : "badge-gold") : "";
     const url = realUrl(article.url);
+    const actionLabel = article.actionLabel || (peerReviewed || /^preprint/i.test(article.status || "") ? "Read the paper" : "Open resource");
     return `
       <article class="card article-card" data-article-tags="${esc(article.tags.join(" "))}" data-article-dimension="${esc(article.dimension || "")}">
         <div class="badge-row">${statusBadge}${article.tags.map((tag) => badge(esc(tag))).join("")}</div>
@@ -1125,12 +1146,12 @@
         <p>${esc(article.annotation)}</p>
         ${!compact && article.why ? `<p class="article-why"><strong>Why it matters:</strong> ${esc(article.why)}</p>` : ""}
         ${!compact && article.evidence ? `<p class="article-evidence">Evidence note: ${esc(article.evidence)}</p>` : ""}
-        ${actionButton("Read the paper", article.url, "button-outline button-small")}
+        ${actionButton(actionLabel, article.url, "button-outline button-small")}
       </article>`;
   }
 
   async function renderArticles() {
-    const articles = await fetchData("articles");
+    const articles = sortArticlesByDate(await fetchData("articles"));
     let feed = null;
     try {
       feed = await fetchData("feed-cache");
@@ -1141,17 +1162,17 @@
     const tags = [...new Set(articles.flatMap((article) => article.tags))].sort();
     const dimensions = [...new Set(articles.map((article) => article.dimension).filter(Boolean))];
     main.innerHTML = `
-      ${pageHero("Curated context", "AI and teaching research, with a reason to read.", "Recent academic papers on teaching and learning with generative AI - each verified, labeled peer-reviewed or preprint, and annotated with why it matters for faculty.")}
+      ${pageHero("Curated context", "AI and teaching articles, tools, and resources.", "Recent academic papers and selected resources on teaching and learning with generative AI - each labeled by type and annotated with why it matters for faculty.")}
       <section class="section">
         <div class="container">
           ${dimensions.length ? `
-          <p class="eyebrow">Filter by research dimension</p>
-          <div class="filter-bar" aria-label="Filter articles by research dimension">
+          <p class="eyebrow">Filter by dimension</p>
+          <div class="filter-bar" aria-label="Filter articles and resources by dimension">
             <button class="filter-button" type="button" aria-pressed="true" data-dimension-filter="all">All dimensions</button>
             ${dimensions.map((dimension) => `<button class="filter-button" type="button" aria-pressed="false" data-dimension-filter="${esc(dimension)}">${esc(dimension)}</button>`).join("")}
           </div>` : ""}
           <p class="eyebrow">Filter by tag</p>
-          <div class="filter-bar" aria-label="Filter articles by tag">
+          <div class="filter-bar" aria-label="Filter articles and resources by tag">
             <button class="filter-button" type="button" aria-pressed="true" data-article-filter="all">All</button>
             ${tags.map((tag) => `<button class="filter-button" type="button" aria-pressed="false" data-article-filter="${esc(tag)}">${esc(tag)}</button>`).join("")}
           </div>
@@ -1330,7 +1351,7 @@
 
   function renderSubscribe() {
     main.innerHTML = `
-      ${pageHero("Weekly update", "Useful developments, without the headline chase.", "New articles, course improvements, and faculty-support tools in one short weekly email.")}
+      ${pageHero("Weekly update", "Useful developments, without the headline chase.", "New resources, course improvements, and faculty-support tools in one short weekly email.")}
       <section class="section">
         <div class="narrow">
           <div class="form-card" id="eo-form-container">
@@ -1362,7 +1383,50 @@
       </section>`;
   }
 
-  function renderAbout() {
+  function renderPresentationItem(presentation) {
+    const venueLine = [presentation.venue, presentation.location].filter(Boolean).join(", ");
+    return `
+      <li class="presentation-item">
+        <div class="presentation-item-head">
+          <h4>${esc(presentation.title)}</h4>
+          ${presentation.type ? badge(esc(presentation.type), presentation.type.toLowerCase().includes("workshop") ? "badge-gold" : "") : ""}
+        </div>
+        <p class="presentation-meta">${esc(presentation.authors)} (${esc(presentation.year)}). ${esc(venueLine)}.</p>
+        ${presentation.note ? `<p class="presentation-note">${esc(presentation.note)}</p>` : ""}
+      </li>`;
+  }
+
+  function renderPresentationArchive(presentations) {
+    if (!presentations || !presentations.length) return "";
+    const sorted = [...presentations].sort((a, b) => Number(b.year) - Number(a.year));
+    const years = [...new Set(sorted.map((item) => item.year))].sort((a, b) => Number(b) - Number(a));
+    const range = `${years[years.length - 1]}-${years[0]}`;
+
+    return `
+      <details class="presentation-archive">
+        <summary>
+          <span>Conference presentations</span>
+          <span class="presentation-archive-count">${presentations.length} talks and workshops, ${range}</span>
+        </summary>
+        <div class="details-body presentation-archive-body">
+          <p>Recent finance, analytics, and AI-in-education talks, grouped by year so the archive can stay useful without taking over the page.</p>
+          ${years.map((year) => {
+            const items = sorted.filter((presentation) => presentation.year === year);
+            return `
+              <section class="presentation-year" aria-labelledby="presentations-${esc(year)}">
+                <div class="presentation-year-heading">
+                  <h3 id="presentations-${esc(year)}">${esc(year)}</h3>
+                  <span>${items.length} ${items.length === 1 ? "presentation" : "presentations"}</span>
+                </div>
+                <ul class="presentation-list">${items.map(renderPresentationItem).join("")}</ul>
+              </section>`;
+          }).join("")}
+        </div>
+      </details>`;
+  }
+
+  async function renderAbout() {
+    const presentations = await fetchData("presentations").catch(() => []);
     main.innerHTML = `
       ${pageHero("About the course", "Grounded curiosity is a design stance.", "This course refuses both AI evangelism and AI panic. It asks faculty to make choices they can explain, defend, and revise.")}
       <section class="section">
@@ -1383,15 +1447,13 @@
           </article>
         </div>
       </section>
-      <section class="section section-tint">
-        <div class="container"><div class="callout"><p class="eyebrow">Content currency</p><h2>Every capability claim needs a vintage stamp.</h2><p>AI capabilities change quickly. Modules and articles carry a last-reviewed date, while stable pedagogical values remain visible across revisions.</p>${site.lastReviewed ? `<p><strong>Site last reviewed:</strong> ${esc(site.lastReviewed)}</p>` : ""}</div></div>
-      </section>
       <section class="section-sm">
         <div class="container">
           <div class="callout">
             <p class="eyebrow">Speaking and sessions</p>
-            <h2>Conference talks come with companion guides.</h2>
+            <h2>Conference talks connect the course to active research.</h2>
             <p>Materials from talks and workshops &mdash; including the SWFA 2026 guide to the top 10 AI applications for finance classroom instruction &mdash; live in the <a href="sessions/">Sessions</a> section.</p>
+            ${renderPresentationArchive(presentations)}
           </div>
         </div>
       </section>

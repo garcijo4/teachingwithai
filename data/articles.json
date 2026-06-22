@@ -193,5 +193,19 @@
     "annotation": "Focus groups with 29 STEM faculty at a large U.S. public university show GenAI adoption is often student-driven; faculty describe pedagogical uses alongside concerns about learning, assessment validity, and integrity, and name the institutional support they need.",
     "why": "Faculty development cannot stop at tool demos - discipline-specific spaces to redesign assessment and compare practices matter more.",
     "evidence": "Qualitative preprint from one institution and one broad disciplinary cluster."
+  },
+  {
+    "title": "AI Prompt Footprint Calculator",
+    "authors": "Andy Masley",
+    "source": "Interactive visual resource",
+    "date": "2026-06",
+    "status": "Interactive tool",
+    "url": "https://www.andymasley.com/visuals/ai-prompt-footprint/",
+    "dimension": "AI Literacy & Faculty Practice",
+    "tags": ["Tools", "Ethics", "Environment"],
+    "annotation": "An interactive calculator that estimates the carbon and water footprint of everyday AI use across models, output lengths, and usage patterns.",
+    "why": "Useful for putting environmental-impact claims into proportion without turning them into a vague reason for either blanket adoption or blanket avoidance.",
+    "evidence": "Use as an awareness and estimation tool, not a precise accounting system. Estimates depend on model, output length, regional grid assumptions, and exclusions such as training, image/video generation, and retries.",
+    "actionLabel": "Open resource"
   }
 ]
