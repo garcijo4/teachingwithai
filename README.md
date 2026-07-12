@@ -1,30 +1,34 @@
 # Teaching with AI — Website
 
 The faculty-development website for **Teaching with Artificial Intelligence**
-(California Lutheran University). Plain HTML, CSS, vanilla JavaScript, and
-editable JSON files. No build step.
+(California Lutheran University). Content remains editable in JSON; a small
+jsdom build runs the existing vanilla-JavaScript renderer and writes fully
+prerendered pages to `dist/` for search engines, link previews, and first paint.
 
 ## Where it lives
 
-- **Production:** https://teachingwithartificialintelligence.netlify.app/
+- **Production:** https://www.teachingwithai.app/
   (Netlify builds automatically from the GitHub repo's `main` branch)
-- **GitHub Pages preview:** https://garcijo4.github.io/teachingwithai/
-  (deployed by `.github/workflows/pages.yml`; useful as a staging check)
 
-Push to `main` → GitHub Pages and Netlify both redeploy. Netlify is the
-canonical site: all `<link rel="canonical">`, sitemap, and robots URLs point
-there, and **forms only work on Netlify** (GitHub Pages cannot accept POSTs).
+Push to `main` and Netlify redeploys. The custom domain is
+canonical: all `<link rel="canonical">`, sitemap, and robots URLs point there.
+The legacy Netlify hostname redirects permanently to the custom domain.
 
 ## Preview locally
 
-From the `website` folder, run any static server, then open
-`http://127.0.0.1:8080/`:
+From the `website` folder, install the locked dependency, build, and serve the
+generated site. Then open `http://127.0.0.1:8080/`:
 
 ```powershell
-python -m http.server 8080
+npm ci
+npm run build
+python -m http.server 8080 --directory dist
 ```
 
-Don't open files via `file://` — pages fetch JSON and need a web server.
+The build prerenders every ordinary page plus route-specific pages for modules,
+sessions, and finance applications, then runs automated metadata, accessibility,
+link, asset, and sitemap checks. Client-side JavaScript adds interactions without
+discarding the prerendered content. Don't open files via `file://`.
 
 ## Editing content (the JSON layer)
 
@@ -34,7 +38,7 @@ JS to update content.**
 | File | Controls |
 |---|---|
 | `site.json` | Site name, tagline, contact email, support URL, site URL, last-reviewed date, intro/conclusion videos, analytics code |
-| `modules.json` | Module titles, objectives, videos, reading, worksheets, slides, artifacts |
+| `modules.json` | Module titles, objectives, videos and lecture slide links, reading, worksheets, and artifacts |
 | `sessions.json` | Standalone sessions (outside the course): title, blurb, video, slides, worksheet, try-it steps, related modules/terms. Add an object to the array and the listing page, session page, and homepage strip update automatically |
 | `finance-applications.json` | Finance guide (SWFA companion): the 10 ranked applications shown at `/sessions/ai-in-finance/`. Each entry holds title, difficulty, tagline, summary, and ordered content sections |
 | `finance-prompts.json` | Finance guide prompt library: every prompt with title, source application, difficulty, and full text (one-click copy on the page) |
@@ -42,12 +46,10 @@ JS to update content.**
 | `finance-frameworks.json`, `finance-presentation.json`, `finance-references.json` | Finance guide appendix pages (OECD frameworks, slide-generation tutorial, reference list) |
 | `key-terms.json` | Glossary definitions, video scripts, tooltip aliases |
 | `articles.json` | Curated article cards |
-| `feeds.json` | RSS feeds for the auto-updating articles section |
 | `chatbots.json` | Chatbot directory (set `"status": "live"` + real `url` to activate a Launch button) |
 | `quickstart.json` | Time-based quick-start paths |
 | `faq.json` | FAQ entries |
 | `updates.json` | Newsletter archive |
-| `presentations.json` | Collapsed conference-presentation archive on the About page |
 
 ### The PLACEHOLDER convention
 
@@ -60,7 +62,7 @@ automatically** — no other change needed. This applies to:
 - `url` (Google Doc `/copy` link) and `exportUrl` (Word/PDF export) on worksheets
 - `url` (read online) and `exportUrl` (Word/PDF download) on each module's `reading`
   (the "Module reading" card between videos and worksheets; counts toward module progress)
-- `pdfUrl` / `previewUrl` on each module's `slides`
+- `slidesUrl` on lecture and session videos
 - `url` on articles and chatbots
 - `supportUrl` and `portfolioWorkbookUrl` in `site.json`
 
@@ -69,8 +71,6 @@ automatically** — no other change needed. This applies to:
 - **Runtime tokens:** `{{TOTAL_RUNTIME}}`, `{{TOTAL_MINUTES}}`, `{{TOTAL_HOURS}}`
   in `faq.json` / `quickstart.json` are replaced with totals computed from
   `modules.json`, so durations never drift when videos change.
-- **Express path:** add `"express": true` to a video in `modules.json` to give
-  it a gold "Express path" badge (the module page then explains the badge).
 - **Video summaries:** each video's `summary` field renders as a collapsible
   "Video summary" dropdown under the player. Edit the text in `modules.json`
   (or `site.json` for the intro/conclusion videos).
@@ -81,25 +81,10 @@ automatically** — no other change needed. This applies to:
   `"goatcounterCode": "yourcode"` in `site.json` (the part before
   `.goatcounter.com`). Leave empty for no analytics. Cookieless — no banner needed.
 
-## Forms (Netlify)
+## Newsletter
 
-Two forms: `weekly-updates` (footer + subscribe page) and `module-feedback`
-(every module page, sent via AJAX). Hidden static copies live at the bottom of
-`index.html` so Netlify's build bots register them — **don't delete that block.**
-
-One-time setup: in the Netlify dashboard → **Forms → Enable form detection**,
-then redeploy. Submissions appear under Forms (100/month on the free tier);
-export the list or wire a notification there.
-
-## Auto-updating articles (RSS)
-
-`.github/workflows/rss-cache.yml` runs daily, executes
-`scripts/fetch_feeds.py`, and commits `data/feed-cache.json` (which also
-triggers a Netlify redeploy). The Articles page shows the "Recent from around
-the web" section only when the cache has items.
-
-To activate: replace the `PLACEHOLDER` values in `data/feeds.json` with real
-RSS URLs. Until then the workflow runs harmlessly and the section stays hidden.
+The subscription page uses the EmailOctopus embed configured in `js/main.js`.
+Netlify form detection is not used.
 
 ## Assets
 
@@ -109,16 +94,14 @@ with approved artwork anytime, keeping the same filenames.
 
 ## Pre-launch checklist
 
-1. Replace remaining `PLACEHOLDER` values in `data/` (search the folder).
-2. Set Google Drive files to "Anyone with the link — Viewer"; use `/copy`
+1. Set Google Drive files to "Anyone with the link — Viewer"; use `/copy`
    links for Docs and `/export?format=docx` links for Word export.
-3. Add ScreenPal/HeyGen embed URLs and verify captions.
-4. Enable Netlify form detection and send a test submission.
-5. Put real RSS URLs in `data/feeds.json`; run the workflow manually once
-   (Actions → Refresh RSS feed cache → Run workflow).
-6. Confirm CTL-credit language in `faq.json` and the instructor bio on About.
-7. Replace placeholder artwork in `assets/img/`.
-8. Run a Lighthouse pass (target 90+) and a link check.
+2. Add ScreenPal/HeyGen embed URLs and verify captions.
+3. Send a test EmailOctopus subscription and verify the confirmation flow.
+4. Confirm CTL-credit language in `faq.json` and the instructor bio on About.
+5. Replace placeholder artwork in `assets/img/`.
+6. Run `npm ci` and `npm run build`; confirm all prerender and QA checks pass.
+7. Run a Lighthouse pass (target 90+).
 
 ## Finance guide (SWFA companion)
 

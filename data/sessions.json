@@ -16,18 +16,13 @@
       "embedUrl": "https://GARCIA.screencasthost.com/player/cO16FunuOMY?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
       "summary": "Case discussions look backward: the decision is made and the pressure is gone. This session flips the timing by letting students step into a situation while the decision is still unfolding, with a chatbot as scenario partner — a nervous investor, skeptical client, or confused patient — never an answer machine. The loop is simple: students enter the scenario, respond, the AI responds in character, the exchange repeats with rising pressure, then reflection and your debrief. The key design principle: assess the reflection, not the chatbot conversation — the student's revised judgment is the evidence. A five-step build (define the objective, build the scaffold, write the prompt, test and iterate, run and debrief) and a five-block prompt anatomy (role, situation, boundaries, behavior, debrief) keep the bot from solving the task or grading without you. A green/yellow/red boundary keeps faculty judgment in the loop: simulate and support reflection, verify any formative feedback, never private student data or final grades. It closes with a modest pilot — one role, one decision, one debrief question, on a 5/10/5/10-minute clock — and three assessment questions: What did you decide? What evidence did you use? What did the role-play make you reconsider?",
       "duration": "9.1 min",
-      "slidesUrl": "https://github.com/garcijo4/teachingwithai/blob/main/assets/slides/A1.%20From_Static_Cases_to_AI_Role-Play.pdf"
-    },
-    "slides": {
-      "title": "AI Role-Play session slides",
-      "pdfUrl": "https://github.com/garcijo4/teachingwithai/blob/main/assets/slides/A1.%20From_Static_Cases_to_AI_Role-Play.pdf",
-      "previewUrl": "https://github.com/garcijo4/teachingwithai/blob/main/assets/slides/A1.%20From_Static_Cases_to_AI_Role-Play.pdf"
+      "slidesUrl": "assets/slides/A1.%20From_Static_Cases_to_AI_Role-Play.pdf"
     },
     "resources": [
       {
         "title": "Role-Play in Finance Example",
         "description": "An example of an AI role-play application in the finance classroom.",
-        "url": "/sessions/ai-in-finance/application.html?a=1",
+        "url": "/sessions/ai-in-finance/applications/1/",
         "icon": "LINK",
         "buttonText": "View example"
       }
@@ -47,7 +42,7 @@
       "productive-struggle"
     ],
     "published": "2026-06-10",
-    "lastReviewed": "2026-06-10"
+    "lastReviewed": "2026-07-12"
   },
   {
     "id": "ai-in-finance",
@@ -132,6 +127,6 @@
       5
     ],
     "published": "2026-03-01",
-    "lastReviewed": "2026-06-10"
+    "lastReviewed": "2026-07-12"
   }
 ]

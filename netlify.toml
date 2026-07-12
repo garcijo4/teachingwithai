@@ -1,5 +1,12 @@
 [build]
-  publish = "."
+  command = "npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "https://teachingwithartificialintelligence.netlify.app/*"
+  to = "https://www.teachingwithai.app/:splat"
+  status = 301
+  force = true
 
 [[headers]]
   for = "/*"
@@ -9,9 +16,32 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
 
 [[redirects]]
+  from = "/course/module.html"
+  to = "/course/modules/:m/"
+  status = 301
+  force = true
+  query = {m = ":m"}
+
+[[redirects]]
   from = "/course/module"
-  to = "/course/module.html"
-  status = 200
+  to = "/course/modules/:m/"
+  status = 301
+  force = true
+  query = {m = ":m"}
+
+[[redirects]]
+  from = "/sessions/session.html"
+  to = "/sessions/:s/"
+  status = 301
+  force = true
+  query = {s = ":s"}
+
+[[redirects]]
+  from = "/sessions/ai-in-finance/application.html"
+  to = "/sessions/ai-in-finance/applications/:a/"
+  status = 301
+  force = true
+  query = {a = ":a"}
 
 [[redirects]]
   from = "/*"

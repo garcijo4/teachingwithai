@@ -6,7 +6,7 @@
     "steps": [
       {
         "title": "Watch: Your disciplinary line in the sand",
-        "url": "course/module.html?m=1#video-m1v1",
+        "url": "course/modules/1/#video-m1v1",
         "minutes": "6 min"
       },
       {
@@ -16,7 +16,7 @@
       },
       {
         "title": "Write one sentence AI must not damage",
-        "url": "course/module.html?m=1#worksheets",
+        "url": "course/modules/1/#worksheets",
         "minutes": "8 min"
       }
     ]
@@ -32,7 +32,7 @@
         "minutes": "5 min"
       },
       {
-        "title": "Complete the relevant module express path",
+        "title": "Complete one focused module activity",
         "url": "course/",
         "minutes": "35 min"
       },
@@ -50,23 +50,23 @@
   },
   {
     "label": "I have a weekend",
-    "minutes": "About 1 hour 40 minutes of lectures",
+    "minutes": "About 1 hour 47 minutes of lectures",
     "description": "Build a foundation and reach an assessment decision.",
     "steps": [
       {
         "title": "Complete Module 1 lectures",
-        "url": "course/module.html?m=1",
+        "url": "course/modules/1/",
         "minutes": "51 min video"
       },
       {
         "title": "Complete Module 2 lectures",
-        "url": "course/module.html?m=2",
+        "url": "course/modules/2/",
         "minutes": "25 min video"
       },
       {
         "title": "Complete Module 3 lectures",
-        "url": "course/module.html?m=3",
-        "minutes": "23 min video"
+        "url": "course/modules/3/",
+        "minutes": "32 min video"
       }
     ]
   },

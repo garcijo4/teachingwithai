@@ -1,0 +1,11 @@
+{
+  "name": "teaching-with-ai-site",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/prerender.mjs && node scripts/qa.mjs",
+    "qa": "node scripts/qa.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0"
+  }
+}

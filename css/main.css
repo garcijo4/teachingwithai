@@ -1023,12 +1023,6 @@ summary {
   resize: vertical;
 }
 
-.feedback-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem;
-}
-
 .portfolio-item {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -1106,95 +1100,6 @@ summary {
   color: #5b4500;
   font-size: 0.75rem;
   font-weight: 800;
-}
-
-.presentation-archive {
-  margin-top: 1.25rem;
-}
-
-.presentation-archive summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.presentation-archive-count {
-  color: var(--muted);
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-
-.presentation-archive-body {
-  color: var(--ink);
-}
-
-.presentation-archive-body > p {
-  max-width: 760px;
-}
-
-.presentation-year {
-  margin-top: 1.3rem;
-}
-
-.presentation-year-heading {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-bottom: 0.45rem;
-  border-bottom: 1px solid var(--line);
-}
-
-.presentation-year-heading h3 {
-  margin: 0;
-  font-size: 1.35rem;
-}
-
-.presentation-year-heading span {
-  color: var(--muted);
-  font-size: 0.84rem;
-  font-weight: 750;
-}
-
-.presentation-list {
-  display: grid;
-  gap: 0;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.presentation-item {
-  padding: 0.95rem 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.presentation-item-head {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.presentation-item h4 {
-  margin: 0;
-  font-family: var(--sans);
-  font-size: 1rem;
-  line-height: 1.35;
-}
-
-.presentation-meta,
-.presentation-note {
-  margin: 0.35rem 0 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.45;
-}
-
-.presentation-note {
-  color: var(--purple-800);
-  font-weight: 750;
 }
 
 .empty-state {
@@ -1610,14 +1515,6 @@ summary {
     flex-direction: row;
     flex-wrap: wrap;
   }
-}
-
-/* ---------- feedback toggle state ---------- */
-
-.feedback-buttons .button[aria-pressed="true"] {
-  background: var(--purple-800);
-  border-color: var(--purple-800);
-  color: var(--white);
 }
 
 /* ---------- noscript fallback ---------- */

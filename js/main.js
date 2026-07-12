@@ -179,12 +179,10 @@
             ${navItems.map(([label, path, matchPath]) => `<a href="${path}" ${isCurrent(matchPath) ? 'aria-current="page"' : ""}>${label}</a>`).join("")}
             <div class="mobile-nav-actions">
               <a class="button button-gold button-small" href="subscribe/">Subscribe</a>
-              <a class="button button-light button-small" href="support/">Support</a>
             </div>
           </nav>
           <div class="header-actions">
             <a class="button button-gold button-small" href="subscribe/">Subscribe</a>
-            <a class="button button-light button-small" href="support/">Support</a>
           </div>
         </div>
       </div>`;
@@ -195,7 +193,7 @@
           <div class="footer-grid">
             <div>
               <p class="eyebrow" style="color: var(--gold)">Weekly update</p>
-              <h2>Stay thoughtful, not breathless.</h2>
+              <h2>Stay thoughtful.</h2>
               <p>Receive a short weekly digest of useful developments in AI and teaching.</p>
               <div style="margin-top: 1.5rem;">
                 <a class="button button-gold button-small" href="subscribe/">Subscribe</a>
@@ -232,9 +230,17 @@
 
       <div class="toast" role="status" aria-live="polite"></div>`;
 
-    document.querySelector("[data-current-year]").textContent = new Date().getFullYear();
+    bindShellInteractions();
+  }
 
-    document.querySelector(".skip-link").addEventListener("click", (event) => {
+  function bindShellInteractions() {
+    const year = document.querySelector("[data-current-year]");
+    if (year) year.textContent = new Date().getFullYear();
+
+    const skipLink = document.querySelector(".skip-link");
+    if (!skipLink || skipLink.__twaBound) return;
+    skipLink.__twaBound = true;
+    skipLink.addEventListener("click", (event) => {
       event.preventDefault();
       main.focus();
       main.scrollIntoView({ block: "start" });
@@ -244,6 +250,7 @@
     const nav = document.querySelector(".site-nav");
     const closeMenu = () => {
       toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open navigation");
       toggle.textContent = "Menu";
       nav.classList.remove("is-open");
       document.body.classList.remove("menu-open");
@@ -254,6 +261,7 @@
         closeMenu();
       } else {
         toggle.setAttribute("aria-expanded", "true");
+        toggle.setAttribute("aria-label", "Close navigation");
         toggle.textContent = "Close";
         nav.classList.add("is-open");
         document.body.classList.add("menu-open");
@@ -270,7 +278,7 @@
 
   function injectAnalytics() {
     const code = (site.goatcounterCode || "").trim();
-    if (!code) return;
+    if (!code || document.querySelector("script[data-goatcounter]")) return;
     const script = document.createElement("script");
     script.async = true;
     script.dataset.goatcounter = `https://${code}.goatcounter.com/count`;
@@ -293,8 +301,10 @@
   }
 
   function injectJsonLd(data) {
+    document.querySelector("script[data-site-jsonld]")?.remove();
     const script = document.createElement("script");
     script.type = "application/ld+json";
+    script.dataset.siteJsonld = "";
     script.textContent = JSON.stringify(data);
     document.head.appendChild(script);
   }
@@ -302,6 +312,18 @@
   function pageUrl(path) {
     const root = realUrl(site.siteUrl);
     return root ? `${root.replace(/\/$/, "")}/${path}` : new URL(path, document.baseURI).href;
+  }
+
+  function modulePath(id, hash = "") {
+    return `course/modules/${id}/${hash}`;
+  }
+
+  function sessionPath(id) {
+    return `sessions/${encodeURIComponent(id)}/`;
+  }
+
+  function financeApplicationPath(id) {
+    return `sessions/ai-in-finance/applications/${id}/`;
   }
 
   function showToast(message) {
@@ -324,6 +346,26 @@
     return `<a class="button ${extraClass}" href="${esc(target)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
   }
 
+  function prepareRichHtml(html, promoteHeadings = false) {
+    const template = document.createElement("template");
+    template.innerHTML = String(html || "");
+    template.content.querySelectorAll('a[target="_blank"]').forEach((link) => {
+      const rel = new Set((link.getAttribute("rel") || "").split(/\s+/).filter(Boolean));
+      rel.add("noopener");
+      rel.add("noreferrer");
+      link.setAttribute("rel", [...rel].join(" "));
+    });
+    if (promoteHeadings) {
+      template.content.querySelectorAll("h4").forEach((heading) => {
+        const replacement = document.createElement("h3");
+        [...heading.attributes].forEach((attribute) => replacement.setAttribute(attribute.name, attribute.value));
+        replacement.append(...heading.childNodes);
+        heading.replaceWith(replacement);
+      });
+    }
+    return template.innerHTML;
+  }
+
   function pageHero(eyebrow, title, lede, extra = "") {
     return `
       <section class="page-hero">
@@ -340,8 +382,9 @@
     return `<span class="badge ${className}">${text}</span>`;
   }
 
-  function progressBar(percent) {
-    return `<div class="progress-bar" aria-label="${percent}% complete"><span style="--progress:${percent}%"></span></div>`;
+  function progressBar(percent, label = "Course progress", ids = []) {
+    const idAttr = ids.length ? ` data-progress-ids="${esc(ids.join(" "))}"` : "";
+    return `<div class="progress-bar" role="progressbar" aria-label="${esc(label)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent}" aria-valuetext="${percent}% complete"${idAttr}><span style="--progress:${percent}%"></span></div>`;
   }
 
   function videoPlaceholder(title, label = "Video coming soon") {
@@ -381,17 +424,18 @@
   }
 
   function moduleCard(module) {
-    const percent = CourseProgress.percent(moduleItemIds(module));
+    const ids = moduleItemIds(module);
+    const percent = CourseProgress.percent(ids);
     return `
-      <article class="card module-card">
+      <article class="card module-card" data-module-id="${module.id}">
         <div class="module-number">${module.id}</div>
-        <div class="badge-row">${badge(`${fmtMinutes(parseMinutes(module.duration))} video`)} ${badge(`Express ${esc(module.express)}`, "badge-gold")}${module.reading ? ` ${badge(esc(module.reading.minutes))}` : ""}</div>
+        <div class="badge-row">${badge(`${fmtMinutes(parseMinutes(module.duration))} video`)}${module.reading ? ` ${badge(esc(module.reading.minutes))}` : ""}</div>
         <h3>${esc(module.title)}</h3>
         <p class="muted">${esc(module.description)}</p>
         <p class="small"><strong>Portfolio artifact:</strong> ${esc(module.artifact)}</p>
-        ${progressBar(percent)}
-        <p class="small muted">${percent}% complete in this browser</p>
-        <a class="button button-outline button-small" href="course/module.html?m=${module.id}">Open Module ${module.id}</a>
+        ${progressBar(percent, `Module ${module.id} progress`, ids)}
+        <p class="small muted"><span data-progress-percent>${percent}</span>% complete in this browser</p>
+        <a class="button button-outline button-small" href="${modulePath(module.id)}">Open Module ${module.id}</a>
       </article>`;
   }
 
@@ -407,7 +451,6 @@
             </div>
             <div class="button-row">
               <a class="button button-gold" href="subscribe/">Subscribe</a>
-              <a class="button button-light" href="support/">Support the project</a>
             </div>
           </div>
         </div>
@@ -477,20 +520,30 @@
 
   function bindProgressCheckboxes(moduleIds = []) {
     document.querySelectorAll("[data-progress-id]").forEach((checkbox) => {
+      checkbox.checked = CourseProgress.isComplete(checkbox.dataset.progressId);
+      if (checkbox.__twaProgressBound) return;
+      checkbox.__twaProgressBound = true;
       checkbox.addEventListener("change", () => {
         CourseProgress.setComplete(checkbox.dataset.progressId, checkbox.checked);
-        if (moduleIds.length) {
-          const percent = CourseProgress.percent(moduleIds);
-          const percentLabel = document.querySelector("[data-module-percent]");
-          const bar = document.querySelector(".page-hero .progress-bar span");
-          if (percentLabel) percentLabel.textContent = percent;
-          if (bar) {
-            bar.style.setProperty("--progress", `${percent}%`);
-            bar.parentElement.setAttribute("aria-label", `${percent}% complete`);
-          }
-        }
+        updateProgressDisplays(moduleIds);
         showToast(checkbox.checked ? "Progress saved in this browser." : "Item marked incomplete.");
       });
+    });
+    updateProgressDisplays(moduleIds);
+  }
+
+  function updateProgressDisplays(fallbackIds = []) {
+    document.querySelectorAll(".progress-bar").forEach((bar) => {
+      const ids = (bar.dataset.progressIds || "").split(/\s+/).filter(Boolean);
+      const progressIds = ids.length ? ids : fallbackIds;
+      if (!progressIds.length) return;
+      const percent = CourseProgress.percent(progressIds);
+      bar.querySelector("span")?.style.setProperty("--progress", `${percent}%`);
+      bar.setAttribute("aria-valuenow", String(percent));
+      bar.setAttribute("aria-valuetext", `${percent}% complete`);
+      const region = bar.closest(".module-card, .page-hero, .callout") || bar.parentElement;
+      const label = region?.querySelector("[data-progress-percent], [data-module-percent], [data-portfolio-percent]");
+      if (label) label.textContent = percent;
     });
   }
 
@@ -508,13 +561,13 @@
     const lastId = state._last;
     const lastModule = modules.find((module) => moduleItemIds(module).includes(lastId));
     const continueContent = lastModule
-      ? `<div class="continue-banner"><div><strong>Continue where you left off</strong><p>Return to Module ${lastModule.id}: ${esc(lastModule.shortTitle)}.</p></div><a class="button button-small" href="course/module.html?m=${lastModule.id}">Continue Module ${lastModule.id}</a></div>`
-      : `<div class="continue-banner"><div><strong>Your progress stays private.</strong><p>Complete checkboxes as you go. Progress is stored only in this browser.</p></div><a class="button button-small" href="course/">View course</a></div>`;
+      ? `<div class="continue-banner" data-home-continue><div><strong>Continue where you left off</strong><p>Return to Module ${lastModule.id}: ${esc(lastModule.shortTitle)}.</p></div><a class="button button-small" href="${modulePath(lastModule.id)}">Continue Module ${lastModule.id}</a></div>`
+      : `<div class="continue-banner" data-home-continue><div><strong>Your progress stays private.</strong><p>Complete checkboxes as you go. Progress is stored only in this browser.</p></div><a class="button button-small" href="course/">View course</a></div>`;
 
     main.innerHTML = `
       <section class="hero">
         <div class="container">
-          <p class="eyebrow">A ${hoursNum}-hour asynchronous faculty course</p>
+          <p class="eyebrow">A ${hoursNum}-hour asynchronous video course for faculty</p>
           <h1>${esc(site.fullName || "Teaching with Artificial Intelligence")}</h1>
           <p class="lede">${esc(site.tagline)} A free, self-paced course for higher-ed faculty &mdash; plus standalone sessions, a plain-language video glossary, and curated resources.</p>
           <div class="button-row">
@@ -526,6 +579,7 @@
       </section>
       <section class="section-tint section">
         <div class="container">
+          <h2 class="eyebrow">Choose how to begin</h2>
           <div class="grid grid-2" style="align-items: start;">
             ${(site.courseVideos && site.courseVideos.opening && site.courseVideos.opening[0]) ? renderVideoCard(site.courseVideos.opening[0]).replace(/<label class="check-row">[\s\S]*?<\/label>/, "") : ""}
             <div class="grid grid-2">
@@ -560,12 +614,12 @@
       <section class="section-sm"><div class="container">${continueContent}</div></section>
       <section class="section" id="needs">
         <div class="container">
-          <div class="section-heading"><div><p class="eyebrow">Start with the problem</p><h2>What do you need right now?</h2><p>You do not need to begin with eight hours or with a tool. Begin with the teaching decision in front of you.</p></div></div>
+          <div class="section-heading"><div><p class="eyebrow">Start with the problem</p><h2>What do you need right now?</h2><p>You do not need to begin with the full course or with a tool. Begin with the teaching decision in front of you.</p></div></div>
           <div class="grid grid-4">
-            <article class="card"><div class="card-icon">POL</div><h3>I need a syllabus AI policy</h3><p>Build transparent, aligned, equity-aware course language.</p><a class="text-link" href="course/module.html?m=5">Go to Module 5 &rarr;</a></article>
-            <article class="card"><div class="card-icon">ASN</div><h3>I need to redesign an assignment</h3><p>Protect essential learning without making work explode.</p><a class="text-link" href="course/module.html?m=4">Go to Module 4 &rarr;</a></article>
-            <article class="card"><div class="card-icon">INT</div><h3>I suspect AI misuse</h3><p>Move from detection-led reactions to designed evidence.</p><a class="text-link" href="course/module.html?m=5">Explore integrity design &rarr;</a></article>
-            <article class="card"><div class="card-icon">101</div><h3>I want to understand the basics</h3><p>Get a functional, discipline-centered orientation.</p><a class="text-link" href="course/module.html?m=1">Start Module 1 &rarr;</a></article>
+            <article class="card"><div class="card-icon">POL</div><h3>I need a syllabus AI policy</h3><p>Build transparent, aligned, equity-aware course language.</p><a class="text-link" href="${modulePath(5)}">Go to Module 5 &rarr;</a></article>
+            <article class="card"><div class="card-icon">ASN</div><h3>I need to redesign an assignment</h3><p>Protect essential learning without making work explode.</p><a class="text-link" href="${modulePath(4)}">Go to Module 4 &rarr;</a></article>
+            <article class="card"><div class="card-icon">INT</div><h3>I suspect AI misuse</h3><p>Move from detection-led reactions to designed evidence.</p><a class="text-link" href="${modulePath(5)}">Explore integrity design &rarr;</a></article>
+            <article class="card"><div class="card-icon">101</div><h3>I want to understand the basics</h3><p>Get a functional, discipline-centered orientation.</p><a class="text-link" href="${modulePath(1)}">Start Module 1 &rarr;</a></article>
           </div>
         </div>
       </section>
@@ -584,7 +638,7 @@
         <div class="container">
           <div class="section-heading"><div><p class="eyebrow">The course spine</p><h2>Follow the six-module arc</h2><p>Each module produces the input for the next. Jump in where needed, then return to complete the design story.</p></div><a class="button button-outline" href="course/">See all modules</a></div>
           <div class="progress-arc">
-            ${modules.map((module) => `<a class="arc-stop" data-number="${module.id}" href="course/module.html?m=${module.id}"><strong>${esc(module.shortTitle)}</strong><small>${fmtMinutes(parseMinutes(module.duration))} video | ${CourseProgress.percent(moduleItemIds(module))}% complete</small></a>`).join("")}
+            ${modules.map((module) => `<a class="arc-stop" data-number="${module.id}" data-arc-progress-ids="${esc(moduleItemIds(module).join(" "))}" href="${modulePath(module.id)}"><strong>${esc(module.shortTitle)}</strong><small>${fmtMinutes(parseMinutes(module.duration))} video | <span data-arc-percent>${CourseProgress.percent(moduleItemIds(module))}</span>% complete</small></a>`).join("")}
           </div>
         </div>
       </section>
@@ -638,7 +692,7 @@
     return `
       <article class="video-card" id="video-${video.id}">
         <h3>${esc(video.title)}</h3>
-        <div class="module-meta"><span>${videoDuration(video)}</span>${video.express ? badge("Express path", "badge-gold") : ""}${hasUrl ? "" : `<span class="placeholder-note">Coming soon</span>`}</div>
+        <div class="module-meta"><span>${videoDuration(video)}</span>${hasUrl ? "" : `<span class="placeholder-note">Coming soon</span>`}</div>
         ${realUrl(video.slidesUrl) ? `<p class="slides-link"><a href="${esc(realUrl(video.slidesUrl))}" target="_blank" rel="noopener noreferrer">View the slides for this lecture (PDF)</a></p>` : ""}
         ${videoBlock(video, "Video coming soon", true)}
         <label class="check-row"><input type="checkbox" data-progress-id="${esc(video.id)}" ${checked ? "checked" : ""}><span><strong>Mark video complete</strong><br><span class="small muted">Stored only in this browser</span></span></label>
@@ -648,12 +702,14 @@
 
   function renderWorksheet(worksheet) {
     const isExcel = /\.xlsx(?:$|[?#])/i.test(worksheet.exportUrl || "");
+    const checked = CourseProgress.isComplete(worksheet.id);
     return `
       <article class="resource-card">
         <div class="resource-icon">${isExcel ? "XLS" : "DOC"}</div>
         <div>
           <h3>${esc(worksheet.title)}</h3>
           <p class="small muted">${esc(worksheet.minutes)}</p>
+          <label class="check-row"><input type="checkbox" data-progress-id="${esc(worksheet.id)}" ${checked ? "checked" : ""}><span><strong>Mark worksheet complete</strong><br><span class="small muted">Stored only in this browser</span></span></label>
         </div>
         <div class="resource-actions">
           ${actionButton(isExcel ? "Download Excel File" : "Download Word File", worksheet.exportUrl, "button-small")}
@@ -669,7 +725,7 @@
         <div class="resource-icon dark">READ</div>
         <div>
           <div class="badge-row">
-            ${reading.duration ? `<span class="badge badge-yellow">${esc(reading.duration)}</span>` : ""}
+            ${reading.minutes ? `<span class="badge badge-yellow">${esc(reading.minutes)}</span>` : ""}
             <span class="badge badge-purple">FACULTY DEVELOPMENT READING</span>
           </div>
           <h3>${esc(reading.title)}</h3>
@@ -692,7 +748,7 @@
       <section class="section-sm">
         <div class="container">
           <div class="callout">
-            <h3>How to take this course</h3>
+            <h2>How to take this course</h2>
             <p>${replaceTokens("The complete lecture sequence runs {{TOTAL_RUNTIME}}. Each module pairs its lectures with a faculty development reading (roughly 25&ndash;30 minutes) that synthesizes the module and prepares you for its worksheet. Use one real course as your design substrate. Complete the modules in sequence for the strongest portfolio story, or begin with the problem you need to solve.", tokens)}</p>
             <p class="small muted">Progress is stored only in this browser. <button class="copy-link" type="button" data-reset-progress>Reset my progress</button></p>
           </div>
@@ -739,7 +795,7 @@
       fetchData("modules"), fetchData("key-terms"), fetchData("sessions").catch(() => [])
     ]);
     const termIndex = buildTermIndex(terms);
-    const moduleId = Number(new URLSearchParams(location.search).get("m"));
+    const moduleId = Number(new URLSearchParams(location.search).get("m") || document.body.dataset.moduleId);
     const module = modules.find((item) => item.id === moduleId);
     if (!module) {
       location.replace(new URL("course/", document.baseURI));
@@ -756,17 +812,16 @@
     const percent = CourseProgress.percent(ids);
     const previous = modules.find((item) => item.id === module.id - 1);
     const next = modules.find((item) => item.id === module.id + 1);
-    const hasExpressItems = module.videos.some((video) => video.express);
     const relatedSessions = allSessions.filter((item) => (item.relatedModules || []).includes(module.id));
 
     main.innerHTML = `
       <section class="page-hero">
         <div class="container">
           <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="course/">Course</a><span>&rsaquo;</span><span>Module ${module.id}</span></nav>
-          <div class="badge-row">${badge(`Module ${module.id}`)} ${badge(`${fmtMinutes(parseMinutes(module.duration))} video`)} ${badge(`Express ${esc(module.express)}`, "badge-gold")} ${badge(`Reviewed ${esc(module.lastReviewed)}`)}</div>
+          <div class="badge-row">${badge(`Module ${module.id}`)} ${badge(`${fmtMinutes(parseMinutes(module.duration))} video`)} ${badge(`Reviewed ${esc(module.lastReviewed)}`)}</div>
           <h1>${esc(module.title)}</h1>
           <p class="lede">${withTermRefs(module.description, termIndex)}</p>
-          <div style="max-width:620px">${progressBar(percent)}<p class="small muted"><span data-module-percent>${percent}</span>% complete in this browser</p></div>
+          <div style="max-width:620px">${progressBar(percent, `Module ${module.id} progress`, ids)}<p class="small muted"><span data-module-percent data-progress-percent>${percent}</span>% complete in this browser</p></div>
         </div>
       </section>
       <section class="section">
@@ -779,7 +834,7 @@
             </section>
             <section>
               <p class="eyebrow">Time budget</p>
-              <div class="callout callout-gold"><h3>${fmtMinutes(parseMinutes(module.duration))} total lecture runtime | ${esc(module.express)} express path${module.reading ? ` | ${esc(module.reading.minutes)}` : ""}</h3><p>The listed runtime reflects the current module lectures.${module.reading ? ` The module reading adds a careful ${esc(module.reading.minutes.replace(" read", ""))}.` : ""} Worksheets and optional portfolio activities add time based on how deeply you choose to engage.${hasExpressItems ? " The express path is the shortest route to this module's artifact &mdash; look for the gold Express badges below." : ""}</p></div>
+              <div class="callout callout-gold"><h2>${fmtMinutes(parseMinutes(module.duration))} total lecture runtime${module.reading ? ` | ${esc(module.reading.minutes)}` : ""}</h2><p>The listed runtime reflects the current module lectures.${module.reading ? ` The module reading adds a careful ${esc(module.reading.minutes.replace(" read", ""))}.` : ""} Worksheets and optional portfolio activities add time based on how deeply you choose to engage.</p></div>
             </section>
             <section id="videos">
               <p class="eyebrow">Watch and reflect</p>
@@ -805,8 +860,8 @@
             </section>
 
             <nav class="button-row" aria-label="Module navigation">
-              ${previous ? `<a class="button button-outline" href="course/module.html?m=${previous.id}">&larr; Module ${previous.id}</a>` : `<a class="button button-outline" href="course/">Course hub</a>`}
-              ${next ? `<a class="button" href="course/module.html?m=${next.id}">Module ${next.id} &rarr;</a>` : `<a class="button" href="portfolio/">Complete portfolio &rarr;</a>`}
+              ${previous ? `<a class="button button-outline" href="${modulePath(previous.id)}">&larr; Module ${previous.id}</a>` : `<a class="button button-outline" href="course/">Course hub</a>`}
+              ${next ? `<a class="button" href="${modulePath(next.id)}">Module ${next.id} &rarr;</a>` : `<a class="button" href="portfolio/">Complete portfolio &rarr;</a>`}
             </nav>
           </div>
           <aside class="sidebar">
@@ -821,7 +876,7 @@
             <div class="card">
               <p class="eyebrow">Related sessions</p>
               <div class="stack-sm">
-                ${relatedSessions.map((item) => `<div><a class="text-link" href="${esc(item.type === "guide" && item.url ? item.url : `sessions/session.html?s=${item.id}`)}">${esc(item.shortTitle || item.title)} &rarr;</a><p class="small muted" style="margin:.25rem 0 0">${esc(item.blurb || "")}</p></div>`).join("")}
+                ${relatedSessions.map((item) => `<div><a class="text-link" href="${esc(item.type === "guide" && item.url ? item.url : sessionPath(item.id))}">${esc(item.shortTitle || item.title)} &rarr;</a><p class="small muted" style="margin:.25rem 0 0">${esc(item.blurb || "")}</p></div>`).join("")}
               </div>
             </div>` : ""}
 
@@ -832,41 +887,6 @@
       ${ctaBanner()}`;
 
     bindProgressCheckboxes(ids);
-    bindFeedbackForm();
-  }
-
-  function bindFeedbackForm() {
-    const form = document.querySelector("[data-feedback-form]");
-    if (!form) return;
-    const helpfulInput = form.querySelector("input[name='helpful']");
-    form.querySelectorAll("[data-helpful]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const selected = button.getAttribute("aria-pressed") !== "true";
-        form.querySelectorAll("[data-helpful]").forEach((item) => item.setAttribute("aria-pressed", "false"));
-        button.setAttribute("aria-pressed", String(selected));
-        helpfulInput.value = selected ? button.dataset.helpful : "";
-      });
-    });
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const data = new FormData(form);
-      if (!data.get("helpful") && !String(data.get("comment") || "").trim()) {
-        showToast("Choose yes or no, or add a comment, before sending.");
-        return;
-      }
-      try {
-        const response = await fetch(location.pathname, {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams(data).toString()
-        });
-        if (!response.ok) throw new Error("Feedback endpoint unavailable");
-        form.innerHTML = `<p><strong>Thank you.</strong> Your feedback improves the next revision of this module.</p>`;
-        showToast("Feedback sent. Thank you.");
-      } catch (error) {
-        showToast("Could not send feedback here. Use the Ask John link instead.");
-      }
-    });
   }
 
   /* ---------- standalone sessions ---------- */
@@ -887,8 +907,18 @@
         <div class="badge-row">${badge(esc(session.duration))} ${(session.topics || []).map((topic) => badge(esc(topic), "badge-gold")).join(" ")}${hasVideo ? "" : ` <span class="placeholder-note">Video coming soon</span>`}</div>
         <h3>${esc(session.title)}</h3>
         <p class="muted">${esc(session.blurb)}</p>
-        <a class="button button-outline button-small" href="sessions/session.html?s=${esc(session.id)}">Open session</a>
+        <a class="button button-outline button-small" href="${sessionPath(session.id)}">Open session</a>
       </article>`;
+  }
+
+  function sessionSlideActions(slides) {
+    const previewUrl = realUrl(slides.previewUrl);
+    const pdfUrl = realUrl(slides.pdfUrl);
+    if (previewUrl && pdfUrl && previewUrl !== pdfUrl) {
+      return `${actionButton("Preview slides", previewUrl, "button-small")}${actionButton("Download PDF", pdfUrl, "button-outline button-small")}`;
+    }
+    const url = pdfUrl || previewUrl;
+    return url ? actionButton("Open slides (PDF)", url, "button-small") : "";
   }
 
   async function renderSessions() {
@@ -897,7 +927,7 @@
       ${pageHero("Standalone sessions", "One design move at a time.", "Short, self-contained sessions that sit outside the six-module course. Each ends with something small enough to pilot next week in a course you already teach.", `<div class="button-row"><a class="button button-outline" href="course/">Looking for the full course?</a></div>`)}
       <section class="section">
         <div class="container">
-          <div class="section-heading"><div><p class="eyebrow">No sequence required</p><h2>Pick the teaching decision in front of you</h2><p>New sessions are added as topics come up in faculty conversations. Each pairs a short video with a one-page pilot plan.</p></div></div>
+          <div class="section-heading"><div><p class="eyebrow">No sequence required</p><h2>Pick the teaching decision in front of you</h2><p>New sessions are added as topics come up in faculty conversations. Formats vary by topic and may include a video, implementation guide, prompts, examples, or downloadable resources.</p></div></div>
           <div class="grid grid-3">${sessions.map(sessionCard).join("")}</div>
         </div>
       </section>
@@ -915,7 +945,7 @@
   async function renderSession() {
     const [sessions, modules, terms] = await Promise.all([fetchData("sessions"), fetchData("modules"), fetchData("key-terms")]);
     const termIndex = buildTermIndex(terms);
-    const slug = new URLSearchParams(location.search).get("s");
+    const slug = new URLSearchParams(location.search).get("s") || document.body.dataset.sessionId;
     const session = sessions.find((item) => item.id === slug);
     if (!session) {
       location.replace(new URL("sessions/", document.baseURI));
@@ -959,7 +989,7 @@
             ${session.takeaway ? `
             <section>
               <p class="eyebrow">The one thing to keep</p>
-              <div class="callout callout-gold"><h3>Key takeaway</h3><p>${withTermRefs(session.takeaway, termIndex)}</p></div>
+              <div class="callout callout-gold"><h2>Key takeaway</h2><p>${withTermRefs(session.takeaway, termIndex)}</p></div>
             </section>` : ""}
             ${(session.tryIt || []).length ? `
             <section id="try-it">
@@ -967,7 +997,7 @@
               <h2>Try it next week</h2>
               <div class="card"><ol>${session.tryIt.map((step) => `<li>${withTermRefs(step, termIndex)}</li>`).join("")}</ol></div>
             </section>` : ""}
-            ${worksheet || realUrl(slides.pdfUrl) || realUrl(slides.previewUrl) || slides.title ? `
+            ${worksheet || realUrl(slides.pdfUrl) || realUrl(slides.previewUrl) || slides.title || (session.resources || []).length ? `
             <section id="resources">
               <p class="eyebrow">Take it with you</p>
               <h2>Session resources</h2>
@@ -981,14 +1011,13 @@
                     ${actionButton("Word/PDF export", worksheet.exportUrl, "button-outline button-small")}
                   </div>
                 </article>` : ""}
-                <article class="resource-card">
+                ${realUrl(slides.pdfUrl) || realUrl(slides.previewUrl) || slides.title ? `<article class="resource-card">
                   <div class="resource-icon">PDF</div>
-                  <div><h3>${esc(slides.title || `${session.shortTitle || session.title} slides`)}</h3><p class="small muted">${realUrl(slides.pdfUrl) || realUrl(slides.previewUrl) ? "View in Google Drive or download the PDF." : "Slide links coming soon."}</p></div>
+                  <div><h3>${esc(slides.title || `${session.shortTitle || session.title} slides`)}</h3><p class="small muted">${realUrl(slides.pdfUrl) || realUrl(slides.previewUrl) ? "Preview or download the PDF." : "Slide links coming soon."}</p></div>
                   <div class="resource-actions">
-                    ${actionButton("Preview slides", slides.previewUrl, "button-small")}
-                    ${actionButton("Open PDF", slides.pdfUrl, "button-outline button-small")}
+                    ${sessionSlideActions(slides)}
                   </div>
-                </article>
+                </article>` : ""}
                 ${(session.resources || []).map(r => `
                 <article class="resource-card">
                   <div class="resource-icon">${esc(r.icon || 'LINK')}</div>
@@ -1002,7 +1031,7 @@
             ${related.length ? `
             <section>
               <p class="eyebrow">Go deeper</p>
-              <div class="callout"><h2>Connect this session to the course</h2><p>This session pairs naturally with ${related.map((module) => `Module ${module.id}: ${esc(module.shortTitle)}`).join(" and ")}. The module adds the frameworks, reading, and portfolio artifact behind this design move.</p><div class="button-row">${related.map((module) => `<a class="button button-small" href="course/module.html?m=${module.id}">Open Module ${module.id}</a>`).join("")}</div></div>
+              <div class="callout"><h2>Connect this session to the course</h2><p>This session pairs naturally with ${related.map((module) => `Module ${module.id}: ${esc(module.shortTitle)}`).join(" and ")}. The module adds the frameworks, reading, and portfolio artifact behind this design move.</p><div class="button-row">${related.map((module) => `<a class="button button-small" href="${modulePath(module.id)}">Open Module ${module.id}</a>`).join("")}</div></div>
             </section>` : ""}
 
             <nav class="button-row" aria-label="Session navigation">
@@ -1036,7 +1065,6 @@
       </section>
       ${ctaBanner()}`;
 
-    bindFeedbackForm();
   }
 
   function termCard(term) {
@@ -1050,30 +1078,13 @@
       </article>`;
   }
 
-  async function renderKeyTerms() {
-    const terms = await fetchData("key-terms");
-    const letters = [...new Set(terms.map((term) => term.term[0].toUpperCase()))].sort();
-    main.innerHTML = `
-      ${pageHero("Video glossary", "Key terms without the jargon barrier.", "Search plain-language definitions, filter by module, and load short video explainers only when you want them.")}
-      <section class="section">
-        <div class="container">
-          <label for="term-search"><strong>Search key terms</strong></label>
-          <input class="search-field" id="term-search" type="search" placeholder="Try: assessment, equity, safety gap...">
-          <div class="filter-bar" aria-label="Filter key terms by module">
-            <button class="filter-button" type="button" aria-pressed="true" data-term-filter="all">All</button>
-            ${[1, 2, 3, 4, 5, 6].map((number) => `<button class="filter-button" type="button" aria-pressed="false" data-term-filter="${number}">Module ${number}</button>`).join("")}
-          </div>
-          <nav class="az-bar" aria-label="Jump to terms by first letter">${letters.map((letter) => `<button type="button" class="az-letter" data-az="${letter}">${letter}</button>`).join("")}</nav>
-          <div class="grid grid-3" id="term-grid">${terms.map(termCard).join("")}</div>
-          <div class="empty-state" id="term-empty" hidden>No terms match that search and module filter.</div>
-        </div>
-      </section>
-      ${ctaBanner()}`;
-
+  function bindKeyTermInteractions() {
     const search = document.querySelector("#term-search");
     const cards = [...document.querySelectorAll(".term-card")];
     const empty = document.querySelector("#term-empty");
-    let activeFilter = "all";
+    if (!search || search.__twaBound) return;
+    search.__twaBound = true;
+    let activeFilter = document.querySelector("[data-term-filter][aria-pressed='true']")?.dataset.termFilter || "all";
     const applyFilters = () => {
       const query = search.value.trim().toLowerCase();
       let visible = 0;
@@ -1083,7 +1094,7 @@
         card.hidden = !(matchesSearch && matchesModule);
         if (!card.hidden) visible += 1;
       });
-      empty.hidden = visible !== 0;
+      if (empty) empty.hidden = visible !== 0;
     };
     search.addEventListener("input", applyFilters);
     document.querySelectorAll("[data-term-filter]").forEach((button) => {
@@ -1116,6 +1127,30 @@
         }
       });
     });
+  }
+
+  async function renderKeyTerms() {
+    const terms = await fetchData("key-terms");
+    const letters = [...new Set(terms.map((term) => term.term[0].toUpperCase()))].sort();
+    main.innerHTML = `
+      ${pageHero("Video glossary", "Key terms without the jargon barrier.", "Search plain-language definitions, filter by module, and load short video explainers only when you want them.")}
+      <section class="section">
+        <div class="container">
+          <h2>Browse key terms</h2>
+          <label for="term-search"><strong>Search key terms</strong></label>
+          <input class="search-field" id="term-search" type="search" placeholder="Try: assessment, equity, safety gap...">
+          <div class="filter-bar" aria-label="Filter key terms by module">
+            <button class="filter-button" type="button" aria-pressed="true" data-term-filter="all">All</button>
+            ${[1, 2, 3, 4, 5, 6].map((number) => `<button class="filter-button" type="button" aria-pressed="false" data-term-filter="${number}">Module ${number}</button>`).join("")}
+          </div>
+          <nav class="az-bar" aria-label="Jump to terms by first letter">${letters.map((letter) => `<button type="button" class="az-letter" data-az="${letter}">${letter}</button>`).join("")}</nav>
+          <div class="grid grid-3" id="term-grid">${terms.map(termCard).join("")}</div>
+          <div class="empty-state" id="term-empty" hidden>No terms match that search and module filter.</div>
+        </div>
+      </section>
+      ${ctaBanner()}`;
+
+    bindKeyTermInteractions();
 
     injectJsonLd({
       "@context": "https://schema.org",
@@ -1150,56 +1185,12 @@
       </article>`;
   }
 
-  async function renderArticles() {
-    const articles = sortArticlesByDate(await fetchData("articles"));
-    let feed = null;
-    try {
-      feed = await fetchData("feed-cache");
-    } catch (error) {
-      feed = null;
-    }
-    const feedItems = (feed && Array.isArray(feed.items) ? feed.items : []).slice(0, 12);
-    const tags = [...new Set(articles.flatMap((article) => article.tags))].sort();
-    const dimensions = [...new Set(articles.map((article) => article.dimension).filter(Boolean))];
-    main.innerHTML = `
-      ${pageHero("Curated context", "AI and teaching articles, tools, and resources.", "Recent academic papers and selected resources on teaching and learning with generative AI - each labeled by type and annotated with why it matters for faculty.")}
-      <section class="section">
-        <div class="container">
-          ${dimensions.length ? `
-          <p class="eyebrow">Filter by dimension</p>
-          <div class="filter-bar" aria-label="Filter articles and resources by dimension">
-            <button class="filter-button" type="button" aria-pressed="true" data-dimension-filter="all">All dimensions</button>
-            ${dimensions.map((dimension) => `<button class="filter-button" type="button" aria-pressed="false" data-dimension-filter="${esc(dimension)}">${esc(dimension)}</button>`).join("")}
-          </div>` : ""}
-          <p class="eyebrow">Filter by tag</p>
-          <div class="filter-bar" aria-label="Filter articles and resources by tag">
-            <button class="filter-button" type="button" aria-pressed="true" data-article-filter="all">All</button>
-            ${tags.map((tag) => `<button class="filter-button" type="button" aria-pressed="false" data-article-filter="${esc(tag)}">${esc(tag)}</button>`).join("")}
-          </div>
-
-          <div class="grid grid-3" style="margin-top:1.25rem">${articles.map((article) => articleCard(article)).join("")}</div>
-        </div>
-      </section>
-      ${feedItems.length ? `
-      <section class="section section-tint">
-        <div class="container">
-          <p class="eyebrow">Recent from around the web</p>
-          <h2>New from the journals and magazines</h2>
-          <p class="small muted">Refreshed daily from configured feeds${feed.updated ? ` | Last updated ${esc(feed.updated)}` : ""}. External links do not imply endorsement.</p>
-          <div class="grid grid-3" style="margin-top:1.5rem">
-            ${feedItems.map((item) => `
-              <article class="card article-card">
-                <div class="article-meta"><span>${esc(item.source)}</span><span>${esc(item.date || "")}</span></div>
-                <h3>${esc(item.title)}</h3>
-                <a class="button button-outline button-small" href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">Read article</a>
-              </article>`).join("")}
-          </div>
-        </div>
-      </section>` : ""}
-      ${ctaBanner()}`;
-
-    let activeTag = "all";
-    let activeDimension = "all";
+  function bindArticleInteractions() {
+    const firstFilter = document.querySelector("[data-article-filter]");
+    if (!firstFilter || firstFilter.__twaGroupBound) return;
+    firstFilter.__twaGroupBound = true;
+    let activeTag = document.querySelector("[data-article-filter][aria-pressed='true']")?.dataset.articleFilter || "all";
+    let activeDimension = document.querySelector("[data-dimension-filter][aria-pressed='true']")?.dataset.dimensionFilter || "all";
     const applyArticleFilters = () => {
       document.querySelectorAll(".article-card[data-article-tags]").forEach((card) => {
         const tagMiss = activeTag !== "all" && !card.dataset.articleTags.split(" ").includes(activeTag);
@@ -1223,11 +1214,40 @@
     });
   }
 
+  async function renderArticles() {
+    const articles = sortArticlesByDate(await fetchData("articles"));
+    const tags = [...new Set(articles.flatMap((article) => article.tags))].sort();
+    const dimensions = [...new Set(articles.map((article) => article.dimension).filter(Boolean))];
+    main.innerHTML = `
+      ${pageHero("Curated context", "AI and teaching articles, tools, and resources.", "Recent academic papers and selected resources on teaching and learning with generative AI - each labeled by type and annotated with why it matters for faculty.")}
+      <section class="section">
+        <div class="container">
+          <h2>Browse the collection</h2>
+          ${dimensions.length ? `
+          <p class="eyebrow">Filter by dimension</p>
+          <div class="filter-bar" aria-label="Filter articles and resources by dimension">
+            <button class="filter-button" type="button" aria-pressed="true" data-dimension-filter="all">All dimensions</button>
+            ${dimensions.map((dimension) => `<button class="filter-button" type="button" aria-pressed="false" data-dimension-filter="${esc(dimension)}">${esc(dimension)}</button>`).join("")}
+          </div>` : ""}
+          <p class="eyebrow">Filter by tag</p>
+          <div class="filter-bar" aria-label="Filter articles and resources by tag">
+            <button class="filter-button" type="button" aria-pressed="true" data-article-filter="all">All</button>
+            ${tags.map((tag) => `<button class="filter-button" type="button" aria-pressed="false" data-article-filter="${esc(tag)}">${esc(tag)}</button>`).join("")}
+          </div>
+
+          <div class="grid grid-3" style="margin-top:1.25rem">${articles.map((article) => articleCard(article)).join("")}</div>
+        </div>
+      </section>
+      ${ctaBanner()}`;
+
+    bindArticleInteractions();
+  }
+
   async function renderChatbots() {
     const chatbots = await fetchData("chatbots");
     main.innerHTML = `
       ${pageHero("Faculty-support tools", "Start with a bounded task, not a blank chat box.", "These chatbot concepts provide starter prompts and realistic expectations. Never paste student PII into a chatbot.")}
-      <section class="section-sm"><div class="container"><div class="callout callout-gold"><h3>Privacy first</h3><p>Use de-identified or synthetic material. You remain responsible for the final teaching decision and for reviewing any generated content.</p></div></div></section>
+      <section class="section-sm"><div class="container"><div class="callout callout-gold"><h2>Privacy first</h2><p>Use de-identified or synthetic material. You remain responsible for the final teaching decision and for reviewing any generated content.</p></div></div></section>
       <section class="section">
         <div class="container">
           <div class="grid grid-2">
@@ -1252,6 +1272,24 @@
       ${ctaBanner()}`;
   }
 
+  function bindPortfolioInteractions(artifactIds) {
+    const ids = artifactIds?.length
+      ? artifactIds
+      : [...document.querySelectorAll("[data-progress-id]")].map((checkbox) => checkbox.dataset.progressId);
+    const updatePortfolio = () => {
+      updateProgressDisplays(ids);
+      const percent = CourseProgress.percent(ids);
+      document.querySelector("[data-completion-state]")?.classList.toggle("is-visible", percent === 100);
+    };
+    bindProgressCheckboxes(ids);
+    document.querySelectorAll("[data-progress-id]").forEach((checkbox) => {
+      if (checkbox.__twaPortfolioBound) return;
+      checkbox.__twaPortfolioBound = true;
+      checkbox.addEventListener("change", updatePortfolio);
+    });
+    updatePortfolio();
+  }
+
   async function renderPortfolio() {
     const modules = await fetchData("modules");
     const artifactIds = modules.map((module) => `artifact-${module.id}`);
@@ -1259,7 +1297,7 @@
       ${pageHero("Course redesign portfolio", "Six connected artifacts. One usable teaching packet.", "Track the documents you have built, download the final workbook, and print a completion summary when the packet is ready.", `<div class="button-row">${actionButton("Download Portfolio Workbook", site.portfolioWorkbookUrl)}<button class="button button-outline" type="button" onclick="window.print()">Print completion summary</button></div>`)}
       <section class="section-sm">
         <div class="container">
-          <div class="callout"><h3>Your portfolio progress</h3>${progressBar(CourseProgress.percent(artifactIds))}<p><strong><span data-portfolio-percent>${CourseProgress.percent(artifactIds)}</span>% complete</strong> | Stored only in this browser</p></div>
+          <div class="callout"><h2>Your portfolio progress</h2>${progressBar(CourseProgress.percent(artifactIds), "Portfolio progress", artifactIds)}<p><strong><span data-portfolio-percent data-progress-percent>${CourseProgress.percent(artifactIds)}</span>% complete</strong> | Stored only in this browser</p></div>
         </div>
       </section>
       <section class="section">
@@ -1269,7 +1307,7 @@
               <article class="card portfolio-item">
                 <input type="checkbox" aria-label="Mark ${esc(module.artifact)} complete" data-progress-id="artifact-${module.id}" ${CourseProgress.isComplete(`artifact-${module.id}`) ? "checked" : ""}>
                 <div><div class="badge-row">${badge(`Module ${module.id}`)}</div><h3>${esc(module.artifact)}</h3><p class="muted">${esc(module.description)}</p></div>
-                <a class="button button-outline button-small" href="course/module.html?m=${module.id}">Open Module ${module.id}</a>
+                <a class="button button-outline button-small" href="${modulePath(module.id)}">Open Module ${module.id}</a>
               </article>`).join("")}
           </div>
           <div class="completion-state" data-completion-state style="margin-top:2rem"><h2>Portfolio complete</h2><p>Your completion summary is ready to print and share with your chair or faculty-development team.</p><button class="button" type="button" onclick="window.print()">Print summary</button></div>
@@ -1277,15 +1315,7 @@
       </section>
       ${ctaBanner()}`;
 
-    const updatePortfolio = () => {
-      const percent = CourseProgress.percent(artifactIds);
-      document.querySelector("[data-portfolio-percent]").textContent = percent;
-      document.querySelector(".callout .progress-bar span").style.setProperty("--progress", `${percent}%`);
-      document.querySelector("[data-completion-state]").classList.toggle("is-visible", percent === 100);
-    };
-    bindProgressCheckboxes();
-    document.querySelectorAll("[data-progress-id]").forEach((checkbox) => checkbox.addEventListener("change", updatePortfolio));
-    updatePortfolio();
+    bindPortfolioInteractions(artifactIds);
   }
 
   async function renderStart() {
@@ -1306,7 +1336,7 @@
           </div>
         </div>
       </section>
-      <section class="section section-tint">
+      <section class="section section-tint" id="needs">
         <div class="container">
           <p class="eyebrow">Quick wins</p><h2>Five things you can do this week</h2>
           <div class="grid grid-3">
@@ -1349,6 +1379,38 @@
       ${ctaBanner()}`;
   }
 
+  function injectEmailOctopus() {
+    const container = document.getElementById("eo-form-container");
+    if (!container) return;
+
+    const normalizeEmbedHeadings = () => {
+      container.querySelectorAll("h1").forEach((heading) => {
+        const replacement = document.createElement("h2");
+        [...heading.attributes].forEach((attribute) => replacement.setAttribute(attribute.name, attribute.value));
+        replacement.append(...heading.childNodes);
+        heading.replaceWith(replacement);
+      });
+    };
+    normalizeEmbedHeadings();
+    if (!container.__twaEmailOctopusObserver && typeof MutationObserver !== "undefined") {
+      const observer = new MutationObserver(normalizeEmbedHeadings);
+      observer.observe(container, { childList: true, subtree: true });
+      container.__twaEmailOctopusObserver = observer;
+    }
+
+    const embedSelector = 'script[data-form="38009506-6669-11f1-aec5-3b85e0858f90"]';
+    if (container.dataset.emailOctopusInitialized === "true" || container.querySelector(embedSelector) || container.querySelector("form")) {
+      container.dataset.emailOctopusInitialized = "true";
+      return;
+    }
+    container.dataset.emailOctopusInitialized = "true";
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://eocampaign1.com/form/38009506-6669-11f1-aec5-3b85e0858f90.js";
+    script.setAttribute("data-form", "38009506-6669-11f1-aec5-3b85e0858f90");
+    container.appendChild(script);
+  }
+
   function renderSubscribe() {
     main.innerHTML = `
       ${pageHero("Weekly update", "Useful developments, without the headline chase.", "New resources, course improvements, and faculty-support tools in one short weekly email.")}
@@ -1360,11 +1422,7 @@
         </div>
       </section>`;
 
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = "https://eocampaign1.com/form/38009506-6669-11f1-aec5-3b85e0858f90.js";
-    script.setAttribute('data-form', '38009506-6669-11f1-aec5-3b85e0858f90');
-    document.getElementById('eo-form-container').appendChild(script);
+    injectEmailOctopus();
   }
 
   function renderSupport() {
@@ -1383,50 +1441,7 @@
       </section>`;
   }
 
-  function renderPresentationItem(presentation) {
-    const venueLine = [presentation.venue, presentation.location].filter(Boolean).join(", ");
-    return `
-      <li class="presentation-item">
-        <div class="presentation-item-head">
-          <h4>${esc(presentation.title)}</h4>
-          ${presentation.type ? badge(esc(presentation.type), presentation.type.toLowerCase().includes("workshop") ? "badge-gold" : "") : ""}
-        </div>
-        <p class="presentation-meta">${esc(presentation.authors)} (${esc(presentation.year)}). ${esc(venueLine)}.</p>
-        ${presentation.note ? `<p class="presentation-note">${esc(presentation.note)}</p>` : ""}
-      </li>`;
-  }
-
-  function renderPresentationArchive(presentations) {
-    if (!presentations || !presentations.length) return "";
-    const sorted = [...presentations].sort((a, b) => Number(b.year) - Number(a.year));
-    const years = [...new Set(sorted.map((item) => item.year))].sort((a, b) => Number(b) - Number(a));
-    const range = `${years[years.length - 1]}-${years[0]}`;
-
-    return `
-      <details class="presentation-archive">
-        <summary>
-          <span>Conference presentations</span>
-          <span class="presentation-archive-count">${presentations.length} talks and workshops, ${range}</span>
-        </summary>
-        <div class="details-body presentation-archive-body">
-          <p>Recent finance, analytics, and AI-in-education talks, grouped by year so the archive can stay useful without taking over the page.</p>
-          ${years.map((year) => {
-            const items = sorted.filter((presentation) => presentation.year === year);
-            return `
-              <section class="presentation-year" aria-labelledby="presentations-${esc(year)}">
-                <div class="presentation-year-heading">
-                  <h3 id="presentations-${esc(year)}">${esc(year)}</h3>
-                  <span>${items.length} ${items.length === 1 ? "presentation" : "presentations"}</span>
-                </div>
-                <ul class="presentation-list">${items.map(renderPresentationItem).join("")}</ul>
-              </section>`;
-          }).join("")}
-        </div>
-      </details>`;
-  }
-
-  async function renderAbout() {
-    const presentations = await fetchData("presentations").catch(() => []);
+  function renderAbout() {
     main.innerHTML = `
       ${pageHero("About the course", "Grounded curiosity is a design stance.", "This course refuses both AI evangelism and AI panic. It asks faculty to make choices they can explain, defend, and revise.")}
       <section class="section">
@@ -1445,16 +1460,6 @@
               <a class="button button-outline button-small" href="https://garcijo4.github.io/john.garcia/" target="_blank" rel="noopener noreferrer">Personal Website</a>
             </div>
           </article>
-        </div>
-      </section>
-      <section class="section-sm">
-        <div class="container">
-          <div class="callout">
-            <p class="eyebrow">Speaking and sessions</p>
-            <h2>Conference talks connect the course to active research.</h2>
-            <p>Materials from talks and workshops &mdash; including the SWFA 2026 guide to the top 10 AI applications for finance classroom instruction &mdash; live in the <a href="sessions/">Sessions</a> section.</p>
-            ${renderPresentationArchive(presentations)}
-          </div>
         </div>
       </section>
       ${ctaBanner()}`;
@@ -1489,7 +1494,7 @@
   function financeSubnav(active) {
     const links = [
       ["overview", "Overview", "sessions/ai-in-finance/"],
-      ["applications", "Applications", "sessions/ai-in-finance/application.html?a=1"],
+      ["applications", "Applications", financeApplicationPath(1)],
       ["prompts", "Prompt Library", "sessions/ai-in-finance/prompts.html"],
       ["quickstart", "Quick Start", "sessions/ai-in-finance/quick-start.html"],
       ["frameworks", "Frameworks", "sessions/ai-in-finance/frameworks.html"],
@@ -1506,6 +1511,21 @@
         <div><h3>${esc(doc.title)}</h3><p class="small muted">${esc(doc.description)}</p></div>
         <div class="resource-actions">${actionButton("Download PDF", doc.url, "button-outline button-small")}</div>
       </article>`).join("")}</div>`;
+  }
+
+  function bindFinanceApplicationFilters() {
+    const first = document.querySelector("[data-app-filter]");
+    if (!first || first.__twaGroupBound) return;
+    first.__twaGroupBound = true;
+    document.querySelectorAll("[data-app-filter]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.appFilter;
+        document.querySelectorAll("[data-app-filter]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        document.querySelectorAll(".app-card[data-app-difficulty]").forEach((card) => {
+          card.hidden = filter !== "all" && card.dataset.appDifficulty !== filter;
+        });
+      });
+    });
   }
 
   async function renderFinance() {
@@ -1530,7 +1550,7 @@
         <div class="container">
           <div class="callout">
             <p class="eyebrow">How to use this guide</p>
-            ${(session.howToUse || []).map((paragraph) => `<p>${paragraph}</p>`).join("")}
+            ${(session.howToUse || []).map((paragraph) => `<p>${prepareRichHtml(paragraph)}</p>`).join("")}
             <p class="small muted">${session.oecdNote}</p>
           </div>
         </div>
@@ -1538,7 +1558,7 @@
       <section class="section-sm">
         <div class="container">
           <div class="callout callout-gold">
-            <h3>Tools you need</h3>
+            <h2>Tools you need</h2>
             <p>${session.toolsNote}</p>
           </div>
         </div>
@@ -1552,7 +1572,7 @@
           </div>
           <div class="grid grid-2">
             ${apps.map((app) => `
-              <a class="card app-card" data-app-difficulty="${esc(app.difficulty)}" href="sessions/ai-in-finance/application.html?a=${app.id}">
+              <a class="card app-card" data-app-difficulty="${esc(app.difficulty)}" href="${financeApplicationPath(app.id)}">
                 <div class="app-card-head"><span class="rank-number">#${app.id}</span>${diffBadge(app.difficulty)}</div>
                 <h3>${esc(app.title)}</h3>
                 <p class="muted">${esc(app.summary || app.tagline)}</p>
@@ -1582,20 +1602,12 @@
       </section>
       ${ctaBanner()}`;
 
-    document.querySelectorAll("[data-app-filter]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const filter = button.dataset.appFilter;
-        document.querySelectorAll("[data-app-filter]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
-        document.querySelectorAll(".app-card[data-app-difficulty]").forEach((card) => {
-          card.hidden = filter !== "all" && card.dataset.appDifficulty !== filter;
-        });
-      });
-    });
+    bindFinanceApplicationFilters();
   }
 
   async function renderFinanceApplication() {
     const apps = await fetchData("finance-applications");
-    const appId = Number(new URLSearchParams(location.search).get("a"));
+    const appId = Number(new URLSearchParams(location.search).get("a") || document.body.dataset.applicationId);
     const app = apps.find((item) => item.id === appId);
     if (!app) {
       location.replace(new URL("sessions/ai-in-finance/", document.baseURI));
@@ -1623,19 +1635,22 @@
               <h2 class="app-content-title">${esc(app.title)}</h2>
               ${diffBadge(app.difficulty)}
             </div>
-            ${app.sections.map((section) => section.kind === "pilot"
-              ? `<div class="callout callout-gold pilot-callout"><p class="eyebrow">Try it this week</p><h2>${esc(section.heading)}</h2>${section.html}</div>`
-              : `<section>${section.heading ? `<h2>${esc(section.heading)}</h2>` : ""}${section.html}</section>`).join("")}
+            ${app.sections.map((section) => {
+              const sectionHtml = prepareRichHtml(section.html, true);
+              return section.kind === "pilot"
+                ? `<div class="callout callout-gold pilot-callout"><p class="eyebrow">Try it this week</p><h2>${esc(section.heading)}</h2>${sectionHtml}</div>`
+                : `<section>${section.heading ? `<h2>${esc(section.heading)}</h2>` : ""}${sectionHtml}</section>`;
+            }).join("")}
             <nav class="button-row" aria-label="Application navigation">
-              ${previous ? `<a class="button button-outline" href="sessions/ai-in-finance/application.html?a=${previous.id}">&larr; #${previous.id}</a>` : `<a class="button button-outline" href="sessions/ai-in-finance/">Guide overview</a>`}
-              ${next ? `<a class="button" href="sessions/ai-in-finance/application.html?a=${next.id}">#${next.id} ${esc(next.title)} &rarr;</a>` : `<a class="button" href="sessions/ai-in-finance/quick-start.html">Quick start guides &rarr;</a>`}
+              ${previous ? `<a class="button button-outline" href="${financeApplicationPath(previous.id)}">&larr; #${previous.id}</a>` : `<a class="button button-outline" href="sessions/ai-in-finance/">Guide overview</a>`}
+              ${next ? `<a class="button" href="${financeApplicationPath(next.id)}">#${next.id} ${esc(next.title)} &rarr;</a>` : `<a class="button" href="sessions/ai-in-finance/quick-start.html">Quick start guides &rarr;</a>`}
             </nav>
           </div>
           <aside class="sidebar">
             <div class="card">
               <p class="eyebrow">All applications</p>
               <ol class="app-jump-list">
-                ${apps.map((item) => `<li><a href="sessions/ai-in-finance/application.html?a=${item.id}" ${item.id === app.id ? 'aria-current="page"' : ""}>#${item.id} ${esc(item.shortTitle || item.title)} ${diffBadge(item.difficulty)}</a></li>`).join("")}
+                ${apps.map((item) => `<li><a href="${financeApplicationPath(item.id)}" ${item.id === app.id ? 'aria-current="page"' : ""}>#${item.id} ${esc(item.shortTitle || item.title)} ${diffBadge(item.difficulty)}</a></li>`).join("")}
               </ol>
             </div>
             <div class="card">
@@ -1650,8 +1665,8 @@
               <p class="eyebrow">Related course modules</p>
               <p class="small muted">The Teaching with AI course covers the discipline-agnostic version of these design moves.</p>
               <div class="stack-sm">
-                <a class="text-link" href="course/module.html?m=3">Module 3: Assessment Redesign &rarr;</a>
-                <a class="text-link" href="course/module.html?m=4">Module 4: Assignment Redesign &rarr;</a>
+                <a class="text-link" href="${modulePath(3)}">Module 3: Assessment Redesign &rarr;</a>
+                <a class="text-link" href="${modulePath(4)}">Module 4: Assignment Redesign &rarr;</a>
               </div>
             </div>
           </aside>
@@ -1674,9 +1689,9 @@
       <section class="section-sm">
         <div class="container">
           <div class="callout">
-            <h3>How to adapt these prompts</h3>
+            <h2>How to adapt these prompts</h2>
             <p>${esc(library.adaptIntro)}</p>
-            <ol>${(library.adaptTips || []).map((tip) => `<li>${tip}</li>`).join("")}</ol>
+            <ol>${(library.adaptTips || []).map((tip) => `<li>${prepareRichHtml(tip)}</li>`).join("")}</ol>
           </div>
         </div>
       </section>
@@ -1690,7 +1705,7 @@
             ${library.prompts.map((prompt) => `
               <article class="card prompt-library-card" data-prompt-difficulty="${esc(prompt.difficulty)}" id="${esc(prompt.id)}-card">
                 <div class="prompt-library-meta">
-                  <a class="text-link" href="sessions/ai-in-finance/application.html?a=${prompt.app}">From #${prompt.app}: ${esc(prompt.appTitle)}</a>
+                  <a class="text-link" href="${financeApplicationPath(prompt.app)}">From #${prompt.app}: ${esc(prompt.appTitle)}</a>
                   ${diffBadge(prompt.difficulty)}
                 </div>
                 <div class="prompt-card">
@@ -1704,6 +1719,13 @@
       </section>
       ${ctaBanner()}`;
 
+    bindFinancePromptFilters();
+  }
+
+  function bindFinancePromptFilters() {
+    const first = document.querySelector("[data-prompt-filter]");
+    if (!first || first.__twaGroupBound) return;
+    first.__twaGroupBound = true;
     document.querySelectorAll("[data-prompt-filter]").forEach((button) => {
       button.addEventListener("click", () => {
         const filter = button.dataset.promptFilter;
@@ -1713,7 +1735,8 @@
           card.hidden = filter !== "all" && card.dataset.promptDifficulty !== filter;
           if (!card.hidden) visible += 1;
         });
-        document.querySelector("#prompt-empty").hidden = visible !== 0;
+        const empty = document.querySelector("#prompt-empty");
+        if (empty) empty.hidden = visible !== 0;
       });
     });
   }
@@ -1739,11 +1762,11 @@
             ${cards.map((card) => `
               <article class="card quickstart-card" data-qs-difficulty="${esc(card.difficulty)}">
                 <div class="app-card-head"><span class="rank-number">#${card.rank}</span><h2 class="quickstart-title">${esc(card.title)}</h2>${diffBadge(card.difficulty)}</div>
-                <div class="session-prose">${card.html}</div>
+                <div class="session-prose">${prepareRichHtml(card.html, true)}</div>
                 <div class="quickstart-footer">
                   ${card.time ? `<span class="badge badge-gold">${esc(card.time)}</span>` : ""}
-                  ${card.submit ? `<p class="small muted">${card.submit}</p>` : ""}
-                  <a class="text-link" href="sessions/ai-in-finance/application.html?a=${card.rank}">Read the full application &rarr;</a>
+                  ${card.submit ? `<p class="small muted">${prepareRichHtml(card.submit)}</p>` : ""}
+                  <a class="text-link" href="${financeApplicationPath(card.rank)}">Read the full application &rarr;</a>
                 </div>
               </article>`).join("")}
           </div>
@@ -1751,6 +1774,13 @@
       </section>
       ${ctaBanner()}`;
 
+    bindFinanceQuickstartFilters();
+  }
+
+  function bindFinanceQuickstartFilters() {
+    const first = document.querySelector("[data-qs-filter]");
+    if (!first || first.__twaGroupBound) return;
+    first.__twaGroupBound = true;
     document.querySelectorAll("[data-qs-filter]").forEach((button) => {
       button.addEventListener("click", () => {
         const filter = button.dataset.qsFilter;
@@ -1768,14 +1798,14 @@
         <div class="container">
           ${financeBreadcrumbs([`<span>${esc(breadcrumbLabel)}</span>`])}
           <h1>${esc(data.title)}</h1>
-          <p class="lede">${data.lede || ""}</p>
+          <p class="lede">${prepareRichHtml(data.lede)}</p>
         </div>
       </section>
       <section class="section-sm"><div class="container">${financeSubnav(subnavKey)}</div></section>
       <section class="section">
         <div class="container">
           <div class="stack session-prose">
-            ${data.sections.map((section) => `<section ${section.id ? `id="${esc(section.id)}"` : ""}>${section.heading ? `<h2>${esc(section.heading)}</h2>` : ""}${section.html}</section>`).join("")}
+            ${data.sections.map((section) => `<section ${section.id ? `id="${esc(section.id)}"` : ""}>${section.heading ? `<h2>${esc(section.heading)}</h2>` : ""}${prepareRichHtml(section.html, true)}</section>`).join("")}
           </div>
         </div>
       </section>
@@ -1803,7 +1833,7 @@
       <section class="section-sm"><div class="container">${financeSubnav("references")}</div></section>
       <section class="section">
         <div class="container session-prose">
-          <ul class="reference-list">${refs.items.map((item) => `<li>${item}</li>`).join("")}</ul>
+          <ul class="reference-list">${refs.items.map((item) => `<li>${prepareRichHtml(item)}</li>`).join("")}</ul>
         </div>
       </section>
       ${ctaBanner()}`;
@@ -1813,6 +1843,62 @@
     main.innerHTML = `
       ${pageHero("404", "This page is not part of the course arc.", "The link may be outdated or the resource may have moved.", `<div class="button-row"><a class="button" href="./">Return home</a><a class="button button-outline" href="course/">Open course hub</a></div>`)}
     `;
+  }
+
+  async function hydrateHomeProgress() {
+    updateProgressDisplays();
+    document.querySelectorAll("[data-arc-progress-ids]").forEach((item) => {
+      const ids = item.dataset.arcProgressIds.split(/\s+/).filter(Boolean);
+      const label = item.querySelector("[data-arc-percent]");
+      if (label) label.textContent = CourseProgress.percent(ids);
+    });
+    try {
+      const modules = await fetchData("modules");
+      const lastId = CourseProgress.read()._last;
+      const lastModule = modules.find((module) => moduleItemIds(module).includes(lastId));
+      const banner = document.querySelector("[data-home-continue]");
+      if (banner && lastModule) {
+        banner.innerHTML = `<div><strong>Continue where you left off</strong><p>Return to Module ${lastModule.id}: ${esc(lastModule.shortTitle)}.</p></div><a class="button button-small" href="${modulePath(lastModule.id)}">Continue Module ${lastModule.id}</a>`;
+      }
+    } catch (error) {
+      console.warn("Could not refresh the home progress prompt.", error);
+    }
+  }
+
+  async function hydratePrerenderedPage() {
+    if (page !== "portfolio" && document.querySelector("[data-progress-id]")) bindProgressCheckboxes();
+    switch (page) {
+      case "home":
+        await hydrateHomeProgress();
+        break;
+      case "course":
+      case "module":
+        updateProgressDisplays();
+        break;
+      case "portfolio":
+        bindPortfolioInteractions();
+        break;
+      case "key-terms":
+        bindKeyTermInteractions();
+        break;
+      case "articles":
+        bindArticleInteractions();
+        break;
+      case "finance":
+        bindFinanceApplicationFilters();
+        break;
+      case "finance-prompts":
+        bindFinancePromptFilters();
+        break;
+      case "finance-quickstart":
+        bindFinanceQuickstartFilters();
+        break;
+      case "subscribe":
+        injectEmailOctopus();
+        break;
+      default:
+        break;
+    }
   }
 
   const renderers = {
@@ -1843,22 +1929,29 @@
   };
 
   async function init() {
+    const isPrerendered = document.documentElement.dataset.prerendered === "true";
+    document.documentElement.dataset.renderState = "pending";
     try {
       site = { ...FALLBACK_SITE, ...(await fetchData("site")) };
     } catch (error) {
       site = FALLBACK_SITE;
     }
-    injectShell();
+    if (isPrerendered && document.querySelector("#site-header")?.children.length) bindShellInteractions();
+    else injectShell();
     injectAnalytics();
     injectPickaxeEmbed();
     try {
-      await (renderers[page] || renderNotFound)();
+      if (isPrerendered) await hydratePrerenderedPage();
+      else await (renderers[page] || renderNotFound)();
       bindGlobalInteractions();
       handleHashTarget();
     } catch (error) {
-      main.innerHTML = `<section class="section"><div class="narrow"><div class="empty-state"><h1>Content could not load</h1><p>${esc(error.message)}</p><p>If you are previewing locally, serve the website folder through a web server so JSON files can be fetched.</p></div></div></section>`;
+      if (!isPrerendered) {
+        main.innerHTML = `<section class="section"><div class="narrow"><div class="empty-state"><h1>Content could not load</h1><p>${esc(error.message)}</p><p>If you are previewing locally, serve the website folder through a web server so JSON files can be fetched.</p></div></div></section>`;
+      }
       console.error(error);
     }
+    document.documentElement.dataset.renderState = "complete";
   }
 
   init();

@@ -5,9 +5,9 @@
   "contactEmail": "jgarcia@callutheran.edu",
   "supportUrl": "https://buymeacoffee.com/john_garcia",
   "newsletterName": "Weekly AI & Teaching Update",
-  "courseDuration": "3 hours",
-  "lastReviewed": "2026-06-09",
-  "siteUrl": "https://teachingwithartificialintelligence.netlify.app",
+  "courseDuration": "3 hours of video",
+  "lastReviewed": "2026-07-12",
+  "siteUrl": "https://www.teachingwithai.app",
   "goatcounterCode": "teachingwithai",
   "portfolioWorkbookUrl": "assets/worksheets/Module%206/Module6_Portfolio_Template.docx",
   "courseVideos": {
@@ -27,7 +27,7 @@
         "embedUrl": "https://GARCIA.screencasthost.com/player/cO1QrQnuZyj?ff=1&title=0&ahc=1&dcc=1&tl=1&bg=transparent&share=1&download=1&embed=1&cl=1",
         "transcript": "An overview of the course stance, six-module arc, and portfolio outcomes.",
         "summary": "A guided tour of the full course: why AI is a design problem rather than a panic, how the six modules build on each other (stance, diagnose, judge, build, communicate, sustain), and the artifact each one produces. It introduces the five frameworks used throughout — the AI Assessment Scale, TILT, the Safety Gap, Oracle/Tutor/Adversary, and the Equity and Ethics Audit — and the course's two standing commitments: equity is more than access, and design must survive changing tools. It closes with exactly where to start and what you do not need (no paid tools, no live sessions, no technical expertise).",
-        "slidesUrl": "https://github.com/garcijo4/teachingwithai/blob/main/assets/slides/0.%20Teaching_with_AI_Course_Overview_Intro.pdf"
+        "slidesUrl": "assets/slides/0.%20Teaching_with_AI_Course_Overview_Intro.pdf"
       }
     ],
     "conclusion": {
