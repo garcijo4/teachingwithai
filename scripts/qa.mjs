@@ -8,6 +8,7 @@ const outputRoot = path.join(root, "dist");
 const site = JSON.parse(await readFile(path.join(root, "data", "site.json"), "utf8"));
 const expectedOrigin = String(site.siteUrl || "https://www.teachingwithai.app").replace(/\/$/, "");
 const failures = [];
+const ignoredDirectories = new Set([".netlify", "node_modules"]);
 const htmlFiles = await findHtmlFiles(outputRoot);
 
 for (const file of htmlFiles) await inspectPage(file);
@@ -25,7 +26,7 @@ async function findHtmlFiles(directory) {
   const files = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const candidate = path.join(directory, entry.name);
-    if (entry.isDirectory()) files.push(...await findHtmlFiles(candidate));
+    if (entry.isDirectory() && !ignoredDirectories.has(entry.name)) files.push(...await findHtmlFiles(candidate));
     else if (entry.name.endsWith(".html")) files.push(candidate);
   }
   return files.sort();

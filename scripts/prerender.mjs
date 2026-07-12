@@ -113,7 +113,7 @@ async function prepareOutput() {
   for (const entry of await readdir(outputRoot, { withFileTypes: true })) {
     await rm(path.join(outputRoot, entry.name), { recursive: true, force: true });
   }
-  const excluded = new Set([".git", ".github", "dist", "node_modules", "package.json", "package-lock.json", ".gitignore", "README.md", "scripts", "netlify.toml"]);
+  const excluded = new Set([".git", ".github", ".netlify", "dist", "node_modules", "package.json", "package-lock.json", ".gitignore", "README.md", "scripts", "netlify.toml"]);
   for (const entry of await readdir(root, { withFileTypes: true })) {
     if (excluded.has(entry.name)) continue;
     await cp(path.join(root, entry.name), path.join(outputRoot, entry.name), { recursive: true });
