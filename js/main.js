@@ -164,8 +164,6 @@
     const footer = document.querySelector("#site-footer");
     const email = site.contactEmail || FALLBACK_SITE.contactEmail;
     const subject = encodeURIComponent(`Question about ${document.title || site.siteName}`);
-    const supportLink = realUrl(site.supportUrl);
-
     header.innerHTML = `
       <a class="skip-link" href="#main-content">Skip to content</a>
       <div class="site-header">
@@ -217,7 +215,6 @@
               <p class="small">Course progress is stored only in this browser. The subscribe form collects only what you submit. Do not enter student data into faculty-support chatbots.</p>
               <div class="button-row">
                 <a class="button button-light button-small" href="mailto:${esc(email)}?subject=${subject}">Email John</a>
-                ${supportLink ? `<a class="button button-gold button-small" href="${esc(supportLink)}" target="_blank" rel="noopener noreferrer">Buy John a coffee</a>` : ""}
               </div>
             </div>
           </div>
