@@ -14,7 +14,6 @@
     fullName: "Teaching with Artificial Intelligence",
     tagline: "Grounded Curiosity. Defensible Choices. Portfolio Outcomes.",
     contactEmail: "jgarcia@callutheran.edu",
-    supportUrl: "",
     newsletterName: "Weekly AI & Teaching Update",
     siteUrl: "",
     goatcounterCode: "",
@@ -175,13 +174,7 @@
           <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">Menu</button>
           <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
             ${navItems.map(([label, path, matchPath]) => `<a href="${path}" ${isCurrent(matchPath) ? 'aria-current="page"' : ""}>${label}</a>`).join("")}
-            <div class="mobile-nav-actions">
-              <a class="button button-gold button-small" href="subscribe/">Subscribe</a>
-            </div>
           </nav>
-          <div class="header-actions">
-            <a class="button button-gold button-small" href="subscribe/">Subscribe</a>
-          </div>
         </div>
       </div>`;
 
@@ -190,12 +183,9 @@
         <div class="container">
           <div class="footer-grid">
             <div>
-              <p class="eyebrow" style="color: var(--gold)">Weekly update</p>
+              <p class="eyebrow" style="color: var(--gold)">Teaching with AI</p>
               <h2>Stay thoughtful.</h2>
-              <p>Receive a short weekly digest of useful developments in AI and teaching.</p>
-              <div style="margin-top: 1.5rem;">
-                <a class="button button-gold button-small" href="subscribe/">Subscribe</a>
-              </div>
+              <p>An independent faculty development resource built around grounded curiosity, defensible choices, and portfolio outcomes.</p>
             </div>
             <div>
               <h3>Explore</h3>
@@ -206,13 +196,12 @@
                 <a href="portfolio/">Portfolio</a>
                 <a href="faq/">FAQ</a>
                 <a href="updates/">Updates</a>
-                <a href="support/">Support</a>
               </nav>
             </div>
             <div>
               <h3>About this resource</h3>
-              <p>This is an independent faculty development resource built around grounded curiosity and defensible learning-design choices.</p>
-              <p class="small">Course progress is stored only in this browser. The subscribe form collects only what you submit. Do not enter student data into faculty-support chatbots.</p>
+              <p>Created by John Garcia, Associate Professor of Finance &amp; Analytics at California Lutheran University.</p>
+              <p class="small">Course progress is stored only in this browser. Do not enter student data into faculty-support chatbots.</p>
               <div class="button-row">
                 <a class="button button-light button-small" href="mailto:${esc(email)}?subject=${subject}">Email John</a>
               </div>
@@ -437,21 +426,7 @@
   }
 
   function ctaBanner() {
-    return `
-      <section class="section-sm">
-        <div class="container">
-          <div class="cta-banner">
-            <div>
-              <p class="eyebrow" style="color:var(--gold)">Keep the conversation going</p>
-              <h2>One useful update. Once a week.</h2>
-              <p>Follow new resources, course improvements, and faculty-support tools without chasing every headline.</p>
-            </div>
-            <div class="button-row">
-              <a class="button button-gold" href="subscribe/">Subscribe</a>
-            </div>
-          </div>
-        </div>
-      </section>`;
+    return "";
   }
 
   /* ---------- global interactions ---------- */
@@ -1371,7 +1346,7 @@
   async function renderUpdates() {
     const updates = await fetchData("updates");
     main.innerHTML = `
-      ${pageHero("Weekly update archive", "See what the newsletter delivers.", "Past updates remain linkable and useful after the week they were sent.", `<div class="button-row"><a class="button" href="subscribe/">Subscribe to weekly updates</a></div>`)}
+      ${pageHero("Update archive", "Course and resource developments.", "Past updates remain linkable and useful after the week they were posted.")}
       <section class="section"><div class="narrow stack">${updates.map((update) => `<article class="card"><div class="article-meta"><span>${esc(update.date)}</span></div><h2>${esc(update.headline)}</h2><p>${update.body}</p><div class="button-row">${update.links.map((link) => `<a class="button button-outline button-small" href="${esc(link.url)}">${esc(link.title)}</a>`).join("")}</div></article>`).join("")}</div></section>
       ${ctaBanner()}`;
   }
@@ -1410,29 +1385,14 @@
 
   function renderSubscribe() {
     main.innerHTML = `
-      ${pageHero("Weekly update", "Useful developments, without the headline chase.", "New resources, course improvements, and faculty-support tools in one short weekly email.")}
+      ${pageHero("Course updates", "Subscriptions are currently closed.", "We are not currently taking new email subscribers. You can follow course developments in the updates archive.", `<div class="button-row"><a class="button" href="course/">Explore course</a><a class="button button-outline" href="updates/">Browse updates</a></div>`)}
       <section class="section">
-        <div class="narrow">
-          <div class="form-card" id="eo-form-container">
-          </div>
-          <p style="margin-top:1.5rem"><a class="text-link" href="updates/">Preview past weekly updates &rarr;</a></p>
-        </div>
-      </section>`;
-
-    injectEmailOctopus();
-  }
-
-  function renderSupport() {
-    main.innerHTML = `
-      ${pageHero("Support the project", "Help keep practical faculty resources free.", "Support helps cover hosting, video production, and future faculty-support tools.")}
-      <section class="section">
-        <div class="narrow">
-          <div class="callout callout-gold">
-            <p class="eyebrow">What support covers</p>
-            <h2>Small infrastructure, sustained attention.</h2>
-            <ul><li>Website and media hosting</li><li>HeyGen and video production costs</li><li>Chatbot API and maintenance costs</li><li>Annual capability-drift review</li></ul>
-            ${actionButton("Buy John a Coffee", site.supportUrl, "button-gold")}
-            <p class="small muted" style="margin-top:1rem">Opens Buy Me a Coffee in a new tab.</p>
+        <div class="narrow card text-center">
+          <h2>Looking for course materials?</h2>
+          <p class="lede">All modules, sessions, and resources remain freely accessible without an account or subscription.</p>
+          <div class="button-row justify-center" style="margin-top: 1.5rem;">
+            <a class="button" href="course/">View modules</a>
+            <a class="button button-outline" href="articles/">Read articles</a>
           </div>
         </div>
       </section>`;
@@ -1919,7 +1879,6 @@
     faq: renderFaq,
     updates: renderUpdates,
     subscribe: renderSubscribe,
-    support: renderSupport,
     about: renderAbout,
     thanks: renderThanks,
     notfound: renderNotFound

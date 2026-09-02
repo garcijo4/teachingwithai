@@ -37,7 +37,7 @@ JS to update content.**
 
 | File | Controls |
 |---|---|
-| `site.json` | Site name, tagline, contact email, support URL, site URL, last-reviewed date, intro/conclusion videos, analytics code |
+| `site.json` | Site name, tagline, contact email, site URL, last-reviewed date, intro/conclusion videos, analytics code |
 | `modules.json` | Module titles, objectives, videos and lecture slide links, reading, worksheets, and artifacts |
 | `sessions.json` | Standalone sessions (outside the course): title, blurb, video, slides, worksheet, try-it steps, related modules/terms. Add an object to the array and the listing page, session page, and homepage strip update automatically |
 | `finance-applications.json` | Finance guide (SWFA companion): the 10 ranked applications shown at `/sessions/ai-in-finance/`. Each entry holds title, difficulty, tagline, summary, and ordered content sections |
@@ -64,7 +64,7 @@ automatically** — no other change needed. This applies to:
   (the "Module reading" card between videos and worksheets; counts toward module progress)
 - `slidesUrl` on lecture and session videos
 - `url` on articles and chatbots
-- `supportUrl` and `portfolioWorkbookUrl` in `site.json`
+- `portfolioWorkbookUrl` in `site.json`
 
 ### Useful extras
 

@@ -44,6 +44,18 @@
   query = {a = ":a"}
 
 [[redirects]]
+  from = "/support/*"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/support"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/404.html"
   status = 404

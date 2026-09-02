@@ -25,7 +25,6 @@ const staticRoutes = [
   ["faq/index.html", "faq/index.html", "/faq/"],
   ["updates/index.html", "updates/index.html", "/updates/"],
   ["subscribe/index.html", "subscribe/index.html", "/subscribe/"],
-  ["support/index.html", "support/index.html", "/support/"],
   ["about/index.html", "about/index.html", "/about/"],
   ["sessions/ai-in-finance/index.html", "sessions/ai-in-finance/index.html", "/sessions/ai-in-finance/"],
   ["sessions/ai-in-finance/prompts.html", "sessions/ai-in-finance/prompts.html", "/sessions/ai-in-finance/prompts.html"],
